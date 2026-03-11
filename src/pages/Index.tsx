@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import Icon from "@/components/ui/icon";
 
 const API = "https://functions.poehali.dev/b5fe522b-d013-460b-93e0-a5976ac7056e";
+const UPLOAD_API = "https://functions.poehali.dev/d188e713-5dbe-4904-9567-82370cb35b13";
 
 interface Poem {
   id: number;
@@ -46,6 +47,11 @@ export default function Index() {
   const [form, setForm] = useState({ ...EMPTY_FORM });
   const [saving, setSaving] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
+
+  // Upload state
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadingAudio, setUploadingAudio] = useState(false);
+  const [uploadingVideo, setUploadingVideo] = useState(false);
 
   const fetchPoems = useCallback(async () => {
     setLoading(true);
@@ -97,6 +103,31 @@ export default function Index() {
       image_url: poem.image_url || "",
     });
     setAdminOpen(true);
+  };
+
+  const uploadFile = async (
+    file: File,
+    setUploading: (v: boolean) => void,
+    field: "image_url" | "audio_url" | "video_url"
+  ) => {
+    setUploading(true);
+    try {
+      const reader = new FileReader();
+      const base64 = await new Promise<string>((resolve, reject) => {
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+      const res = await fetch(UPLOAD_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ file: base64, name: file.name, type: file.type }),
+      });
+      const data = await res.json();
+      if (data.url) setForm((prev) => ({ ...prev, [field]: data.url }));
+    } finally {
+      setUploading(false);
+    }
   };
 
   const savePoem = async () => {
@@ -231,20 +262,28 @@ export default function Index() {
                 ) : (
                   <div className="grid md:grid-cols-3 gap-6">
                     {poems.slice(0, 3).map((poem) => (
-                      <div key={poem.id} onClick={() => { setSelectedPoem(poem); setActiveSection("poems"); }} className="cursor-pointer" style={{ background: "#1c1610", border: "1px solid #2e2418", padding: "2rem", transition: "all 0.4s ease" }}
+                      <div key={poem.id} onClick={() => { setSelectedPoem(poem); setActiveSection("poems"); }} className="cursor-pointer" style={{ background: "#1c1610", border: "1px solid #2e2418", transition: "all 0.4s ease", overflow: "hidden" }}
                         onMouseEnter={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#c9a96e"; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 0 40px rgba(201,169,110,0.07)"; }}
                         onMouseLeave={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#2e2418"; el.style.transform = "translateY(0)"; el.style.boxShadow = "none"; }}>
-                        <div className="flex items-center justify-between mb-5">
-                          <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>{poem.category}</span>
-                          <span style={{ color: "#c9a96e", opacity: 0.25, fontSize: "0.75rem", fontFamily: "Montserrat" }}>{poem.year}</span>
-                        </div>
-                        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "#f0e8d5", marginBottom: "0.8rem" }}>{poem.title}</h3>
-                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(240,232,213,0.45)", fontStyle: "italic", whiteSpace: "pre-line" }}>{poem.excerpt}</p>
-                        <div className="flex items-center gap-3 mt-5">
-                          {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#c9a96e", opacity: 0.5 }} />}
-                          {poem.has_video && <Icon name="Play" size={12} style={{ color: "#c9a96e", opacity: 0.5 }} />}
-                          <div className="flex-1" />
-                          <Icon name="ArrowRight" size={14} style={{ color: "#c9a96e", opacity: 0.4 }} />
+                        {poem.image_url && (
+                          <div style={{ height: "140px", overflow: "hidden" }}>
+                            <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
+                          </div>
+                        )}
+                        <div style={{ padding: "2rem" }}>
+                          <div className="flex items-center justify-between mb-5">
+                            <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>{poem.category}</span>
+                            <span style={{ color: "#c9a96e", opacity: 0.25, fontSize: "0.75rem", fontFamily: "Montserrat" }}>{poem.year}</span>
+                          </div>
+                          <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "#f0e8d5", marginBottom: "0.8rem" }}>{poem.title}</h3>
+                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(240,232,213,0.45)", fontStyle: "italic", whiteSpace: "pre-line" }}>{poem.excerpt}</p>
+                          <div className="flex items-center gap-3 mt-5">
+                            {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#c9a96e", opacity: 0.5 }} />}
+                            {poem.has_video && <Icon name="Play" size={12} style={{ color: "#c9a96e", opacity: 0.5 }} />}
+                            {poem.image_url && <Icon name="Image" size={12} style={{ color: "#c9a96e", opacity: 0.5 }} />}
+                            <div className="flex-1" />
+                            <Icon name="ArrowRight" size={14} style={{ color: "#c9a96e", opacity: 0.4 }} />
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -329,12 +368,31 @@ export default function Index() {
             </div>
             <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#f0e8d5", marginBottom: "2rem" }}>{selectedPoem.title}</h1>
             <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, marginBottom: "3rem" }} />
-            {(selectedPoem.has_audio || selectedPoem.has_video) && (
-              <div className="mb-10 p-5 flex items-center gap-4" style={{ border: "1px solid #2e2418", background: "rgba(201,169,110,0.02)" }}>
-                {selectedPoem.has_audio && <button className="flex items-center gap-2" style={btnGold}><Icon name="Play" size={12} />Слушать</button>}
-                {selectedPoem.has_video && <button className="flex items-center gap-2" style={btnGold}><Icon name="Video" size={12} />Смотреть</button>}
+            {/* Картинка */}
+            {selectedPoem.image_url && (
+              <div className="mb-10">
+                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", maxHeight: "400px", objectFit: "cover", border: "1px solid #2e2418" }} />
               </div>
             )}
+
+            {/* Аудио */}
+            {selectedPoem.audio_url && (
+              <div className="mb-8 p-5" style={{ border: "1px solid #2e2418", background: "rgba(201,169,110,0.02)" }}>
+                <div className="flex items-center gap-3 mb-3">
+                  <Icon name="Music" size={13} style={{ color: "#c9a96e", opacity: 0.6 }} />
+                  <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.5 }}>Аудиозапись</span>
+                </div>
+                <audio controls src={selectedPoem.audio_url} style={{ width: "100%", height: "36px", accentColor: "#c9a96e" }} />
+              </div>
+            )}
+
+            {/* Видео */}
+            {selectedPoem.video_url && (
+              <div className="mb-10" style={{ border: "1px solid #2e2418" }}>
+                <video controls src={selectedPoem.video_url} style={{ width: "100%", display: "block", maxHeight: "400px", background: "#0a0805" }} />
+              </div>
+            )}
+
             <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#f0e8d5", whiteSpace: "pre-line", marginBottom: "5rem" }}>
               {selectedPoem.text}
             </div>
@@ -533,14 +591,67 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Медиа переключатели */}
-              <div className="flex items-center gap-8">
-                {[{ key: "has_audio" as const, icon: "Music", label: "Есть аудио" }, { key: "has_video" as const, icon: "Video", label: "Есть видео" }].map(({ key, icon, label }) => (
-                  <button key={key} onClick={() => setForm({ ...form, [key]: !form[key] })} className="flex items-center gap-2" style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: form[key] ? "#c9a96e" : "rgba(240,232,213,0.3)", transition: "color 0.3s" }}>
-                    <Icon name={icon as "Music"} size={14} />
-                    {label}
-                  </button>
-                ))}
+              {/* Картинка */}
+              <div>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Картинка</label>
+                <div className="mt-3 space-y-3">
+                  {form.image_url && (
+                    <div className="relative" style={{ maxWidth: "200px" }}>
+                      <img src={form.image_url} alt="" style={{ width: "100%", height: "120px", objectFit: "cover", border: "1px solid #2e2418" }} />
+                      <button onClick={() => setForm({ ...form, image_url: "" })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(10,8,5,0.8)", border: "none", cursor: "pointer", color: "#c97070", padding: "2px" }}>
+                        <Icon name="X" size={12} />
+                      </button>
+                    </div>
+                  )}
+                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingImage ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingImage ? 0.5 : 1 }}>
+                    <Icon name={uploadingImage ? "Loader" : "ImagePlus"} size={13} />
+                    <span>{uploadingImage ? "Загрузка..." : form.image_url ? "Заменить" : "Загрузить"}</span>
+                    <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingImage}
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadFile(f, setUploadingImage, "image_url"); e.target.value = ""; }} />
+                  </label>
+                </div>
+              </div>
+
+              {/* Аудио */}
+              <div>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Аудио</label>
+                <div className="mt-3 space-y-3">
+                  {form.audio_url && (
+                    <div className="flex items-center gap-3 p-3" style={{ background: "rgba(201,169,110,0.04)", border: "1px solid #2e2418" }}>
+                      <audio controls src={form.audio_url} style={{ height: "32px", flex: 1, accentColor: "#c9a96e" }} />
+                      <button onClick={() => setForm({ ...form, audio_url: "", has_audio: false })} style={{ background: "none", border: "none", cursor: "pointer", color: "#c97070", opacity: 0.6 }}>
+                        <Icon name="X" size={14} />
+                      </button>
+                    </div>
+                  )}
+                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingAudio ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingAudio ? 0.5 : 1 }}>
+                    <Icon name={uploadingAudio ? "Loader" : "Music"} size={13} />
+                    <span>{uploadingAudio ? "Загрузка..." : form.audio_url ? "Заменить" : "Загрузить"}</span>
+                    <input type="file" accept="audio/*" style={{ display: "none" }} disabled={uploadingAudio}
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) { uploadFile(f, setUploadingAudio, "audio_url"); setForm((prev) => ({ ...prev, has_audio: true })); } e.target.value = ""; }} />
+                  </label>
+                </div>
+              </div>
+
+              {/* Видео */}
+              <div>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Видео</label>
+                <div className="mt-3 space-y-3">
+                  {form.video_url && (
+                    <div className="relative" style={{ maxWidth: "320px" }}>
+                      <video controls src={form.video_url} style={{ width: "100%", border: "1px solid #2e2418", display: "block" }} />
+                      <button onClick={() => setForm({ ...form, video_url: "", has_video: false })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(10,8,5,0.8)", border: "none", cursor: "pointer", color: "#c97070", padding: "2px" }}>
+                        <Icon name="X" size={12} />
+                      </button>
+                    </div>
+                  )}
+                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingVideo ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingVideo ? 0.5 : 1 }}>
+                    <Icon name={uploadingVideo ? "Loader" : "Video"} size={13} />
+                    <span>{uploadingVideo ? "Загрузка..." : form.video_url ? "Заменить" : "Загрузить"}</span>
+                    <input type="file" accept="video/*" style={{ display: "none" }} disabled={uploadingVideo}
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) { uploadFile(f, setUploadingVideo, "video_url"); setForm((prev) => ({ ...prev, has_video: true })); } e.target.value = ""; }} />
+                  </label>
+                </div>
               </div>
             </div>
 
