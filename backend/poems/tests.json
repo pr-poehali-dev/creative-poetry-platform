@@ -1,0 +1,17 @@
+{
+  "tests": [
+    {
+      "name": "GET all poems",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "POST create poem",
+      "method": "POST",
+      "path": "/",
+      "body": {"title": "Тест", "text": "Строка первая\nСтрока вторая", "category": "Лирика", "year": "2024"},
+      "expectedStatus": 201
+    }
+  ]
+}
