@@ -526,36 +526,47 @@ export default function Index() {
 
         {/* ABOUT */}
         {activeSection === "about" && (
-          <div className="max-w-4xl mx-auto px-6 py-16">
-            <div className="mb-14">
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Биография</p>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#f0e8d5" }}>О поэте</h1>
-              <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, marginTop: "1.5rem" }} />
+          <div className="max-w-3xl mx-auto px-6 py-16">
+            <div className="text-center mb-14">
+              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Об авторе</p>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 300, lineHeight: 1.3, color: "#f0e8d5" }}>
+                История одной души,<br />преображённой словом
+              </h1>
+              <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, margin: "2rem auto 0" }} />
             </div>
-            <div className="grid md:grid-cols-5 gap-12 mt-12">
-              <div className="md:col-span-2">
-                <div className="aspect-[3/4] flex items-center justify-center" style={{ background: "#1c1610", border: "1px solid #2e2418" }}>
-                  <div className="text-center" style={{ opacity: 0.3 }}>
-                    <Icon name="User" size={40} style={{ color: "#c9a96e", margin: "0 auto 1rem" }} />
-                    <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", color: "#c9a96e", letterSpacing: "0.1em" }}>Фото поэта</p>
-                  </div>
-                </div>
+
+            <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 1.95, fontWeight: 300, color: "rgba(240,232,213,0.75)" }}>
+              <p style={{ fontStyle: "italic", color: "#c9a96e", opacity: 0.85, textAlign: "center", fontSize: "1.25rem" }}>Здравствуйте, дорогие читатели!</p>
+
+              <p>Я очень рада приветствовать каждого из вас на этой странице. Если вы здесь, значит, наши души ищут чего-то схожего: опоры в вере, утешения в словах, отклика в поэзии.</p>
+
+              <p>Этот сайт — моё скромное начинание, место, где я делюсь стихотворениями, которые рождаются в тишине молитвы, в глубине переживаний, в моменты откровения. Я верю, что каждое слово, написанное с искренним сердцем, несёт в себе Божью благодать.</p>
+
+              <p>Здесь вы найдёте не только мои авторские стихи, но и драгоценные строки, написанные моей бабушкой и моим папой. Их творчество — это отражение их жизненного пути, их веры и их любви к Богу. Я надеюсь, что их стихи, как и мои, смогут послужить вам поддержкой, утешением и вдохновением.</p>
+
+              <div className="my-8 py-6 px-8" style={{ borderLeft: "2px solid #c9a96e", background: "rgba(201,169,110,0.03)" }}>
+                <p style={{ fontStyle: "italic", color: "rgba(240,232,213,0.8)", marginBottom: "0.75rem" }}>
+                  «Ибо очи Господа обозревают всю землю, чтобы поддерживать тех, чьё сердце вполне предано Ему».
+                </p>
+                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>2 Паралипоменон 16:9</p>
               </div>
-              <div className="md:col-span-3">
-                <div className="space-y-5" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", lineHeight: 1.9, fontWeight: 300, color: "rgba(240,232,213,0.75)" }}>
-                  <p>Поэт, чьи строки рождаются на пересечении веры и живого чувства. Стихи — это попытка передать свет тихой молитвы и красоту Божьего мира.</p>
-                  <p>Каждое произведение — это диалог с Богом и с читателем. Приглашение остановиться, вздохнуть и почувствовать нечто настоящее.</p>
-                  <p style={{ fontStyle: "italic", color: "rgba(240,232,213,0.45)" }}>Пишу о том, что чувствую. О тишине и свете. О вере и сомнении. О красоте, которую Господь вложил в каждую минуту жизни.</p>
-                </div>
-                <div className="mt-10 grid grid-cols-3 gap-6">
-                  {[{ label: "Стихотворений", value: `${poems.length}` }, { label: "Лет творчества", value: "5+" }, { label: "Категорий", value: `${new Set(poems.map(p => p.category)).size}` }].map((stat) => (
-                    <div key={stat.label} className="text-center">
-                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.5rem", fontWeight: 300, color: "#c9a96e", lineHeight: 1 }}>{stat.value}</div>
-                      <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(240,232,213,0.35)", marginTop: "0.5rem" }}>{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+
+              <p>Я стремлюсь, чтобы мои стихи были именно такими — искренними свидетельствами преданности и доверия Богу.</p>
+
+              <p>Я бы очень хотела, чтобы этот сайт наполнял ваши сердца Божьей любовью, миром и теплом. Возможно, читая эти строки, вы найдёте отраду в своих собственных переживаниях, вспомните о Божьем присутствии в самые трудные моменты жизни.</p>
+
+              <p>Если у вас есть желание поделиться своими христианскими стихотворениями или теми, которые находят отклик в вашей душе, я буду очень рада это увидеть! Будем вместе вдохновляться и назидать друг друга.</p>
+
+              <p style={{ textAlign: "center", color: "#c9a96e", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", paddingTop: "1rem" }}>
+                Пусть наш общий путь через поэзию будет благословен Господом!
+              </p>
+
+              <p style={{ textAlign: "center", color: "rgba(240,232,213,0.6)" }}>
+                С любовью и верой,
+              </p>
+              <p style={{ textAlign: "center", color: "#c9a96e", opacity: 0.85, letterSpacing: "0.15em", fontSize: "1.2rem" }}>
+                ФВА
+              </p>
             </div>
           </div>
         )}
