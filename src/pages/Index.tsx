@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import Icon from "@/components/ui/icon";
 
-const API = "https://functions.poehali.dev/b5fe522b-d013-460b-93e0-a5976ac7056e";
-const UPLOAD_API = "https://functions.poehali.dev/d188e713-5dbe-4904-9567-82370cb35b13";
+const API = "https://functions.poehali.dev/4f546a64-ab67-4997-8f24-3dca5874d153";
+const UPLOAD_API = "https://functions.poehali.dev/5934a1fd-54aa-4dbb-b346-ccaf74ab4d2f";
 
 interface Poem {
   id: number;
