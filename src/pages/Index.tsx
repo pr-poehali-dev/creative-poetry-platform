@@ -562,10 +562,7 @@ export default function Index() {
               </p>
 
               <p style={{ textAlign: "center", color: "rgba(240,232,213,0.6)" }}>
-                С любовью и верой,
-              </p>
-              <p style={{ textAlign: "center", color: "#c9a96e", opacity: 0.85, letterSpacing: "0.15em", fontSize: "1.2rem" }}>
-                ФВА
+                С любовью и верой, <span style={{ color: "#c9a96e", opacity: 0.85, letterSpacing: "0.15em" }}>ФВА</span>
               </p>
             </div>
           </div>
