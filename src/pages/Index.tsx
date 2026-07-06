@@ -674,6 +674,7 @@ export default function Index() {
                     <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingImage}
                       onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadFile(f, setUploadingImage, "image_url"); e.target.value = ""; }} />
                   </label>
+                  <input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="или вставьте ссылку на картинку" style={{ ...inputStyle, fontSize: "0.85rem" }} />
                 </div>
               </div>
 
@@ -695,6 +696,7 @@ export default function Index() {
                     <input type="file" accept="audio/*" style={{ display: "none" }} disabled={uploadingAudio}
                       onChange={(e) => { const f = e.target.files?.[0]; if (f) { uploadFile(f, setUploadingAudio, "audio_url"); setForm((prev) => ({ ...prev, has_audio: true })); } e.target.value = ""; }} />
                   </label>
+                  <input value={form.audio_url} onChange={(e) => setForm({ ...form, audio_url: e.target.value, has_audio: !!e.target.value })} placeholder="или вставьте ссылку на аудио" style={{ ...inputStyle, fontSize: "0.85rem" }} />
                 </div>
               </div>
 
@@ -716,6 +718,7 @@ export default function Index() {
                     <input type="file" accept="video/*" style={{ display: "none" }} disabled={uploadingVideo}
                       onChange={(e) => { const f = e.target.files?.[0]; if (f) { uploadFile(f, setUploadingVideo, "video_url"); setForm((prev) => ({ ...prev, has_video: true })); } e.target.value = ""; }} />
                   </label>
+                  <input value={form.video_url} onChange={(e) => setForm({ ...form, video_url: e.target.value, has_video: !!e.target.value })} placeholder="или вставьте ссылку на видео" style={{ ...inputStyle, fontSize: "0.85rem" }} />
                 </div>
               </div>
             </div>
