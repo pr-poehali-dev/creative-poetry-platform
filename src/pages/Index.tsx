@@ -249,8 +249,67 @@ export default function Index() {
               </div>
             </section>
 
-            {/* Featured poems */}
+            {/* Приветственное слово */}
             <section className="py-24 px-6">
+              <div className="max-w-3xl mx-auto">
+                <div className="text-center mb-14">
+                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Приветствие</p>
+                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.3rem", fontWeight: 300, lineHeight: 1.3, color: "#f0e8d5" }}>
+                    Добро пожаловать в мир поэзии,<br />рождённой с верой и любовью
+                  </h2>
+                  <div style={{ fontSize: "1.3rem", marginTop: "1rem", opacity: 0.8 }}>🙏🏻 🕊️</div>
+                  <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.4, margin: "2rem auto 0" }} />
+                </div>
+
+                <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 300, lineHeight: 1.95, color: "rgba(240,232,213,0.72)" }}>
+                  <p>Мы рады приветствовать вас на нашей странице, где каждый стих — это отклик души, пропитанный молитвой, тишиной и глубокими жизненными переживаниями. Здесь вы откроете для себя авторские стихотворения, написанные мной, а также произведения, вдохновлённые и созданные моей бабушкой и моим папой.</p>
+
+                  <p>Мы создали этот сайт как место поддержки 🌿, утешения 🕊️ и духовного укрепления 🙏🏻. Мы надеемся, что каждый, кто зайдёт сюда, найдёт слова, которые коснутся его сердца.</p>
+
+                  <p>Здесь собраны и будут пополняться христианские стихи, пронизанные размышлениями, переживаниями и глубоким смыслом. Мы верим, что каждое стихотворение, подобно псалмам 🎼, наполнено особым значением. В них вложена частичка души, искренние молитвы и размышления о Божьей любви ❤️ и Его Промысле.</p>
+
+                  <p>В жизни каждого человека встречаются радости и трудности, но во всём этом присутствует Господь. Надеемся, что читая строки здесь, вы сможете найти утешение 🕊️🌿, почувствовать Божью любовь ❤️, мир и тепло. Возможно, в каких-то стихах вы узнаете себя, свои переживания, и это послужит вам поддержкой.</p>
+
+                  <p className="text-center" style={{ color: "#c9a96e", fontStyle: "italic", fontSize: "1.3rem", padding: "1rem 0" }}>
+                    🕊️ Пусть Господь благословит каждого из вас! 🙏🏻
+                  </p>
+
+                  <p>Мы приглашаем и вас стать частью нашего творческого пространства. Если у вас есть желание, вы можете делиться своими христианскими стихотворениями или теми, которые вам особенно близки. Будем вместе назидать друг друга! 🌿🕊️🙏🏻</p>
+
+                  <p className="text-center" style={{ color: "#c9a96e", opacity: 0.8, letterSpacing: "0.15em", fontSize: "1.2rem" }}>
+                    ФВА 🌸🕊️🙏🏻
+                  </p>
+                </div>
+
+                {/* Напоминание из Писания */}
+                <div className="mt-16 p-8" style={{ background: "#1c1610", border: "1px solid #2e2418" }}>
+                  <div className="text-center mb-8">
+                    <div style={{ fontSize: "1.1rem", marginBottom: "0.5rem" }}>☁️</div>
+                    <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65 }}>Напоминание из Писания</p>
+                  </div>
+                  <div className="space-y-6">
+                    {[
+                      { ref: "Псалтирь 104:1", text: "Славьте Господа; призывайте имя Его; возвещайте в народах дела Его" },
+                      { ref: "Книга Иова 34:21", text: "Ибо очи Его над путями человека, и Он видит все шаги его" },
+                      { ref: "2 Паралипоменон 16:9", text: "Ибо очи Господа обозревают всю землю, чтобы поддерживать тех, чьё сердце вполне предано Ему" },
+                      { ref: "1 Фессалоникийцам 5:11", text: "Посему увещавайте друг друга и назидайте один другого" },
+                    ].map((verse) => (
+                      <div key={verse.ref} style={{ borderLeft: "2px solid #c9a96e", paddingLeft: "1.5rem" }}>
+                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.7, color: "rgba(240,232,213,0.75)", marginBottom: "0.5rem" }}>
+                          «{verse.text}»
+                        </p>
+                        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>
+                          {verse.ref}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Featured poems */}
+            <section className="pb-24 px-6">
               <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-16">
                   <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Избранное</p>
