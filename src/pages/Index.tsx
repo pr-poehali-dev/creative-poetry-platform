@@ -4,6 +4,12 @@ import Icon from "@/components/ui/icon";
 const API = "https://functions.poehali.dev/4f546a64-ab67-4997-8f24-3dca5874d153";
 const UPLOAD_API = "https://functions.poehali.dev/5934a1fd-54aa-4dbb-b346-ccaf74ab4d2f";
 
+const AUTHORS = [
+  "Фастовщук Александр Икарович",
+  "Фастовщук Валентина Александровна",
+  "Фастовщук Валерия Ивановна",
+];
+
 interface Poem {
   id: number;
   title: string;
@@ -11,6 +17,7 @@ interface Poem {
   excerpt: string;
   category: string;
   year: string;
+  author: string;
   has_audio: boolean;
   has_video: boolean;
   audio_url?: string;
@@ -25,6 +32,7 @@ const EMPTY_FORM = {
   excerpt: "",
   category: "Лирика",
   year: new Date().getFullYear().toString(),
+  author: AUTHORS[0],
   has_audio: false,
   has_video: false,
   audio_url: "",
@@ -96,6 +104,7 @@ export default function Index() {
       excerpt: poem.excerpt || "",
       category: poem.category,
       year: poem.year,
+      author: poem.author || AUTHORS[0],
       has_audio: poem.has_audio,
       has_video: poem.has_video,
       audio_url: poem.audio_url || "",
@@ -380,24 +389,34 @@ export default function Index() {
                 <button onClick={() => navigate("admin")} style={{ ...btnGold, marginTop: "1.5rem" }}>Добавить первое</button>
               </div>
             ) : (
-              <div className="space-y-4">
-                {poems.map((poem) => (
-                  <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-6" onClick={() => setSelectedPoem(poem)}
-                    style={{ background: "#1c1610", border: "1px solid #2e2418", padding: "2rem", transition: "all 0.4s ease" }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#c9a96e"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#2e2418"; }}>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-4 mb-3">
-                        <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>{poem.category}</span>
-                        <span style={{ color: "#2e2418" }}>·</span>
-                        <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(240,232,213,0.25)" }}>{poem.year}</span>
-                        {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#c9a96e", opacity: 0.45 }} />}
-                        {poem.has_video && <Icon name="Play" size={12} style={{ color: "#c9a96e", opacity: 0.45 }} />}
-                      </div>
-                      <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#f0e8d5", marginBottom: "0.5rem" }}>{poem.title}</h2>
-                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(240,232,213,0.4)", whiteSpace: "pre-line", lineHeight: 1.8 }}>{poem.excerpt}</p>
+              <div className="space-y-16">
+                {AUTHORS.filter((a) => poems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
+                  <div key={author}>
+                    <div className="mb-8">
+                      <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#c9a96e" }}>{author}</h2>
+                      <div style={{ width: "100%", height: "1px", background: "#2e2418", marginTop: "1rem" }} />
                     </div>
-                    <Icon name="ArrowRight" size={18} style={{ color: "#c9a96e", opacity: 0.35, marginTop: "0.5rem", flexShrink: 0 }} />
+                    <div className="space-y-4">
+                      {poems.filter((p) => (p.author || AUTHORS[0]) === author).map((poem) => (
+                        <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-6" onClick={() => setSelectedPoem(poem)}
+                          style={{ background: "#1c1610", border: "1px solid #2e2418", padding: "2rem", transition: "all 0.4s ease" }}
+                          onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#c9a96e"; }}
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#2e2418"; }}>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-4 mb-3">
+                              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>{poem.category}</span>
+                              <span style={{ color: "#2e2418" }}>·</span>
+                              <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(240,232,213,0.25)" }}>{poem.year}</span>
+                              {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#c9a96e", opacity: 0.45 }} />}
+                              {poem.has_video && <Icon name="Play" size={12} style={{ color: "#c9a96e", opacity: 0.45 }} />}
+                            </div>
+                            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#f0e8d5", marginBottom: "0.5rem" }}>{poem.title}</h3>
+                            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(240,232,213,0.4)", whiteSpace: "pre-line", lineHeight: 1.8 }}>{poem.excerpt}</p>
+                          </div>
+                          <Icon name="ArrowRight" size={18} style={{ color: "#c9a96e", opacity: 0.35, marginTop: "0.5rem", flexShrink: 0 }} />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -423,7 +442,8 @@ export default function Index() {
               <span style={{ color: "#2e2418" }}>·</span>
               <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(240,232,213,0.25)" }}>{selectedPoem.year}</span>
             </div>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#f0e8d5", marginBottom: "2rem" }}>{selectedPoem.title}</h1>
+            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#f0e8d5", marginBottom: "0.75rem" }}>{selectedPoem.title}</h1>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#c9a96e", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
             <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, marginBottom: "3rem" }} />
             {/* Картинка */}
             {selectedPoem.image_url && (
@@ -644,6 +664,16 @@ export default function Index() {
               <div>
                 <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Анонс (2 строки)</label>
                 <textarea value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} placeholder="Короткий анонс для списка (если пусто — возьмётся из текста)" rows={2} style={{ ...inputStyle, marginTop: "0.5rem", resize: "none", fontStyle: "italic" }} />
+              </div>
+
+              {/* Автор */}
+              <div>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Автор</label>
+                <select value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} style={{ ...inputStyle, marginTop: "0.5rem" }}>
+                  {AUTHORS.map((a) => (
+                    <option key={a} value={a} style={{ background: "#1c1610", color: "#f0e8d5" }}>{a}</option>
+                  ))}
+                </select>
               </div>
 
               {/* Категория и год */}
