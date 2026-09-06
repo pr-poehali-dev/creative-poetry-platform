@@ -51,6 +51,7 @@ function snippetFor(poem: Poem, query: string) {
 export default function PoemsSections({ activeSection, navigate, poems, loading, selectedPoem, setSelectedPoem, openEdit, openCreate, deletePoem, deleteConfirm, setDeleteConfirm }: Props) {
   const [activeCategory, setActiveCategory] = useState<string>("Все");
   const [search, setSearch] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const categories = useMemo(() => {
     const set = new Set(poems.map((p) => p.category).filter(Boolean));
@@ -90,6 +91,26 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
   const goToPoem = (poem: Poem) => {
     setSelectedPoem(poem);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const sharePoem = async (poem: Poem) => {
+    const author = poem.author || AUTHORS[0];
+    const shareText = `${poem.title}\n\n${poem.text}\n\n— ${author}\n${window.location.origin}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: poem.title, text: shareText });
+        return;
+      } catch {
+        return;
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(shareText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
@@ -187,11 +208,22 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <button onClick={() => setSelectedPoem(null)} className="flex items-center gap-2" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.8, background: "none", border: "none", cursor: "pointer" }}>
                 <Icon name="ArrowLeft" size={13} />Назад
               </button>
-              <button onClick={() => openEdit(selectedPoem)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.65, transition: "opacity 0.3s" }}
-                onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"}
-                onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.4"}>
-                <Icon name="Pencil" size={15} />
-              </button>
+              <div className="flex items-center gap-4">
+                {copied && (
+                  <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#5f7043" }}>Скопировано</span>
+                )}
+                <button onClick={() => sharePoem(selectedPoem)} title="Поделиться" className="flex items-center gap-2"
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.08)", border: "1px solid rgba(181,103,58,0.25)", borderRadius: "999px", padding: "0.4rem 0.9rem", cursor: "pointer", transition: "all 0.3s" }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(181,103,58,0.16)"}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(181,103,58,0.08)"}>
+                  <Icon name="Share2" size={13} />Поделиться
+                </button>
+                <button onClick={() => openEdit(selectedPoem)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.65, transition: "opacity 0.3s" }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.4"}>
+                  <Icon name="Pencil" size={15} />
+                </button>
+              </div>
             </div>
             <div className="flex items-center gap-4 mb-3">
               <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{selectedPoem.category}</span>

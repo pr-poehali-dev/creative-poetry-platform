@@ -64,7 +64,10 @@ export function SiteFooter({ navigate }: { navigate: (section: Section) => void 
           ))}
         </div>
         <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(58,45,32,0.8)" }}>
-          Христианские стихотворения · {new Date().getFullYear()}
+          © {new Date().getFullYear()} Христианские стихотворения · Семья Фастовщук
+        </p>
+        <p className="max-w-xl mx-auto mt-4 px-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontStyle: "italic", lineHeight: 1.7, color: "rgba(58,45,32,0.7)" }}>
+          Все стихотворения принадлежат их авторам. Копирование и распространение возможны при указании автора и ссылки на этот сайт.
         </p>
       </footer>
     </>
