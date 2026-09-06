@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import Icon from "@/components/ui/icon";
 import { AUTHORS, Poem, Section, btnGold, inputStyle } from "./shared";
 
@@ -16,6 +17,18 @@ interface Props {
 }
 
 export default function PoemsSections({ activeSection, navigate, poems, loading, selectedPoem, setSelectedPoem, openEdit, openCreate, deletePoem, deleteConfirm, setDeleteConfirm }: Props) {
+  const [activeCategory, setActiveCategory] = useState<string>("Все");
+
+  const categories = useMemo(() => {
+    const set = new Set(poems.map((p) => p.category).filter(Boolean));
+    return ["Все", ...Array.from(set).sort((a, b) => a.localeCompare(b, "ru"))];
+  }, [poems]);
+
+  const visiblePoems = useMemo(
+    () => (activeCategory === "Все" ? poems : poems.filter((p) => p.category === activeCategory)),
+    [poems, activeCategory]
+  );
+
   return (
     <>
         {/* POEMS LIST */}
@@ -26,6 +39,19 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
+            {!loading && poems.length > 0 && categories.length > 2 && (
+              <div className="flex flex-wrap gap-3 mb-10">
+                {categories.map((cat) => {
+                  const active = cat === activeCategory;
+                  return (
+                    <button key={cat} onClick={() => setActiveCategory(cat)}
+                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", padding: "0.45rem 1rem", borderRadius: "999px", cursor: "pointer", transition: "all 0.3s", color: active ? "#fffaf3" : "#8f4f2a", background: active ? "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)" : "rgba(181,103,58,0.08)", border: active ? "1px solid #b5673a" : "1px solid rgba(181,103,58,0.25)" }}>
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
             {loading ? (
               <div className="text-center py-20" style={{ color: "rgba(58,45,32,0.72)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
             ) : poems.length === 0 ? (
@@ -35,14 +61,19 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               </div>
             ) : (
               <div className="space-y-16">
-                {AUTHORS.filter((a) => poems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
+                {visiblePoems.length === 0 && (
+                  <div className="text-center py-16">
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(58,45,32,0.72)" }}>В этой категории пока нет стихотворений.</p>
+                  </div>
+                )}
+                {AUTHORS.filter((a) => visiblePoems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
                   <div key={author}>
                     <div className="mb-8">
                       <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#a57c42" }}>{author}</h2>
                       <div style={{ width: "100%", height: "1px", background: "#e5d8c0", marginTop: "1rem" }} />
                     </div>
                     <div className="space-y-4">
-                      {poems.filter((p) => (p.author || AUTHORS[0]) === author).map((poem) => (
+                      {visiblePoems.filter((p) => (p.author || AUTHORS[0]) === author).map((poem) => (
                         <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-6" onClick={() => setSelectedPoem(poem)}
                           style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "2rem", transition: "all 0.4s ease" }}
                           onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#a57c42"; }}
