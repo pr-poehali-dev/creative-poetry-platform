@@ -200,8 +200,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "2rem auto 0" }} />
             </div>
 
-            <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", lineHeight: 1.95, fontWeight: 400, color: "#3a2d20" }}>
-              <p style={{ fontStyle: "italic", color: "#a57c42", opacity: 0.85, textAlign: "center", fontSize: "1.25rem" }}>Здравствуйте, дорогие читатели!</p>
+            <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", lineHeight: 1.95, fontWeight: 400, color: "#3a2d20", textAlign: "justify", textIndent: "2.2rem", hyphens: "auto" }}>
+              <p style={{ fontStyle: "italic", color: "#a57c42", opacity: 0.85, textAlign: "center", fontSize: "1.25rem", textIndent: 0 }}>Здравствуйте, дорогие читатели!</p>
 
               <p>Я сердечно приветствую каждого из вас на этой странице. Если вы здесь, значит, наши души ищут чего-то схожего: опоры в вере, утешения в словах и отклика в поэзии.</p>
 
@@ -224,11 +224,11 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
 
               <p>Если у вас есть желание поделиться своими христианскими стихотворениями или теми, которые находят отклик в вашей душе, я буду очень рада этому. Будем вместе вдохновляться и назидать друг друга.</p>
 
-              <p style={{ textAlign: "center", color: "#a57c42", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", paddingTop: "1rem" }}>
+              <p style={{ textAlign: "center", color: "#a57c42", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", paddingTop: "1rem", textIndent: 0 }}>
                 Пусть наш общий путь через поэзию будет благословен Господом!
               </p>
 
-              <p style={{ textAlign: "center", color: "rgba(58,45,32,0.92)" }}>
+              <p style={{ textAlign: "center", color: "rgba(58,45,32,0.92)", textIndent: 0 }}>
                 С любовью и верой, <span style={{ color: "#a57c42", opacity: 0.85, letterSpacing: "0.15em" }}>ФВА</span>
               </p>
             </div>

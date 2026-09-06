@@ -53,7 +53,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                   <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "2rem auto 0" }} />
                 </div>
 
-                <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", fontWeight: 400, lineHeight: 1.95, color: "#3a2d20" }}>
+                <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", fontWeight: 400, lineHeight: 1.95, color: "#3a2d20", textAlign: "justify", textIndent: "2.2rem", hyphens: "auto" }}>
                   <p>Мы рады приветствовать вас на нашей странице, где каждый стих — это отклик души, пропитанный молитвой, тишиной и глубокими жизненными переживаниями. Здесь вы откроете для себя авторские стихотворения, написанные мной, а также произведения, вдохновлённые и созданные моей бабушкой и моим папой.</p>
 
                   <p>Мы создали этот сайт как место поддержки, утешения и духовного укрепления. Мы надеемся, что каждый, кто зайдёт сюда, найдёт слова, которые коснутся его сердца.</p>
@@ -64,11 +64,11 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
 
                   <p>Приглашаем и вас стать частью нашего творческого пространства. Если у вас есть желание, вы можете делиться своими христианскими стихотворениями или теми, которые вам особенно близки. Будем вместе назидать друг друга!</p>
 
-                  <p className="text-center" style={{ color: "#a57c42", fontStyle: "italic", fontSize: "1.3rem", padding: "1rem 0" }}>
+                  <p className="text-center" style={{ color: "#a57c42", fontStyle: "italic", fontSize: "1.3rem", padding: "1rem 0", textIndent: 0, textAlign: "center" }}>
                     Пусть Господь благословит каждого из вас!
                   </p>
 
-                  <p className="text-center" style={{ color: "#a57c42", opacity: 0.8, letterSpacing: "0.15em", fontSize: "1.2rem" }}>
+                  <p className="text-center" style={{ color: "#a57c42", opacity: 0.8, letterSpacing: "0.15em", fontSize: "1.2rem", textIndent: 0, textAlign: "center" }}>
                     ФВА
                   </p>
                 </div>
