@@ -1,46 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import Icon from "@/components/ui/icon";
-
-const API = "https://functions.poehali.dev/4f546a64-ab67-4997-8f24-3dca5874d153";
-const UPLOAD_API = "https://functions.poehali.dev/5934a1fd-54aa-4dbb-b346-ccaf74ab4d2f";
-
-const AUTHORS = [
-  "Фастовщук Александр Икарович",
-  "Фастовщук Валентина Александровна",
-  "Фастовщук Валерия Ивановна",
-];
-
-interface Poem {
-  id: number;
-  title: string;
-  text: string;
-  excerpt: string;
-  category: string;
-  year: string;
-  author: string;
-  has_audio: boolean;
-  has_video: boolean;
-  audio_url?: string;
-  video_url?: string;
-  image_url?: string;
-  created_at?: string;
-}
-
-const EMPTY_FORM = {
-  title: "",
-  text: "",
-  excerpt: "",
-  category: "Лирика",
-  year: new Date().getFullYear().toString(),
-  author: AUTHORS[0],
-  has_audio: false,
-  has_video: false,
-  audio_url: "",
-  video_url: "",
-  image_url: "",
-};
-
-type Section = "home" | "poems" | "about" | "contacts" | "admin";
+import { SiteNav, SiteFooter } from "@/components/poetry/SiteChrome";
+import HomeSection from "@/components/poetry/HomeSection";
+import PoemsSections from "@/components/poetry/PoemsSections";
+import PoemFormModal from "@/components/poetry/PoemFormModal";
+import { API, UPLOAD_API, AUTHORS, EMPTY_FORM, Poem, Section } from "@/components/poetry/shared";
 
 export default function Index() {
   const [activeSection, setActiveSection] = useState<Section>("home");
@@ -75,13 +38,6 @@ export default function Index() {
   }, []);
 
   useEffect(() => { fetchPoems(); }, [fetchPoems]);
-
-  const navItems: { key: Section; label: string }[] = [
-    { key: "home", label: "Главная" },
-    { key: "poems", label: "Стихотворения" },
-    { key: "about", label: "О поэте" },
-    { key: "contacts", label: "Контакты" },
-  ];
 
   const navigate = (section: Section) => {
     setActiveSection(section);
@@ -164,618 +120,61 @@ export default function Index() {
     if (selectedPoem?.id === id) setSelectedPoem(null);
   };
 
-  const inputStyle = {
-    display: "block",
-    width: "100%",
-    background: "transparent",
-    border: "none",
-    borderBottom: "1px solid #e5d8c0",
-    color: "#3d3226",
-    fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "1rem",
-    padding: "0.5rem 0",
-    outline: "none",
-  };
-
-  const btnGold = {
-    background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)",
-    border: "1px solid #b5673a",
-    color: "#fffaf3",
-    padding: "0.5rem 1.5rem",
-    fontFamily: "Montserrat, sans-serif",
-    fontSize: "0.65rem",
-    letterSpacing: "0.2em",
-    textTransform: "uppercase" as const,
-    cursor: "pointer",
-    transition: "all 0.3s",
-  };
-
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#fdf6e9", backgroundImage: "radial-gradient(ellipse 60% 40% at 15% 10%, rgba(181,103,58,0.10) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 85% 25%, rgba(122,140,96,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 50% 85%, rgba(192,138,62,0.10) 0%, transparent 65%)", backgroundAttachment: "fixed" }}>
 
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-5" style={{ backgroundColor: "rgba(250,244,232,0.92)", backdropFilter: "blur(10px)", borderBottom: "1px solid #e5d8c0" }}>
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <button onClick={() => navigate("home")} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", letterSpacing: "0.15em", color: "#a57c42", background: "none", border: "none", cursor: "pointer" }}>
-            Поэзия
-          </button>
-          <div className="hidden md:flex items-center gap-10">
-            {navItems.map((item) => (
-              <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: activeSection === item.key ? "#a57c42" : "#7a6444", opacity: activeSection === item.key ? 1 : 0.6, background: "none", border: "none", cursor: "pointer", transition: "all 0.3s" }}>
-                {item.label}
-              </button>
-            ))}
-            <button onClick={() => navigate("admin")} title="Управление" style={{ background: "none", border: "none", cursor: "pointer", color: activeSection === "admin" ? "#a57c42" : "#a57c42", opacity: activeSection === "admin" ? 1 : 0.3, transition: "opacity 0.3s" }}>
-              <Icon name="Settings" size={15} />
-            </button>
-          </div>
-          <button className="md:hidden" style={{ color: "#a57c42", background: "none", border: "none", cursor: "pointer" }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={20} />
-          </button>
-        </div>
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 flex flex-col gap-5 items-center" style={{ borderTop: "1px solid #e5d8c0" }}>
-            {navItems.map((item) => (
-              <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: activeSection === item.key ? "#a57c42" : "#7a6444", opacity: activeSection === item.key ? 1 : 0.6, background: "none", border: "none", cursor: "pointer" }}>
-                {item.label}
-              </button>
-            ))}
-            <button onClick={() => navigate("admin")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75, background: "none", border: "none", cursor: "pointer" }}>
-              Управление
-            </button>
-          </div>
-        )}
-      </nav>
+      <SiteNav
+        activeSection={activeSection}
+        navigate={navigate}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
 
       <main className="pt-20">
 
-        {/* HOME */}
-        {activeSection === "home" && (
-          <div>
-            <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6" style={{ background: "radial-gradient(ellipse at center, rgba(165,124,66,0.05) 0%, transparent 70%)" }}>
-              <div className="mb-8" style={{ opacity: 0.75 }}>
-                <div className="flex items-center gap-3 justify-center" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#a57c42" }}>
-                  <span>✦</span><span style={{ color: "#7a6444" }}>Авторские стихотворения</span><span>✦</span>
-                </div>
-              </div>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, letterSpacing: "0.02em", color: "#3d3226", marginBottom: "0.3rem" }}>
-                Христианские
-              </h1>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", background: "linear-gradient(100deg, #c08a3e 0%, #b5673a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
-                стихотворения
-              </h1>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.75, margin: "2.5rem auto" }} />
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.93)", fontStyle: "italic", maxWidth: "480px" }}>
-                Слова, рождённые из молитвы и тишины. Каждое стихотворение — свидетельство веры и красоты Божьего мира.
-              </p>
-              <div className="flex gap-4 mt-12">
-                <button onClick={() => navigate("poems")} style={btnGold}>Читать стихи</button>
-                <button onClick={() => navigate("about")} style={{ ...btnGold, background: "transparent", borderColor: "#7a8c60", color: "#5f7043" }}>О поэте</button>
-              </div>
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ color: "#a57c42", opacity: 0.6 }}>
-                <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase" }}>Прокрутите</span>
-                <Icon name="ChevronDown" size={14} />
-              </div>
-            </section>
+        <HomeSection
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          navigate={navigate}
+          poems={poems}
+          loading={loading}
+          setSelectedPoem={setSelectedPoem}
+        />
 
-            {/* Приветственное слово */}
-            <section className="py-24 px-6">
-              <div className="max-w-3xl mx-auto">
-                <div className="text-center mb-14" style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.88) 0%, rgba(253,246,233,0.8) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/3c87e877-562c-4446-a8a4-8cdb3988643f.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
-                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Приветствие</p>
-                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.3rem", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
-                    Добро пожаловать в мир поэзии,<br />рождённой с верой и любовью
-                  </h2>
-                  <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "2rem auto 0" }} />
-                </div>
+        <PoemsSections
+          activeSection={activeSection}
+          navigate={navigate}
+          poems={poems}
+          loading={loading}
+          selectedPoem={selectedPoem}
+          setSelectedPoem={setSelectedPoem}
+          openEdit={openEdit}
+          openCreate={openCreate}
+          deletePoem={deletePoem}
+          deleteConfirm={deleteConfirm}
+          setDeleteConfirm={setDeleteConfirm}
+        />
 
-                <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", fontWeight: 400, lineHeight: 1.95, color: "#3a2d20" }}>
-                  <p>Мы рады приветствовать вас на нашей странице, где каждый стих — это отклик души, пропитанный молитвой, тишиной и глубокими жизненными переживаниями. Здесь вы откроете для себя авторские стихотворения, написанные мной, а также произведения, вдохновлённые и созданные моей бабушкой и моим папой.</p>
-
-                  <p>Мы создали этот сайт как место поддержки, утешения и духовного укрепления. Мы надеемся, что каждый, кто зайдёт сюда, найдёт слова, которые коснутся его сердца.</p>
-
-                  <p>Здесь собраны и будут пополняться христианские стихи, пронизанные размышлениями, переживаниями и глубоким смыслом. Мы верим, что каждое стихотворение, подобно псалмам, наполнено особым значением. В них вложена частичка души, искренние молитвы и размышления о Божьей любви и Его Промысле.</p>
-
-                  <p>В жизни каждого человека встречаются радости и трудности, но во всём этом присутствует Господь. Надеемся, что читая строки здесь, вы сможете найти утешение, почувствовать Божью любовь, мир и тепло. Возможно, в каких-то стихах вы узнаете себя, свои переживания, и это послужит вам поддержкой. Кроме того, мы хотим сохранить ту часть семейного наследия, где поэзия становилась личным письмом: многие из бабушкиных стихов изначально предназначались конкретным людям, и теперь они хранятся здесь как тихое напоминание о связи сердец.</p>
-
-                  <p>Приглашаем и вас стать частью нашего творческого пространства. Если у вас есть желание, вы можете делиться своими христианскими стихотворениями или теми, которые вам особенно близки. Будем вместе назидать друг друга!</p>
-
-                  <p className="text-center" style={{ color: "#a57c42", fontStyle: "italic", fontSize: "1.3rem", padding: "1rem 0" }}>
-                    Пусть Господь благословит каждого из вас!
-                  </p>
-
-                  <p className="text-center" style={{ color: "#a57c42", opacity: 0.8, letterSpacing: "0.15em", fontSize: "1.2rem" }}>
-                    ФВА
-                  </p>
-                </div>
-
-                {/* Напоминание из Писания */}
-                <div className="mt-16 p-8" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)" }}>
-                  <div className="text-center mb-8">
-                    <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9 }}>Напоминание из Писания</p>
-                  </div>
-                  <div className="space-y-6">
-                    {[
-                      { ref: "Псалтирь 104:1", text: "Славьте Господа; призывайте имя Его; возвещайте в народах дела Его" },
-                      { ref: "Книга Иова 34:21", text: "Ибо очи Его над путями человека, и Он видит все шаги его" },
-                      { ref: "2 Паралипоменон 16:9", text: "Ибо очи Господа обозревают всю землю, чтобы поддерживать тех, чьё сердце вполне предано Ему" },
-                      { ref: "1 Фессалоникийцам 5:11", text: "Посему увещавайте друг друга и назидайте один другого" },
-                    ].map((verse) => (
-                      <div key={verse.ref} style={{ borderLeft: "3px solid #7a8c60", paddingLeft: "1.5rem", background: "rgba(122,140,96,0.07)", paddingTop: "0.75rem", paddingBottom: "0.75rem", borderRadius: "0 6px 6px 0" }}>
-                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.7, color: "rgba(58,45,32,0.96)", marginBottom: "0.5rem" }}>
-                          «{verse.text}»
-                        </p>
-                        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>
-                          {verse.ref}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Featured poems */}
-            <section className="pb-24 px-6">
-              <div className="max-w-5xl mx-auto">
-                <div className="text-center mb-16" style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3rem 2.5rem", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.88) 0%, rgba(253,246,233,0.8) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/4ca1ed55-b029-4d0e-b334-8862593ef5d2.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
-                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Избранное</p>
-                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.5rem", fontWeight: 300, color: "#3d3226" }}>Последние стихотворения</h2>
-                  <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "1.5rem auto 0" }} />
-                </div>
-                {loading ? (
-                  <div className="text-center py-20" style={{ color: "rgba(58,45,32,0.72)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
-                ) : (
-                  <div className="grid md:grid-cols-3 gap-6">
-                    {poems.slice(0, 3).map((poem) => (
-                      <div key={poem.id} onClick={() => { setSelectedPoem(poem); setActiveSection("poems"); }} className="cursor-pointer" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", transition: "all 0.4s ease", overflow: "hidden" }}
-                        onMouseEnter={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#a57c42"; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 0 40px rgba(165,124,66,0.07)"; }}
-                        onMouseLeave={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#e5d8c0"; el.style.transform = "translateY(0)"; el.style.boxShadow = "none"; }}>
-                        {poem.image_url && (
-                          <div style={{ height: "140px", overflow: "hidden" }}>
-                            <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
-                          </div>
-                        )}
-                        <div style={{ padding: "2rem" }}>
-                          <div className="flex items-center justify-between mb-5">
-                            <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
-                            <span style={{ color: "#a57c42", opacity: 0.5, fontSize: "0.75rem", fontFamily: "Montserrat" }}>{poem.year}</span>
-                          </div>
-                          <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.8rem" }}>{poem.title}</h3>
-                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.85)", fontStyle: "italic", whiteSpace: "pre-line" }}>{poem.excerpt}</p>
-                          <div className="flex items-center gap-3 mt-5">
-                            {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#a57c42", opacity: 0.75 }} />}
-                            {poem.has_video && <Icon name="Play" size={12} style={{ color: "#a57c42", opacity: 0.75 }} />}
-                            {poem.image_url && <Icon name="Image" size={12} style={{ color: "#a57c42", opacity: 0.75 }} />}
-                            <div className="flex-1" />
-                            <Icon name="ArrowRight" size={14} style={{ color: "#a57c42", opacity: 0.65 }} />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                <div className="text-center mt-12">
-                  <button onClick={() => navigate("poems")} style={btnGold}>Все стихотворения</button>
-                </div>
-              </div>
-            </section>
-
-            <section className="py-24 px-6" style={{ borderTop: "1px solid #e5d8c0", borderBottom: "1px solid #e5d8c0" }}>
-              <div className="max-w-2xl mx-auto text-center">
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", color: "#a57c42", opacity: 0.45, lineHeight: 1 }}>«</div>
-                <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, lineHeight: 1.75, fontStyle: "italic", color: "#3d3226", opacity: 0.8 }}>
-                  Поэзия — это молитва,<br />которую сердце произносит словами.
-                </blockquote>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", color: "#a57c42", opacity: 0.45, lineHeight: 1 }}>»</div>
-              </div>
-            </section>
-          </div>
-        )}
-
-        {/* POEMS LIST */}
-        {activeSection === "poems" && !selectedPoem && (
-          <div className="max-w-5xl mx-auto px-6 py-16">
-            <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(90deg, rgba(253,246,233,0.94) 0%, rgba(253,246,233,0.72) 55%, rgba(253,246,233,0.55) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/8145e7ba-a43c-4589-9837-e8077605bda8.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Все произведения</p>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
-            </div>
-            {loading ? (
-              <div className="text-center py-20" style={{ color: "rgba(58,45,32,0.72)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
-            ) : poems.length === 0 ? (
-              <div className="text-center py-20">
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(58,45,32,0.72)" }}>Стихотворений пока нет.</p>
-                <button onClick={() => navigate("admin")} style={{ ...btnGold, marginTop: "1.5rem" }}>Добавить первое</button>
-              </div>
-            ) : (
-              <div className="space-y-16">
-                {AUTHORS.filter((a) => poems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
-                  <div key={author}>
-                    <div className="mb-8">
-                      <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#a57c42" }}>{author}</h2>
-                      <div style={{ width: "100%", height: "1px", background: "#e5d8c0", marginTop: "1rem" }} />
-                    </div>
-                    <div className="space-y-4">
-                      {poems.filter((p) => (p.author || AUTHORS[0]) === author).map((poem) => (
-                        <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-6" onClick={() => setSelectedPoem(poem)}
-                          style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "2rem", transition: "all 0.4s ease" }}
-                          onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#a57c42"; }}
-                          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e5d8c0"; }}>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-4 mb-3">
-                              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
-                              <span style={{ color: "#e5d8c0" }}>·</span>
-                              <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(58,45,32,0.68)" }}>{poem.year}</span>
-                              {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
-                              {poem.has_video && <Icon name="Play" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
-                            </div>
-                            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.5rem" }}>{poem.title}</h3>
-                            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(58,45,32,0.82)", whiteSpace: "pre-line", lineHeight: 1.8 }}>{poem.excerpt}</p>
-                          </div>
-                          <Icon name="ArrowRight" size={18} style={{ color: "#a57c42", opacity: 0.6, marginTop: "0.5rem", flexShrink: 0 }} />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* POEM DETAIL */}
-        {activeSection === "poems" && selectedPoem && (
-          <div className="max-w-3xl mx-auto px-6 py-16">
-            <div className="flex items-center justify-between mb-12">
-              <button onClick={() => setSelectedPoem(null)} className="flex items-center gap-2" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.8, background: "none", border: "none", cursor: "pointer" }}>
-                <Icon name="ArrowLeft" size={13} />Назад
-              </button>
-              <button onClick={() => openEdit(selectedPoem)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.65, transition: "opacity 0.3s" }}
-                onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"}
-                onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.4"}>
-                <Icon name="Pencil" size={15} />
-              </button>
-            </div>
-            <div className="flex items-center gap-4 mb-3">
-              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{selectedPoem.category}</span>
-              <span style={{ color: "#e5d8c0" }}>·</span>
-              <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(58,45,32,0.68)" }}>{selectedPoem.year}</span>
-            </div>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}>{selectedPoem.title}</h1>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
-            <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginBottom: "3rem" }} />
-            {/* Картинка */}
-            {selectedPoem.image_url && (
-              <div className="mb-10">
-                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", maxHeight: "400px", objectFit: "cover", border: "1px solid #e5d8c0" }} />
-              </div>
-            )}
-
-            {/* Аудио */}
-            {selectedPoem.audio_url && (
-              <div className="mb-8 p-5" style={{ border: "1px solid #e5d8c0", background: "rgba(165,124,66,0.02)" }}>
-                <div className="flex items-center gap-3 mb-3">
-                  <Icon name="Music" size={13} style={{ color: "#a57c42", opacity: 0.85 }} />
-                  <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75 }}>Аудиозапись</span>
-                </div>
-                <audio controls src={selectedPoem.audio_url} style={{ width: "100%", height: "36px", accentColor: "#a57c42" }} />
-              </div>
-            )}
-
-            {/* Видео */}
-            {selectedPoem.video_url && (
-              <div className="mb-10" style={{ border: "1px solid #e5d8c0" }}>
-                <video controls src={selectedPoem.video_url} style={{ width: "100%", display: "block", maxHeight: "400px", background: "#e5d8c0" }} />
-              </div>
-            )}
-
-            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "5rem" }}>
-              {selectedPoem.text}
-            </div>
-          </div>
-        )}
-
-        {/* ADMIN */}
-        {activeSection === "admin" && (
-          <div className="max-w-5xl mx-auto px-6 py-16">
-            <div className="flex items-end justify-between mb-14">
-              <div>
-                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Панель управления</p>
-                <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
-                <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
-              </div>
-              <button onClick={openCreate} className="flex items-center gap-2" style={{ ...btnGold, padding: "0.6rem 1.5rem" }}>
-                <Icon name="Plus" size={14} />Добавить
-              </button>
-            </div>
-
-            {loading ? (
-              <div className="text-center py-20" style={{ color: "rgba(58,45,32,0.72)", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>Загрузка...</div>
-            ) : poems.length === 0 ? (
-              <div className="text-center py-20">
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(58,45,32,0.72)", marginBottom: "1.5rem" }}>Стихотворений пока нет.</p>
-                <button onClick={openCreate} style={btnGold}>Добавить первое</button>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {poems.map((poem) => (
-                  <div key={poem.id} className="flex items-center justify-between gap-4" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "1.25rem 1.75rem" }}>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-1">
-                        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 400, color: "#3d3226" }}>{poem.title}</h3>
-                        {poem.has_audio && <Icon name="Music" size={11} style={{ color: "#a57c42", opacity: 0.75 }} />}
-                        {poem.has_video && <Icon name="Play" size={11} style={{ color: "#a57c42", opacity: 0.75 }} />}
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
-                        <span style={{ color: "#e5d8c0" }}>·</span>
-                        <span style={{ fontFamily: "Montserrat", fontSize: "0.6rem", color: "rgba(58,45,32,0.68)" }}>{poem.year}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <button onClick={() => { setSelectedPoem(poem); navigate("poems"); }} title="Просмотр" style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.6, transition: "opacity 0.2s" }}
-                        onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.8"}
-                        onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.35"}>
-                        <Icon name="Eye" size={16} />
-                      </button>
-                      <button onClick={() => openEdit(poem)} title="Редактировать" style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.6, transition: "opacity 0.2s" }}
-                        onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.8"}
-                        onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.35"}>
-                        <Icon name="Pencil" size={16} />
-                      </button>
-                      {deleteConfirm === poem.id ? (
-                        <div className="flex items-center gap-2">
-                          <button onClick={() => deletePoem(poem.id)} style={{ background: "none", border: "1px solid #8b2a2a", color: "#a13b3b", padding: "0.2rem 0.6rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer" }}>Удалить</button>
-                          <button onClick={() => setDeleteConfirm(null)} style={{ background: "none", border: "none", color: "rgba(58,45,32,0.72)", cursor: "pointer", fontFamily: "Montserrat", fontSize: "0.55rem" }}>Отмена</button>
-                        </div>
-                      ) : (
-                        <button onClick={() => setDeleteConfirm(poem.id)} title="Удалить" style={{ background: "none", border: "none", cursor: "pointer", color: "#a13b3b", opacity: 0.55, transition: "opacity 0.2s" }}
-                          onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.8"}
-                          onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.3"}>
-                          <Icon name="Trash2" size={16} />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* ABOUT */}
-        {activeSection === "about" && (
-          <div className="max-w-3xl mx-auto px-6 py-16">
-            <div className="text-center" style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.86) 0%, rgba(253,246,233,0.78) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/10690ee4-ac28-404c-87fa-1a502c26a23c.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Об авторе</p>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
-                История одной души,<br />преображённой словом
-              </h1>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "2rem auto 0" }} />
-            </div>
-
-            <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", lineHeight: 1.95, fontWeight: 400, color: "#3a2d20" }}>
-              <p style={{ fontStyle: "italic", color: "#a57c42", opacity: 0.85, textAlign: "center", fontSize: "1.25rem" }}>Здравствуйте, дорогие читатели!</p>
-
-              <p>Я сердечно приветствую каждого из вас на этой странице. Если вы здесь, значит, наши души ищут чего-то схожего: опоры в вере, утешения в словах и отклика в поэзии.</p>
-
-              <p>Этот сайт — моё скромное начинание, место, где я делюсь стихотворениями, которые рождаются в тишине молитвы, в глубине переживаний, в моменты откровения. Я верю, что каждое слово, написанное с искренним сердцем, несёт в себе Божью благодать. Здесь вы найдёте не только мои авторские стихи, но и драгоценные строки, написанные моей бабушкой и моим папой. Их творчество — это отражение их жизненного пути, их веры и их любви к Богу.</p>
-
-              <p>Особое место среди бабушкиных произведений занимают те стихи, которые она часто адресовала конкретным людям в знак поддержки или благодарности. Для меня очень важно сохранить эти личные послания на страницах сайта как живое свидетельство её чуткого сердца. Именно поэтому этот проект служит ещё одной важной цели — бережно сберечь нашу семейную память о близких людях и передать тепло их слов будущим поколениям.</p>
-
-              <p>Я надеюсь, что их стихи, как и мои, смогут послужить вам поддержкой, утешением и вдохновением. Как сказано в Писании:</p>
-
-              <div className="my-8 py-6 px-8" style={{ borderLeft: "3px solid #7a8c60", background: "rgba(122,140,96,0.08)", borderRadius: "0 6px 6px 0" }}>
-                <p style={{ fontStyle: "italic", color: "rgba(58,45,32,1)", marginBottom: "0.75rem" }}>
-                  «Ибо очи Господа обозревают всю землю, чтобы поддерживать тех, чьё сердце вполне предано Ему».
-                </p>
-                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>2 Паралипоменон 16:9</p>
-              </div>
-
-              <p>Я стремлюсь, чтобы мои стихи были именно такими — искренними свидетельствами преданности и доверия Богу.</p>
-
-              <p>Мне бы очень хотелось, чтобы эти страницы наполняли ваши сердца Божьей любовью, миром и теплом. Возможно, читая эти строки, вы найдёте отраду в своих собственных переживаниях, вспомните о Божьем присутствии в самые трудные моменты жизни.</p>
-
-              <p>Если у вас есть желание поделиться своими христианскими стихотворениями или теми, которые находят отклик в вашей душе, я буду очень рада этому. Будем вместе вдохновляться и назидать друг друга.</p>
-
-              <p style={{ textAlign: "center", color: "#a57c42", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", paddingTop: "1rem" }}>
-                Пусть наш общий путь через поэзию будет благословен Господом!
-              </p>
-
-              <p style={{ textAlign: "center", color: "rgba(58,45,32,0.92)" }}>
-                С любовью и верой, <span style={{ color: "#a57c42", opacity: 0.85, letterSpacing: "0.15em" }}>ФВА</span>
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* CONTACTS */}
-        {activeSection === "contacts" && (
-          <div className="max-w-2xl mx-auto px-6 py-16">
-            <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(90deg, rgba(253,246,233,0.94) 0%, rgba(253,246,233,0.72) 55%, rgba(253,246,233,0.55) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/4ca1ed55-b029-4d0e-b334-8862593ef5d2.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Связаться</p>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Контакты</h1>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
-            </div>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.9)", fontStyle: "italic", marginBottom: "3rem" }}>
-              Если стихотворение тронуло вас, если хотите поделиться мыслями или предложить сотрудничество — напишите.
-            </p>
-            <div className="space-y-8">
-              <input placeholder="Ваше имя" style={inputStyle} />
-              <input placeholder="Электронная почта" style={inputStyle} />
-              <textarea placeholder="Ваше сообщение..." rows={5} style={{ ...inputStyle, resize: "none" }} />
-              <button style={{ display: "block", width: "100%", background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)", border: "1px solid #b5673a", color: "#fffaf3", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer" }}>
-                Отправить сообщение
-              </button>
-            </div>
-            <div className="mt-14 pt-10 flex items-center gap-10" style={{ borderTop: "1px solid #e5d8c0" }}>
-              {[{ icon: "Mail", label: "Почта", value: "Укажите email" }, { icon: "MessageCircle", label: "Telegram", value: "@username" }].map((contact) => (
-                <div key={contact.label} className="flex items-center gap-3">
-                  <Icon name={contact.icon as "Mail"} size={15} style={{ color: "#a57c42", opacity: 0.75 }} />
-                  <div>
-                    <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.7 }}>{contact.label}</div>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(58,45,32,0.85)" }}>{contact.value}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </main>
 
-      {/* Footer */}
-      <footer className="mt-24 py-16 text-center" style={{ borderTop: "1px solid #e5d8c0", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.9) 0%, rgba(253,246,233,0.82) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/3c87e877-562c-4446-a8a4-8cdb3988643f.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div style={{ color: "#a57c42", opacity: 0.7, marginBottom: "1.25rem", fontSize: "1.2rem" }}>✦</div>
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-8">
-          {navItems.map((item) => (
-            <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "none", border: "none", cursor: "pointer", transition: "color 0.3s" }}
-              onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.color = "#5f7043"}
-              onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.color = "#8f4f2a"}>
-              {item.label}
-            </button>
-          ))}
-        </div>
-        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(58,45,32,0.8)" }}>
-          Христианские стихотворения · {new Date().getFullYear()}
-        </p>
-      </footer>
+      <SiteFooter navigate={navigate} />
 
-      {/* ===== MODAL: Create / Edit ===== */}
-      {adminOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto py-10 px-4" style={{ backgroundColor: "rgba(255,250,243,0.9)", backdropFilter: "blur(6px)" }}>
-          <div className="w-full max-w-2xl" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)" }}>
-            {/* Modal header */}
-            <div className="flex items-center justify-between px-8 py-6" style={{ borderBottom: "1px solid #e5d8c0" }}>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, color: "#3d3226" }}>
-                {editingPoem ? "Редактировать стихотворение" : "Новое стихотворение"}
-              </h2>
-              <button onClick={() => setAdminOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.75 }}>
-                <Icon name="X" size={18} />
-              </button>
-            </div>
-
-            {/* Modal body */}
-            <div className="px-8 py-8 space-y-8">
-              {/* Название */}
-              <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Название *</label>
-                <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Название стихотворения" style={{ ...inputStyle, marginTop: "0.5rem" }} />
-              </div>
-
-              {/* Текст */}
-              <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Текст *</label>
-                <textarea value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} placeholder="Текст стихотворения..." rows={10} style={{ ...inputStyle, marginTop: "0.5rem", resize: "vertical", lineHeight: 2, fontStyle: "italic" }} />
-              </div>
-
-              {/* Анонс */}
-              <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Анонс (2 строки)</label>
-                <textarea value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} placeholder="Короткий анонс для списка (если пусто — возьмётся из текста)" rows={2} style={{ ...inputStyle, marginTop: "0.5rem", resize: "none", fontStyle: "italic" }} />
-              </div>
-
-              {/* Автор */}
-              <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Автор</label>
-                <select value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} style={{ ...inputStyle, marginTop: "0.5rem" }}>
-                  {AUTHORS.map((a) => (
-                    <option key={a} value={a} style={{ background: "#fffaf3", color: "#3d3226" }}>{a}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Категория и год */}
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Категория</label>
-                  <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} placeholder="Лирика" style={{ ...inputStyle, marginTop: "0.5rem" }} />
-                </div>
-                <div>
-                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Год</label>
-                  <input value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} placeholder="2024" style={{ ...inputStyle, marginTop: "0.5rem" }} />
-                </div>
-              </div>
-
-              {/* Картинка */}
-              <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Картинка</label>
-                <div className="mt-3 space-y-3">
-                  {form.image_url && (
-                    <div className="relative" style={{ maxWidth: "200px" }}>
-                      <img src={form.image_url} alt="" style={{ width: "100%", height: "120px", objectFit: "cover", border: "1px solid #e5d8c0" }} />
-                      <button onClick={() => setForm({ ...form, image_url: "" })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(255,250,243,0.85)", border: "none", cursor: "pointer", color: "#a13b3b", padding: "2px" }}>
-                        <Icon name="X" size={12} />
-                      </button>
-                    </div>
-                  )}
-                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingImage ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingImage ? 0.5 : 1 }}>
-                    <Icon name={uploadingImage ? "Loader" : "ImagePlus"} size={13} />
-                    <span>{uploadingImage ? "Загрузка..." : form.image_url ? "Заменить" : "Загрузить"}</span>
-                    <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingImage}
-                      onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadFile(f, setUploadingImage, "image_url"); e.target.value = ""; }} />
-                  </label>
-                  <input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="или вставьте ссылку на картинку" style={{ ...inputStyle, fontSize: "0.85rem" }} />
-                </div>
-              </div>
-
-              {/* Аудио */}
-              <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Аудио</label>
-                <div className="mt-3 space-y-3">
-                  {form.audio_url && (
-                    <div className="flex items-center gap-3 p-3" style={{ background: "rgba(165,124,66,0.04)", border: "1px solid #e5d8c0" }}>
-                      <audio controls src={form.audio_url} style={{ height: "32px", flex: 1, accentColor: "#a57c42" }} />
-                      <button onClick={() => setForm({ ...form, audio_url: "", has_audio: false })} style={{ background: "none", border: "none", cursor: "pointer", color: "#a13b3b", opacity: 0.85 }}>
-                        <Icon name="X" size={14} />
-                      </button>
-                    </div>
-                  )}
-                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingAudio ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingAudio ? 0.5 : 1 }}>
-                    <Icon name={uploadingAudio ? "Loader" : "Music"} size={13} />
-                    <span>{uploadingAudio ? "Загрузка..." : form.audio_url ? "Заменить" : "Загрузить"}</span>
-                    <input type="file" accept="audio/*" style={{ display: "none" }} disabled={uploadingAudio}
-                      onChange={(e) => { const f = e.target.files?.[0]; if (f) { uploadFile(f, setUploadingAudio, "audio_url"); setForm((prev) => ({ ...prev, has_audio: true })); } e.target.value = ""; }} />
-                  </label>
-                  <input value={form.audio_url} onChange={(e) => setForm({ ...form, audio_url: e.target.value, has_audio: !!e.target.value })} placeholder="или вставьте ссылку на аудио" style={{ ...inputStyle, fontSize: "0.85rem" }} />
-                </div>
-              </div>
-
-              {/* Видео */}
-              <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Видео</label>
-                <div className="mt-3 space-y-3">
-                  {form.video_url && (
-                    <div className="relative" style={{ maxWidth: "320px" }}>
-                      <video controls src={form.video_url} style={{ width: "100%", border: "1px solid #e5d8c0", display: "block" }} />
-                      <button onClick={() => setForm({ ...form, video_url: "", has_video: false })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(255,250,243,0.85)", border: "none", cursor: "pointer", color: "#a13b3b", padding: "2px" }}>
-                        <Icon name="X" size={12} />
-                      </button>
-                    </div>
-                  )}
-                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingVideo ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingVideo ? 0.5 : 1 }}>
-                    <Icon name={uploadingVideo ? "Loader" : "Video"} size={13} />
-                    <span>{uploadingVideo ? "Загрузка..." : form.video_url ? "Заменить" : "Загрузить"}</span>
-                    <input type="file" accept="video/*" style={{ display: "none" }} disabled={uploadingVideo}
-                      onChange={(e) => { const f = e.target.files?.[0]; if (f) { uploadFile(f, setUploadingVideo, "video_url"); setForm((prev) => ({ ...prev, has_video: true })); } e.target.value = ""; }} />
-                  </label>
-                  <input value={form.video_url} onChange={(e) => setForm({ ...form, video_url: e.target.value, has_video: !!e.target.value })} placeholder="или вставьте ссылку на видео" style={{ ...inputStyle, fontSize: "0.85rem" }} />
-                </div>
-              </div>
-            </div>
-
-            {/* Modal footer */}
-            <div className="flex items-center justify-end gap-4 px-8 py-6" style={{ borderTop: "1px solid #e5d8c0" }}>
-              <button onClick={() => setAdminOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(58,45,32,0.8)" }}>
-                Отмена
-              </button>
-              <button onClick={savePoem} disabled={saving || !form.title.trim() || !form.text.trim()} style={{ ...btnGold, opacity: saving || !form.title.trim() || !form.text.trim() ? 0.4 : 1 }}>
-                {saving ? "Сохраняю..." : editingPoem ? "Сохранить" : "Добавить"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <PoemFormModal
+        adminOpen={adminOpen}
+        setAdminOpen={setAdminOpen}
+        editingPoem={editingPoem}
+        form={form}
+        setForm={setForm}
+        saving={saving}
+        savePoem={savePoem}
+        uploadFile={uploadFile}
+        uploadingImage={uploadingImage}
+        uploadingAudio={uploadingAudio}
+        uploadingVideo={uploadingVideo}
+        setUploadingImage={setUploadingImage}
+        setUploadingAudio={setUploadingAudio}
+        setUploadingVideo={setUploadingVideo}
+      />
     </div>
   );
 }
