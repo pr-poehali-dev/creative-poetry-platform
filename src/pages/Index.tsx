@@ -169,8 +169,8 @@ export default function Index() {
     width: "100%",
     background: "transparent",
     border: "none",
-    borderBottom: "1px solid #2e2418",
-    color: "#f0e8d5",
+    borderBottom: "1px solid #e5d8c0",
+    color: "#3d3226",
     fontFamily: "'Cormorant Garamond', serif",
     fontSize: "1rem",
     padding: "0.5rem 0",
@@ -179,8 +179,8 @@ export default function Index() {
 
   const btnGold = {
     background: "transparent",
-    border: "1px solid #c9a96e",
-    color: "#c9a96e",
+    border: "1px solid #a57c42",
+    color: "#a57c42",
     padding: "0.5rem 1.5rem",
     fontFamily: "Montserrat, sans-serif",
     fontSize: "0.65rem",
@@ -191,36 +191,36 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#130f0a", backgroundImage: "radial-gradient(ellipse at 20% 50%, rgba(201,169,110,0.03) 0%, transparent 50%)" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#faf4e8", backgroundImage: "radial-gradient(ellipse at 20% 50%, rgba(165,124,66,0.03) 0%, transparent 50%)" }}>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-5" style={{ backgroundColor: "rgba(19,15,10,0.95)", backdropFilter: "blur(10px)", borderBottom: "1px solid #2e2418" }}>
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-5" style={{ backgroundColor: "rgba(250,244,232,0.92)", backdropFilter: "blur(10px)", borderBottom: "1px solid #e5d8c0" }}>
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <button onClick={() => navigate("home")} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", letterSpacing: "0.15em", color: "#c9a96e", background: "none", border: "none", cursor: "pointer" }}>
+          <button onClick={() => navigate("home")} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", letterSpacing: "0.15em", color: "#a57c42", background: "none", border: "none", cursor: "pointer" }}>
             Поэзия
           </button>
           <div className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
-              <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: activeSection === item.key ? "#c9a96e" : "#e8d5a3", opacity: activeSection === item.key ? 1 : 0.6, background: "none", border: "none", cursor: "pointer", transition: "all 0.3s" }}>
+              <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: activeSection === item.key ? "#a57c42" : "#7a6444", opacity: activeSection === item.key ? 1 : 0.6, background: "none", border: "none", cursor: "pointer", transition: "all 0.3s" }}>
                 {item.label}
               </button>
             ))}
-            <button onClick={() => navigate("admin")} title="Управление" style={{ background: "none", border: "none", cursor: "pointer", color: activeSection === "admin" ? "#c9a96e" : "#c9a96e", opacity: activeSection === "admin" ? 1 : 0.3, transition: "opacity 0.3s" }}>
+            <button onClick={() => navigate("admin")} title="Управление" style={{ background: "none", border: "none", cursor: "pointer", color: activeSection === "admin" ? "#a57c42" : "#a57c42", opacity: activeSection === "admin" ? 1 : 0.3, transition: "opacity 0.3s" }}>
               <Icon name="Settings" size={15} />
             </button>
           </div>
-          <button className="md:hidden" style={{ color: "#c9a96e", background: "none", border: "none", cursor: "pointer" }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="md:hidden" style={{ color: "#a57c42", background: "none", border: "none", cursor: "pointer" }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <Icon name={mobileMenuOpen ? "X" : "Menu"} size={20} />
           </button>
         </div>
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 flex flex-col gap-5 items-center" style={{ borderTop: "1px solid #2e2418" }}>
+          <div className="md:hidden mt-4 pb-4 flex flex-col gap-5 items-center" style={{ borderTop: "1px solid #e5d8c0" }}>
             {navItems.map((item) => (
-              <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: activeSection === item.key ? "#c9a96e" : "#e8d5a3", opacity: activeSection === item.key ? 1 : 0.6, background: "none", border: "none", cursor: "pointer" }}>
+              <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: activeSection === item.key ? "#a57c42" : "#7a6444", opacity: activeSection === item.key ? 1 : 0.6, background: "none", border: "none", cursor: "pointer" }}>
                 {item.label}
               </button>
             ))}
-            <button onClick={() => navigate("admin")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.5, background: "none", border: "none", cursor: "pointer" }}>
+            <button onClick={() => navigate("admin")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75, background: "none", border: "none", cursor: "pointer" }}>
               Управление
             </button>
           </div>
@@ -232,27 +232,27 @@ export default function Index() {
         {/* HOME */}
         {activeSection === "home" && (
           <div>
-            <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6" style={{ background: "radial-gradient(ellipse at center, rgba(201,169,110,0.05) 0%, transparent 70%)" }}>
-              <div className="mb-8" style={{ opacity: 0.5 }}>
-                <div className="flex items-center gap-3 justify-center" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#c9a96e" }}>
-                  <span>✦</span><span style={{ color: "#e8d5a3" }}>Авторские стихотворения</span><span>✦</span>
+            <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6" style={{ background: "radial-gradient(ellipse at center, rgba(165,124,66,0.05) 0%, transparent 70%)" }}>
+              <div className="mb-8" style={{ opacity: 0.75 }}>
+                <div className="flex items-center gap-3 justify-center" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#a57c42" }}>
+                  <span>✦</span><span style={{ color: "#7a6444" }}>Авторские стихотворения</span><span>✦</span>
                 </div>
               </div>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, letterSpacing: "0.02em", color: "#f0e8d5", marginBottom: "0.3rem" }}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, letterSpacing: "0.02em", color: "#3d3226", marginBottom: "0.3rem" }}>
                 Христианские
               </h1>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", color: "#c9a96e" }}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", color: "#a57c42" }}>
                 стихотворения
               </h1>
-              <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.5, margin: "2.5rem auto" }} />
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(240,232,213,0.65)", fontStyle: "italic", maxWidth: "480px" }}>
+              <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.75, margin: "2.5rem auto" }} />
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(74,60,44,0.78)", fontStyle: "italic", maxWidth: "480px" }}>
                 Слова, рождённые из молитвы и тишины. Каждое стихотворение — свидетельство веры и красоты Божьего мира.
               </p>
               <div className="flex gap-4 mt-12">
                 <button onClick={() => navigate("poems")} style={btnGold}>Читать стихи</button>
-                <button onClick={() => navigate("about")} style={{ ...btnGold, borderColor: "rgba(201,169,110,0.35)", color: "rgba(240,232,213,0.55)" }}>О поэте</button>
+                <button onClick={() => navigate("about")} style={{ ...btnGold, borderColor: "rgba(165,124,66,0.35)", color: "rgba(74,60,44,0.72)" }}>О поэте</button>
               </div>
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ color: "#c9a96e", opacity: 0.35 }}>
+              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ color: "#a57c42", opacity: 0.6 }}>
                 <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase" }}>Прокрутите</span>
                 <Icon name="ChevronDown" size={14} />
               </div>
@@ -262,14 +262,14 @@ export default function Index() {
             <section className="py-24 px-6">
               <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-14">
-                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Приветствие</p>
-                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.3rem", fontWeight: 300, lineHeight: 1.3, color: "#f0e8d5" }}>
+                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Приветствие</p>
+                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.3rem", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
                     Добро пожаловать в мир поэзии,<br />рождённой с верой и любовью
                   </h2>
-                  <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.4, margin: "2rem auto 0" }} />
+                  <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.65, margin: "2rem auto 0" }} />
                 </div>
 
-                <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 300, lineHeight: 1.95, color: "rgba(240,232,213,0.72)" }}>
+                <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 300, lineHeight: 1.95, color: "rgba(74,60,44,0.82)" }}>
                   <p>Мы рады приветствовать вас на нашей странице, где каждый стих — это отклик души, пропитанный молитвой, тишиной и глубокими жизненными переживаниями. Здесь вы откроете для себя авторские стихотворения, написанные мной, а также произведения, вдохновлённые и созданные моей бабушкой и моим папой.</p>
 
                   <p>Мы создали этот сайт как место поддержки, утешения и духовного укрепления. Мы надеемся, что каждый, кто зайдёт сюда, найдёт слова, которые коснутся его сердца.</p>
@@ -280,19 +280,19 @@ export default function Index() {
 
                   <p>Приглашаем и вас стать частью нашего творческого пространства. Если у вас есть желание, вы можете делиться своими христианскими стихотворениями или теми, которые вам особенно близки. Будем вместе назидать друг друга!</p>
 
-                  <p className="text-center" style={{ color: "#c9a96e", fontStyle: "italic", fontSize: "1.3rem", padding: "1rem 0" }}>
+                  <p className="text-center" style={{ color: "#a57c42", fontStyle: "italic", fontSize: "1.3rem", padding: "1rem 0" }}>
                     Пусть Господь благословит каждого из вас!
                   </p>
 
-                  <p className="text-center" style={{ color: "#c9a96e", opacity: 0.8, letterSpacing: "0.15em", fontSize: "1.2rem" }}>
+                  <p className="text-center" style={{ color: "#a57c42", opacity: 0.8, letterSpacing: "0.15em", fontSize: "1.2rem" }}>
                     ФВА
                   </p>
                 </div>
 
                 {/* Напоминание из Писания */}
-                <div className="mt-16 p-8" style={{ background: "#1c1610", border: "1px solid #2e2418" }}>
+                <div className="mt-16 p-8" style={{ background: "#fffaf3", border: "1px solid #e5d8c0" }}>
                   <div className="text-center mb-8">
-                    <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65 }}>Напоминание из Писания</p>
+                    <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9 }}>Напоминание из Писания</p>
                   </div>
                   <div className="space-y-6">
                     {[
@@ -301,11 +301,11 @@ export default function Index() {
                       { ref: "2 Паралипоменон 16:9", text: "Ибо очи Господа обозревают всю землю, чтобы поддерживать тех, чьё сердце вполне предано Ему" },
                       { ref: "1 Фессалоникийцам 5:11", text: "Посему увещавайте друг друга и назидайте один другого" },
                     ].map((verse) => (
-                      <div key={verse.ref} style={{ borderLeft: "2px solid #c9a96e", paddingLeft: "1.5rem" }}>
-                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.7, color: "rgba(240,232,213,0.75)", marginBottom: "0.5rem" }}>
+                      <div key={verse.ref} style={{ borderLeft: "2px solid #a57c42", paddingLeft: "1.5rem" }}>
+                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.7, color: "rgba(74,60,44,0.85)", marginBottom: "0.5rem" }}>
                           «{verse.text}»
                         </p>
-                        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>
+                        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>
                           {verse.ref}
                         </p>
                       </div>
@@ -319,18 +319,18 @@ export default function Index() {
             <section className="pb-24 px-6">
               <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-16">
-                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Избранное</p>
-                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.5rem", fontWeight: 300, color: "#f0e8d5" }}>Последние стихотворения</h2>
-                  <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.4, margin: "1.5rem auto 0" }} />
+                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Избранное</p>
+                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.5rem", fontWeight: 300, color: "#3d3226" }}>Последние стихотворения</h2>
+                  <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.65, margin: "1.5rem auto 0" }} />
                 </div>
                 {loading ? (
-                  <div className="text-center py-20" style={{ color: "rgba(240,232,213,0.3)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
+                  <div className="text-center py-20" style={{ color: "rgba(74,60,44,0.55)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
                 ) : (
                   <div className="grid md:grid-cols-3 gap-6">
                     {poems.slice(0, 3).map((poem) => (
-                      <div key={poem.id} onClick={() => { setSelectedPoem(poem); setActiveSection("poems"); }} className="cursor-pointer" style={{ background: "#1c1610", border: "1px solid #2e2418", transition: "all 0.4s ease", overflow: "hidden" }}
-                        onMouseEnter={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#c9a96e"; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 0 40px rgba(201,169,110,0.07)"; }}
-                        onMouseLeave={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#2e2418"; el.style.transform = "translateY(0)"; el.style.boxShadow = "none"; }}>
+                      <div key={poem.id} onClick={() => { setSelectedPoem(poem); setActiveSection("poems"); }} className="cursor-pointer" style={{ background: "#fffaf3", border: "1px solid #e5d8c0", transition: "all 0.4s ease", overflow: "hidden" }}
+                        onMouseEnter={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#a57c42"; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 0 40px rgba(165,124,66,0.07)"; }}
+                        onMouseLeave={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#e5d8c0"; el.style.transform = "translateY(0)"; el.style.boxShadow = "none"; }}>
                         {poem.image_url && (
                           <div style={{ height: "140px", overflow: "hidden" }}>
                             <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
@@ -338,17 +338,17 @@ export default function Index() {
                         )}
                         <div style={{ padding: "2rem" }}>
                           <div className="flex items-center justify-between mb-5">
-                            <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>{poem.category}</span>
-                            <span style={{ color: "#c9a96e", opacity: 0.25, fontSize: "0.75rem", fontFamily: "Montserrat" }}>{poem.year}</span>
+                            <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>{poem.category}</span>
+                            <span style={{ color: "#a57c42", opacity: 0.5, fontSize: "0.75rem", fontFamily: "Montserrat" }}>{poem.year}</span>
                           </div>
-                          <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "#f0e8d5", marginBottom: "0.8rem" }}>{poem.title}</h3>
-                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(240,232,213,0.45)", fontStyle: "italic", whiteSpace: "pre-line" }}>{poem.excerpt}</p>
+                          <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.8rem" }}>{poem.title}</h3>
+                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(74,60,44,0.66)", fontStyle: "italic", whiteSpace: "pre-line" }}>{poem.excerpt}</p>
                           <div className="flex items-center gap-3 mt-5">
-                            {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#c9a96e", opacity: 0.5 }} />}
-                            {poem.has_video && <Icon name="Play" size={12} style={{ color: "#c9a96e", opacity: 0.5 }} />}
-                            {poem.image_url && <Icon name="Image" size={12} style={{ color: "#c9a96e", opacity: 0.5 }} />}
+                            {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#a57c42", opacity: 0.75 }} />}
+                            {poem.has_video && <Icon name="Play" size={12} style={{ color: "#a57c42", opacity: 0.75 }} />}
+                            {poem.image_url && <Icon name="Image" size={12} style={{ color: "#a57c42", opacity: 0.75 }} />}
                             <div className="flex-1" />
-                            <Icon name="ArrowRight" size={14} style={{ color: "#c9a96e", opacity: 0.4 }} />
+                            <Icon name="ArrowRight" size={14} style={{ color: "#a57c42", opacity: 0.65 }} />
                           </div>
                         </div>
                       </div>
@@ -361,13 +361,13 @@ export default function Index() {
               </div>
             </section>
 
-            <section className="py-24 px-6" style={{ borderTop: "1px solid #2e2418", borderBottom: "1px solid #2e2418" }}>
+            <section className="py-24 px-6" style={{ borderTop: "1px solid #e5d8c0", borderBottom: "1px solid #e5d8c0" }}>
               <div className="max-w-2xl mx-auto text-center">
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", color: "#c9a96e", opacity: 0.2, lineHeight: 1 }}>«</div>
-                <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, lineHeight: 1.75, fontStyle: "italic", color: "#f0e8d5", opacity: 0.8 }}>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", color: "#a57c42", opacity: 0.45, lineHeight: 1 }}>«</div>
+                <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, lineHeight: 1.75, fontStyle: "italic", color: "#3d3226", opacity: 0.8 }}>
                   Поэзия — это молитва,<br />которую сердце произносит словами.
                 </blockquote>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", color: "#c9a96e", opacity: 0.2, lineHeight: 1 }}>»</div>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", color: "#a57c42", opacity: 0.45, lineHeight: 1 }}>»</div>
               </div>
             </section>
           </div>
@@ -377,15 +377,15 @@ export default function Index() {
         {activeSection === "poems" && !selectedPoem && (
           <div className="max-w-5xl mx-auto px-6 py-16">
             <div className="mb-14">
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Все произведения</p>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#f0e8d5" }}>Стихотворения</h1>
-              <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, marginTop: "1.5rem" }} />
+              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Все произведения</p>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
+              <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
             {loading ? (
-              <div className="text-center py-20" style={{ color: "rgba(240,232,213,0.3)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
+              <div className="text-center py-20" style={{ color: "rgba(74,60,44,0.55)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
             ) : poems.length === 0 ? (
               <div className="text-center py-20">
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(240,232,213,0.3)" }}>Стихотворений пока нет.</p>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(74,60,44,0.55)" }}>Стихотворений пока нет.</p>
                 <button onClick={() => navigate("admin")} style={{ ...btnGold, marginTop: "1.5rem" }}>Добавить первое</button>
               </div>
             ) : (
@@ -393,27 +393,27 @@ export default function Index() {
                 {AUTHORS.filter((a) => poems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
                   <div key={author}>
                     <div className="mb-8">
-                      <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#c9a96e" }}>{author}</h2>
-                      <div style={{ width: "100%", height: "1px", background: "#2e2418", marginTop: "1rem" }} />
+                      <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#a57c42" }}>{author}</h2>
+                      <div style={{ width: "100%", height: "1px", background: "#e5d8c0", marginTop: "1rem" }} />
                     </div>
                     <div className="space-y-4">
                       {poems.filter((p) => (p.author || AUTHORS[0]) === author).map((poem) => (
                         <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-6" onClick={() => setSelectedPoem(poem)}
-                          style={{ background: "#1c1610", border: "1px solid #2e2418", padding: "2rem", transition: "all 0.4s ease" }}
-                          onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#c9a96e"; }}
-                          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#2e2418"; }}>
+                          style={{ background: "#fffaf3", border: "1px solid #e5d8c0", padding: "2rem", transition: "all 0.4s ease" }}
+                          onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#a57c42"; }}
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e5d8c0"; }}>
                           <div className="flex-1">
                             <div className="flex items-center gap-4 mb-3">
-                              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>{poem.category}</span>
-                              <span style={{ color: "#2e2418" }}>·</span>
-                              <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(240,232,213,0.25)" }}>{poem.year}</span>
-                              {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#c9a96e", opacity: 0.45 }} />}
-                              {poem.has_video && <Icon name="Play" size={12} style={{ color: "#c9a96e", opacity: 0.45 }} />}
+                              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>{poem.category}</span>
+                              <span style={{ color: "#e5d8c0" }}>·</span>
+                              <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(74,60,44,0.5)" }}>{poem.year}</span>
+                              {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
+                              {poem.has_video && <Icon name="Play" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
                             </div>
-                            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#f0e8d5", marginBottom: "0.5rem" }}>{poem.title}</h3>
-                            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(240,232,213,0.4)", whiteSpace: "pre-line", lineHeight: 1.8 }}>{poem.excerpt}</p>
+                            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.5rem" }}>{poem.title}</h3>
+                            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(74,60,44,0.62)", whiteSpace: "pre-line", lineHeight: 1.8 }}>{poem.excerpt}</p>
                           </div>
-                          <Icon name="ArrowRight" size={18} style={{ color: "#c9a96e", opacity: 0.35, marginTop: "0.5rem", flexShrink: 0 }} />
+                          <Icon name="ArrowRight" size={18} style={{ color: "#a57c42", opacity: 0.6, marginTop: "0.5rem", flexShrink: 0 }} />
                         </div>
                       ))}
                     </div>
@@ -428,49 +428,49 @@ export default function Index() {
         {activeSection === "poems" && selectedPoem && (
           <div className="max-w-3xl mx-auto px-6 py-16">
             <div className="flex items-center justify-between mb-12">
-              <button onClick={() => setSelectedPoem(null)} className="flex items-center gap-2" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.55, background: "none", border: "none", cursor: "pointer" }}>
+              <button onClick={() => setSelectedPoem(null)} className="flex items-center gap-2" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.8, background: "none", border: "none", cursor: "pointer" }}>
                 <Icon name="ArrowLeft" size={13} />Назад
               </button>
-              <button onClick={() => openEdit(selectedPoem)} style={{ background: "none", border: "none", cursor: "pointer", color: "#c9a96e", opacity: 0.4, transition: "opacity 0.3s" }}
+              <button onClick={() => openEdit(selectedPoem)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.65, transition: "opacity 0.3s" }}
                 onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"}
                 onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.4"}>
                 <Icon name="Pencil" size={15} />
               </button>
             </div>
             <div className="flex items-center gap-4 mb-3">
-              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>{selectedPoem.category}</span>
-              <span style={{ color: "#2e2418" }}>·</span>
-              <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(240,232,213,0.25)" }}>{selectedPoem.year}</span>
+              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>{selectedPoem.category}</span>
+              <span style={{ color: "#e5d8c0" }}>·</span>
+              <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(74,60,44,0.5)" }}>{selectedPoem.year}</span>
             </div>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#f0e8d5", marginBottom: "0.75rem" }}>{selectedPoem.title}</h1>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#c9a96e", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
-            <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, marginBottom: "3rem" }} />
+            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}>{selectedPoem.title}</h1>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
+            <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, marginBottom: "3rem" }} />
             {/* Картинка */}
             {selectedPoem.image_url && (
               <div className="mb-10">
-                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", maxHeight: "400px", objectFit: "cover", border: "1px solid #2e2418" }} />
+                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", maxHeight: "400px", objectFit: "cover", border: "1px solid #e5d8c0" }} />
               </div>
             )}
 
             {/* Аудио */}
             {selectedPoem.audio_url && (
-              <div className="mb-8 p-5" style={{ border: "1px solid #2e2418", background: "rgba(201,169,110,0.02)" }}>
+              <div className="mb-8 p-5" style={{ border: "1px solid #e5d8c0", background: "rgba(165,124,66,0.02)" }}>
                 <div className="flex items-center gap-3 mb-3">
-                  <Icon name="Music" size={13} style={{ color: "#c9a96e", opacity: 0.6 }} />
-                  <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.5 }}>Аудиозапись</span>
+                  <Icon name="Music" size={13} style={{ color: "#a57c42", opacity: 0.85 }} />
+                  <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75 }}>Аудиозапись</span>
                 </div>
-                <audio controls src={selectedPoem.audio_url} style={{ width: "100%", height: "36px", accentColor: "#c9a96e" }} />
+                <audio controls src={selectedPoem.audio_url} style={{ width: "100%", height: "36px", accentColor: "#a57c42" }} />
               </div>
             )}
 
             {/* Видео */}
             {selectedPoem.video_url && (
-              <div className="mb-10" style={{ border: "1px solid #2e2418" }}>
-                <video controls src={selectedPoem.video_url} style={{ width: "100%", display: "block", maxHeight: "400px", background: "#0a0805" }} />
+              <div className="mb-10" style={{ border: "1px solid #e5d8c0" }}>
+                <video controls src={selectedPoem.video_url} style={{ width: "100%", display: "block", maxHeight: "400px", background: "#e5d8c0" }} />
               </div>
             )}
 
-            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#f0e8d5", whiteSpace: "pre-line", marginBottom: "5rem" }}>
+            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "5rem" }}>
               {selectedPoem.text}
             </div>
           </div>
@@ -481,9 +481,9 @@ export default function Index() {
           <div className="max-w-5xl mx-auto px-6 py-16">
             <div className="flex items-end justify-between mb-14">
               <div>
-                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Панель управления</p>
-                <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#f0e8d5" }}>Стихотворения</h1>
-                <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, marginTop: "1.5rem" }} />
+                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Панель управления</p>
+                <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
+                <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, marginTop: "1.5rem" }} />
               </div>
               <button onClick={openCreate} className="flex items-center gap-2" style={{ ...btnGold, padding: "0.6rem 1.5rem" }}>
                 <Icon name="Plus" size={14} />Добавить
@@ -491,46 +491,46 @@ export default function Index() {
             </div>
 
             {loading ? (
-              <div className="text-center py-20" style={{ color: "rgba(240,232,213,0.3)", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>Загрузка...</div>
+              <div className="text-center py-20" style={{ color: "rgba(74,60,44,0.55)", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>Загрузка...</div>
             ) : poems.length === 0 ? (
               <div className="text-center py-20">
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(240,232,213,0.3)", marginBottom: "1.5rem" }}>Стихотворений пока нет.</p>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(74,60,44,0.55)", marginBottom: "1.5rem" }}>Стихотворений пока нет.</p>
                 <button onClick={openCreate} style={btnGold}>Добавить первое</button>
               </div>
             ) : (
               <div className="space-y-3">
                 {poems.map((poem) => (
-                  <div key={poem.id} className="flex items-center justify-between gap-4" style={{ background: "#1c1610", border: "1px solid #2e2418", padding: "1.25rem 1.75rem" }}>
+                  <div key={poem.id} className="flex items-center justify-between gap-4" style={{ background: "#fffaf3", border: "1px solid #e5d8c0", padding: "1.25rem 1.75rem" }}>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-1">
-                        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 400, color: "#f0e8d5" }}>{poem.title}</h3>
-                        {poem.has_audio && <Icon name="Music" size={11} style={{ color: "#c9a96e", opacity: 0.5 }} />}
-                        {poem.has_video && <Icon name="Play" size={11} style={{ color: "#c9a96e", opacity: 0.5 }} />}
+                        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 400, color: "#3d3226" }}>{poem.title}</h3>
+                        {poem.has_audio && <Icon name="Music" size={11} style={{ color: "#a57c42", opacity: 0.75 }} />}
+                        {poem.has_video && <Icon name="Play" size={11} style={{ color: "#a57c42", opacity: 0.75 }} />}
                       </div>
                       <div className="flex items-center gap-3">
-                        <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.5 }}>{poem.category}</span>
-                        <span style={{ color: "#2e2418" }}>·</span>
-                        <span style={{ fontFamily: "Montserrat", fontSize: "0.6rem", color: "rgba(240,232,213,0.25)" }}>{poem.year}</span>
+                        <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75 }}>{poem.category}</span>
+                        <span style={{ color: "#e5d8c0" }}>·</span>
+                        <span style={{ fontFamily: "Montserrat", fontSize: "0.6rem", color: "rgba(74,60,44,0.5)" }}>{poem.year}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <button onClick={() => { setSelectedPoem(poem); navigate("poems"); }} title="Просмотр" style={{ background: "none", border: "none", cursor: "pointer", color: "#c9a96e", opacity: 0.35, transition: "opacity 0.2s" }}
+                      <button onClick={() => { setSelectedPoem(poem); navigate("poems"); }} title="Просмотр" style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.6, transition: "opacity 0.2s" }}
                         onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.8"}
                         onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.35"}>
                         <Icon name="Eye" size={16} />
                       </button>
-                      <button onClick={() => openEdit(poem)} title="Редактировать" style={{ background: "none", border: "none", cursor: "pointer", color: "#c9a96e", opacity: 0.35, transition: "opacity 0.2s" }}
+                      <button onClick={() => openEdit(poem)} title="Редактировать" style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.6, transition: "opacity 0.2s" }}
                         onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.8"}
                         onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.35"}>
                         <Icon name="Pencil" size={16} />
                       </button>
                       {deleteConfirm === poem.id ? (
                         <div className="flex items-center gap-2">
-                          <button onClick={() => deletePoem(poem.id)} style={{ background: "none", border: "1px solid #8b2a2a", color: "#c97070", padding: "0.2rem 0.6rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer" }}>Удалить</button>
-                          <button onClick={() => setDeleteConfirm(null)} style={{ background: "none", border: "none", color: "rgba(240,232,213,0.3)", cursor: "pointer", fontFamily: "Montserrat", fontSize: "0.55rem" }}>Отмена</button>
+                          <button onClick={() => deletePoem(poem.id)} style={{ background: "none", border: "1px solid #8b2a2a", color: "#a13b3b", padding: "0.2rem 0.6rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer" }}>Удалить</button>
+                          <button onClick={() => setDeleteConfirm(null)} style={{ background: "none", border: "none", color: "rgba(74,60,44,0.55)", cursor: "pointer", fontFamily: "Montserrat", fontSize: "0.55rem" }}>Отмена</button>
                         </div>
                       ) : (
-                        <button onClick={() => setDeleteConfirm(poem.id)} title="Удалить" style={{ background: "none", border: "none", cursor: "pointer", color: "#c97070", opacity: 0.3, transition: "opacity 0.2s" }}
+                        <button onClick={() => setDeleteConfirm(poem.id)} title="Удалить" style={{ background: "none", border: "none", cursor: "pointer", color: "#a13b3b", opacity: 0.55, transition: "opacity 0.2s" }}
                           onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.8"}
                           onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.3"}>
                           <Icon name="Trash2" size={16} />
@@ -548,15 +548,15 @@ export default function Index() {
         {activeSection === "about" && (
           <div className="max-w-3xl mx-auto px-6 py-16">
             <div className="text-center mb-14">
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Об авторе</p>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 300, lineHeight: 1.3, color: "#f0e8d5" }}>
+              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Об авторе</p>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
                 История одной души,<br />преображённой словом
               </h1>
-              <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, margin: "2rem auto 0" }} />
+              <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, margin: "2rem auto 0" }} />
             </div>
 
-            <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 1.95, fontWeight: 300, color: "rgba(240,232,213,0.75)" }}>
-              <p style={{ fontStyle: "italic", color: "#c9a96e", opacity: 0.85, textAlign: "center", fontSize: "1.25rem" }}>Здравствуйте, дорогие читатели!</p>
+            <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 1.95, fontWeight: 300, color: "rgba(74,60,44,0.85)" }}>
+              <p style={{ fontStyle: "italic", color: "#a57c42", opacity: 0.85, textAlign: "center", fontSize: "1.25rem" }}>Здравствуйте, дорогие читатели!</p>
 
               <p>Я сердечно приветствую каждого из вас на этой странице. Если вы здесь, значит, наши души ищут чего-то схожего: опоры в вере, утешения в словах и отклика в поэзии.</p>
 
@@ -566,11 +566,11 @@ export default function Index() {
 
               <p>Я надеюсь, что их стихи, как и мои, смогут послужить вам поддержкой, утешением и вдохновением. Как сказано в Писании:</p>
 
-              <div className="my-8 py-6 px-8" style={{ borderLeft: "2px solid #c9a96e", background: "rgba(201,169,110,0.03)" }}>
-                <p style={{ fontStyle: "italic", color: "rgba(240,232,213,0.8)", marginBottom: "0.75rem" }}>
+              <div className="my-8 py-6 px-8" style={{ borderLeft: "2px solid #a57c42", background: "rgba(165,124,66,0.03)" }}>
+                <p style={{ fontStyle: "italic", color: "rgba(74,60,44,0.88)", marginBottom: "0.75rem" }}>
                   «Ибо очи Господа обозревают всю землю, чтобы поддерживать тех, чьё сердце вполне предано Ему».
                 </p>
-                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>2 Паралипоменон 16:9</p>
+                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>2 Паралипоменон 16:9</p>
               </div>
 
               <p>Я стремлюсь, чтобы мои стихи были именно такими — искренними свидетельствами преданности и доверия Богу.</p>
@@ -579,12 +579,12 @@ export default function Index() {
 
               <p>Если у вас есть желание поделиться своими христианскими стихотворениями или теми, которые находят отклик в вашей душе, я буду очень рада этому. Будем вместе вдохновляться и назидать друг друга.</p>
 
-              <p style={{ textAlign: "center", color: "#c9a96e", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", paddingTop: "1rem" }}>
+              <p style={{ textAlign: "center", color: "#a57c42", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", paddingTop: "1rem" }}>
                 Пусть наш общий путь через поэзию будет благословен Господом!
               </p>
 
-              <p style={{ textAlign: "center", color: "rgba(240,232,213,0.6)" }}>
-                С любовью и верой, <span style={{ color: "#c9a96e", opacity: 0.85, letterSpacing: "0.15em" }}>ФВА</span>
+              <p style={{ textAlign: "center", color: "rgba(74,60,44,0.76)" }}>
+                С любовью и верой, <span style={{ color: "#a57c42", opacity: 0.85, letterSpacing: "0.15em" }}>ФВА</span>
               </p>
             </div>
           </div>
@@ -594,28 +594,28 @@ export default function Index() {
         {activeSection === "contacts" && (
           <div className="max-w-2xl mx-auto px-6 py-16">
             <div className="mb-14">
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.65, marginBottom: "1rem" }}>Связаться</p>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#f0e8d5" }}>Контакты</h1>
-              <div style={{ width: "60px", height: "1px", background: "#c9a96e", opacity: 0.45, marginTop: "1.5rem" }} />
+              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Связаться</p>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Контакты</h1>
+              <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(240,232,213,0.55)", fontStyle: "italic", marginBottom: "3rem" }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(74,60,44,0.72)", fontStyle: "italic", marginBottom: "3rem" }}>
               Если стихотворение тронуло вас, если хотите поделиться мыслями или предложить сотрудничество — напишите.
             </p>
             <div className="space-y-8">
               <input placeholder="Ваше имя" style={inputStyle} />
               <input placeholder="Электронная почта" style={inputStyle} />
               <textarea placeholder="Ваше сообщение..." rows={5} style={{ ...inputStyle, resize: "none" }} />
-              <button style={{ display: "block", width: "100%", background: "#c9a96e", border: "1px solid #c9a96e", color: "#130f0a", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer" }}>
+              <button style={{ display: "block", width: "100%", background: "#a57c42", border: "1px solid #a57c42", color: "#3d3226", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer" }}>
                 Отправить сообщение
               </button>
             </div>
-            <div className="mt-14 pt-10 flex items-center gap-10" style={{ borderTop: "1px solid #2e2418" }}>
+            <div className="mt-14 pt-10 flex items-center gap-10" style={{ borderTop: "1px solid #e5d8c0" }}>
               {[{ icon: "Mail", label: "Почта", value: "Укажите email" }, { icon: "MessageCircle", label: "Telegram", value: "@username" }].map((contact) => (
                 <div key={contact.label} className="flex items-center gap-3">
-                  <Icon name={contact.icon as "Mail"} size={15} style={{ color: "#c9a96e", opacity: 0.5 }} />
+                  <Icon name={contact.icon as "Mail"} size={15} style={{ color: "#a57c42", opacity: 0.75 }} />
                   <div>
-                    <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.45 }}>{contact.label}</div>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(240,232,213,0.45)" }}>{contact.value}</div>
+                    <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.7 }}>{contact.label}</div>
+                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(74,60,44,0.66)" }}>{contact.value}</div>
                   </div>
                 </div>
               ))}
@@ -625,23 +625,23 @@ export default function Index() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-24 py-10 text-center" style={{ borderTop: "1px solid #2e2418" }}>
-        <div style={{ color: "#c9a96e", opacity: 0.2, marginBottom: "0.5rem", fontSize: "1.2rem" }}>✦</div>
-        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(240,232,213,0.2)" }}>
+      <footer className="mt-24 py-10 text-center" style={{ borderTop: "1px solid #e5d8c0" }}>
+        <div style={{ color: "#a57c42", opacity: 0.45, marginBottom: "0.5rem", fontSize: "1.2rem" }}>✦</div>
+        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,60,44,0.45)" }}>
           Христианские стихотворения · {new Date().getFullYear()}
         </p>
       </footer>
 
       {/* ===== MODAL: Create / Edit ===== */}
       {adminOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto py-10 px-4" style={{ backgroundColor: "rgba(10,8,5,0.9)", backdropFilter: "blur(6px)" }}>
-          <div className="w-full max-w-2xl" style={{ background: "#1c1610", border: "1px solid #2e2418" }}>
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto py-10 px-4" style={{ backgroundColor: "rgba(255,250,243,0.9)", backdropFilter: "blur(6px)" }}>
+          <div className="w-full max-w-2xl" style={{ background: "#fffaf3", border: "1px solid #e5d8c0" }}>
             {/* Modal header */}
-            <div className="flex items-center justify-between px-8 py-6" style={{ borderBottom: "1px solid #2e2418" }}>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, color: "#f0e8d5" }}>
+            <div className="flex items-center justify-between px-8 py-6" style={{ borderBottom: "1px solid #e5d8c0" }}>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, color: "#3d3226" }}>
                 {editingPoem ? "Редактировать стихотворение" : "Новое стихотворение"}
               </h2>
-              <button onClick={() => setAdminOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#c9a96e", opacity: 0.5 }}>
+              <button onClick={() => setAdminOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.75 }}>
                 <Icon name="X" size={18} />
               </button>
             </div>
@@ -650,28 +650,28 @@ export default function Index() {
             <div className="px-8 py-8 space-y-8">
               {/* Название */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Название *</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Название *</label>
                 <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Название стихотворения" style={{ ...inputStyle, marginTop: "0.5rem" }} />
               </div>
 
               {/* Текст */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Текст *</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Текст *</label>
                 <textarea value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} placeholder="Текст стихотворения..." rows={10} style={{ ...inputStyle, marginTop: "0.5rem", resize: "vertical", lineHeight: 2, fontStyle: "italic" }} />
               </div>
 
               {/* Анонс */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Анонс (2 строки)</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Анонс (2 строки)</label>
                 <textarea value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} placeholder="Короткий анонс для списка (если пусто — возьмётся из текста)" rows={2} style={{ ...inputStyle, marginTop: "0.5rem", resize: "none", fontStyle: "italic" }} />
               </div>
 
               {/* Автор */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Автор</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Автор</label>
                 <select value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} style={{ ...inputStyle, marginTop: "0.5rem" }}>
                   {AUTHORS.map((a) => (
-                    <option key={a} value={a} style={{ background: "#1c1610", color: "#f0e8d5" }}>{a}</option>
+                    <option key={a} value={a} style={{ background: "#fffaf3", color: "#3d3226" }}>{a}</option>
                   ))}
                 </select>
               </div>
@@ -679,23 +679,23 @@ export default function Index() {
               {/* Категория и год */}
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Категория</label>
+                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Категория</label>
                   <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} placeholder="Лирика" style={{ ...inputStyle, marginTop: "0.5rem" }} />
                 </div>
                 <div>
-                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Год</label>
+                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Год</label>
                   <input value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} placeholder="2024" style={{ ...inputStyle, marginTop: "0.5rem" }} />
                 </div>
               </div>
 
               {/* Картинка */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Картинка</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Картинка</label>
                 <div className="mt-3 space-y-3">
                   {form.image_url && (
                     <div className="relative" style={{ maxWidth: "200px" }}>
-                      <img src={form.image_url} alt="" style={{ width: "100%", height: "120px", objectFit: "cover", border: "1px solid #2e2418" }} />
-                      <button onClick={() => setForm({ ...form, image_url: "" })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(10,8,5,0.8)", border: "none", cursor: "pointer", color: "#c97070", padding: "2px" }}>
+                      <img src={form.image_url} alt="" style={{ width: "100%", height: "120px", objectFit: "cover", border: "1px solid #e5d8c0" }} />
+                      <button onClick={() => setForm({ ...form, image_url: "" })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(255,250,243,0.85)", border: "none", cursor: "pointer", color: "#a13b3b", padding: "2px" }}>
                         <Icon name="X" size={12} />
                       </button>
                     </div>
@@ -712,12 +712,12 @@ export default function Index() {
 
               {/* Аудио */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Аудио</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Аудио</label>
                 <div className="mt-3 space-y-3">
                   {form.audio_url && (
-                    <div className="flex items-center gap-3 p-3" style={{ background: "rgba(201,169,110,0.04)", border: "1px solid #2e2418" }}>
-                      <audio controls src={form.audio_url} style={{ height: "32px", flex: 1, accentColor: "#c9a96e" }} />
-                      <button onClick={() => setForm({ ...form, audio_url: "", has_audio: false })} style={{ background: "none", border: "none", cursor: "pointer", color: "#c97070", opacity: 0.6 }}>
+                    <div className="flex items-center gap-3 p-3" style={{ background: "rgba(165,124,66,0.04)", border: "1px solid #e5d8c0" }}>
+                      <audio controls src={form.audio_url} style={{ height: "32px", flex: 1, accentColor: "#a57c42" }} />
+                      <button onClick={() => setForm({ ...form, audio_url: "", has_audio: false })} style={{ background: "none", border: "none", cursor: "pointer", color: "#a13b3b", opacity: 0.85 }}>
                         <Icon name="X" size={14} />
                       </button>
                     </div>
@@ -734,12 +734,12 @@ export default function Index() {
 
               {/* Видео */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a96e", opacity: 0.6 }}>Видео</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Видео</label>
                 <div className="mt-3 space-y-3">
                   {form.video_url && (
                     <div className="relative" style={{ maxWidth: "320px" }}>
-                      <video controls src={form.video_url} style={{ width: "100%", border: "1px solid #2e2418", display: "block" }} />
-                      <button onClick={() => setForm({ ...form, video_url: "", has_video: false })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(10,8,5,0.8)", border: "none", cursor: "pointer", color: "#c97070", padding: "2px" }}>
+                      <video controls src={form.video_url} style={{ width: "100%", border: "1px solid #e5d8c0", display: "block" }} />
+                      <button onClick={() => setForm({ ...form, video_url: "", has_video: false })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(255,250,243,0.85)", border: "none", cursor: "pointer", color: "#a13b3b", padding: "2px" }}>
                         <Icon name="X" size={12} />
                       </button>
                     </div>
@@ -756,8 +756,8 @@ export default function Index() {
             </div>
 
             {/* Modal footer */}
-            <div className="flex items-center justify-end gap-4 px-8 py-6" style={{ borderTop: "1px solid #2e2418" }}>
-              <button onClick={() => setAdminOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(240,232,213,0.35)" }}>
+            <div className="flex items-center justify-end gap-4 px-8 py-6" style={{ borderTop: "1px solid #e5d8c0" }}>
+              <button onClick={() => setAdminOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(74,60,44,0.6)" }}>
                 Отмена
               </button>
               <button onClick={savePoem} disabled={saving || !form.title.trim() || !form.text.trim()} style={{ ...btnGold, opacity: saving || !form.title.trim() || !form.text.trim() ? 0.4 : 1 }}>

@@ -4,43 +4,43 @@
 
 @layer base {
   :root {
-    --background: 30 15% 8%;
-    --foreground: 40 20% 90%;
+    --background: 38 60% 95%;
+    --foreground: 32 22% 20%;
 
-    --card: 30 12% 11%;
-    --card-foreground: 40 20% 90%;
+    --card: 38 70% 98%;
+    --card-foreground: 32 22% 20%;
 
-    --popover: 30 12% 11%;
-    --popover-foreground: 40 20% 90%;
+    --popover: 38 70% 98%;
+    --popover-foreground: 32 22% 20%;
 
-    --primary: 43 65% 65%;
-    --primary-foreground: 30 15% 8%;
+    --primary: 33 43% 45%;
+    --primary-foreground: 38 70% 98%;
 
-    --secondary: 30 10% 16%;
-    --secondary-foreground: 40 20% 80%;
+    --secondary: 36 40% 90%;
+    --secondary-foreground: 32 22% 25%;
 
-    --muted: 30 10% 16%;
-    --muted-foreground: 35 12% 55%;
+    --muted: 36 40% 90%;
+    --muted-foreground: 32 15% 45%;
 
-    --accent: 43 65% 65%;
-    --accent-foreground: 30 15% 8%;
+    --accent: 33 43% 45%;
+    --accent-foreground: 38 70% 98%;
 
-    --destructive: 0 62.8% 40%;
-    --destructive-foreground: 40 20% 90%;
+    --destructive: 0 50% 43%;
+    --destructive-foreground: 38 70% 98%;
 
-    --border: 30 10% 20%;
-    --input: 30 10% 18%;
-    --ring: 43 65% 65%;
+    --border: 35 35% 83%;
+    --input: 35 35% 83%;
+    --ring: 33 43% 45%;
 
     --radius: 0.25rem;
 
     /* Кастомные переменные */
-    --gold: #c9a96e;
-    --gold-light: #e8d5a3;
-    --cream: #f0e8d5;
-    --dark-bg: #130f0a;
-    --dark-card: #1c1610;
-    --dark-border: #2e2418;
+    --gold: #a57c42;
+    --gold-light: #7a6444;
+    --cream: #3d3226;
+    --dark-bg: #faf4e8;
+    --dark-card: #fffaf3;
+    --dark-border: #e5d8c0;
   }
 }
 
