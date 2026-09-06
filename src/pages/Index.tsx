@@ -376,7 +376,7 @@ export default function Index() {
         {/* POEMS LIST */}
         {activeSection === "poems" && !selectedPoem && (
           <div className="max-w-5xl mx-auto px-6 py-16">
-            <div className="mb-14">
+            <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(90deg, rgba(253,246,233,0.94) 0%, rgba(253,246,233,0.72) 55%, rgba(253,246,233,0.55) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/8145e7ba-a43c-4589-9837-e8077605bda8.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
               <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Все произведения</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
@@ -547,7 +547,7 @@ export default function Index() {
         {/* ABOUT */}
         {activeSection === "about" && (
           <div className="max-w-3xl mx-auto px-6 py-16">
-            <div className="text-center mb-14">
+            <div className="text-center" style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.86) 0%, rgba(253,246,233,0.78) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/10690ee4-ac28-404c-87fa-1a502c26a23c.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
               <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Об авторе</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
                 История одной души,<br />преображённой словом
@@ -593,7 +593,7 @@ export default function Index() {
         {/* CONTACTS */}
         {activeSection === "contacts" && (
           <div className="max-w-2xl mx-auto px-6 py-16">
-            <div className="mb-14">
+            <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(90deg, rgba(253,246,233,0.94) 0%, rgba(253,246,233,0.72) 55%, rgba(253,246,233,0.55) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/8145e7ba-a43c-4589-9837-e8077605bda8.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
               <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Связаться</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Контакты</h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
@@ -605,7 +605,7 @@ export default function Index() {
               <input placeholder="Ваше имя" style={inputStyle} />
               <input placeholder="Электронная почта" style={inputStyle} />
               <textarea placeholder="Ваше сообщение..." rows={5} style={{ ...inputStyle, resize: "none" }} />
-              <button style={{ display: "block", width: "100%", background: "#a57c42", border: "1px solid #a57c42", color: "#3d3226", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer" }}>
+              <button style={{ display: "block", width: "100%", background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)", border: "1px solid #b5673a", color: "#fffaf3", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer" }}>
                 Отправить сообщение
               </button>
             </div>
