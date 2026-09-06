@@ -176,9 +176,20 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <span style={{ color: "#e5d8c0" }}>·</span>
               <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(58,45,32,0.68)" }}>{selectedPoem.year}</span>
             </div>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}>{selectedPoem.title}</h1>
+            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}><Highlight text={selectedPoem.title} query={search} /></h1>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
             <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginBottom: "3rem" }} />
+            {search.trim() && (
+              <div className="flex items-center gap-3 mb-8" style={{ background: "rgba(192,138,62,0.08)", border: "1px solid rgba(181,103,58,0.2)", borderRadius: "6px", padding: "0.6rem 1rem" }}>
+                <Icon name="Search" size={13} style={{ color: "#a57c42", opacity: 0.8, flexShrink: 0 }} />
+                <span style={{ flex: 1, fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", color: "rgba(58,45,32,0.85)" }}>
+                  Подсвечено по запросу «{search.trim()}»
+                </span>
+                <button onClick={() => setSearch("")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#8f4f2a", background: "none", border: "none", cursor: "pointer", flexShrink: 0 }}>
+                  Снять
+                </button>
+              </div>
+            )}
             {/* Картинка */}
             {selectedPoem.image_url && (
               <div className="mb-10">
@@ -205,7 +216,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             )}
 
             <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "5rem" }}>
-              {selectedPoem.text}
+              <Highlight text={selectedPoem.text} query={search} />
             </div>
           </div>
         )}
