@@ -178,9 +178,9 @@ export default function Index() {
   };
 
   const btnGold = {
-    background: "transparent",
-    border: "1px solid #a57c42",
-    color: "#a57c42",
+    background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)",
+    border: "1px solid #b5673a",
+    color: "#fffaf3",
     padding: "0.5rem 1.5rem",
     fontFamily: "Montserrat, sans-serif",
     fontSize: "0.65rem",
@@ -191,7 +191,7 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#faf4e8", backgroundImage: "radial-gradient(ellipse at 20% 50%, rgba(165,124,66,0.03) 0%, transparent 50%)" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#fdf6e9", backgroundImage: "radial-gradient(ellipse 60% 40% at 15% 10%, rgba(181,103,58,0.10) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 85% 25%, rgba(122,140,96,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 50% 85%, rgba(192,138,62,0.10) 0%, transparent 65%)", backgroundAttachment: "fixed" }}>
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-5" style={{ backgroundColor: "rgba(250,244,232,0.92)", backdropFilter: "blur(10px)", borderBottom: "1px solid #e5d8c0" }}>
@@ -241,16 +241,16 @@ export default function Index() {
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, letterSpacing: "0.02em", color: "#3d3226", marginBottom: "0.3rem" }}>
                 Христианские
               </h1>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", color: "#a57c42" }}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", background: "linear-gradient(100deg, #c08a3e 0%, #b5673a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
                 стихотворения
               </h1>
-              <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.75, margin: "2.5rem auto" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.75, margin: "2.5rem auto" }} />
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(74,60,44,0.78)", fontStyle: "italic", maxWidth: "480px" }}>
                 Слова, рождённые из молитвы и тишины. Каждое стихотворение — свидетельство веры и красоты Божьего мира.
               </p>
               <div className="flex gap-4 mt-12">
                 <button onClick={() => navigate("poems")} style={btnGold}>Читать стихи</button>
-                <button onClick={() => navigate("about")} style={{ ...btnGold, borderColor: "rgba(165,124,66,0.35)", color: "rgba(74,60,44,0.72)" }}>О поэте</button>
+                <button onClick={() => navigate("about")} style={{ ...btnGold, background: "transparent", borderColor: "#7a8c60", color: "#5f7043" }}>О поэте</button>
               </div>
               <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ color: "#a57c42", opacity: 0.6 }}>
                 <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase" }}>Прокрутите</span>
@@ -262,11 +262,11 @@ export default function Index() {
             <section className="py-24 px-6">
               <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-14">
-                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Приветствие</p>
+                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Приветствие</p>
                   <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.3rem", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
                     Добро пожаловать в мир поэзии,<br />рождённой с верой и любовью
                   </h2>
-                  <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.65, margin: "2rem auto 0" }} />
+                  <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "2rem auto 0" }} />
                 </div>
 
                 <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 300, lineHeight: 1.95, color: "rgba(74,60,44,0.82)" }}>
@@ -290,7 +290,7 @@ export default function Index() {
                 </div>
 
                 {/* Напоминание из Писания */}
-                <div className="mt-16 p-8" style={{ background: "#fffaf3", border: "1px solid #e5d8c0" }}>
+                <div className="mt-16 p-8" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)" }}>
                   <div className="text-center mb-8">
                     <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9 }}>Напоминание из Писания</p>
                   </div>
@@ -301,7 +301,7 @@ export default function Index() {
                       { ref: "2 Паралипоменон 16:9", text: "Ибо очи Господа обозревают всю землю, чтобы поддерживать тех, чьё сердце вполне предано Ему" },
                       { ref: "1 Фессалоникийцам 5:11", text: "Посему увещавайте друг друга и назидайте один другого" },
                     ].map((verse) => (
-                      <div key={verse.ref} style={{ borderLeft: "2px solid #a57c42", paddingLeft: "1.5rem" }}>
+                      <div key={verse.ref} style={{ borderLeft: "3px solid #7a8c60", paddingLeft: "1.5rem", background: "rgba(122,140,96,0.07)", paddingTop: "0.75rem", paddingBottom: "0.75rem", borderRadius: "0 6px 6px 0" }}>
                         <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.7, color: "rgba(74,60,44,0.85)", marginBottom: "0.5rem" }}>
                           «{verse.text}»
                         </p>
@@ -319,16 +319,16 @@ export default function Index() {
             <section className="pb-24 px-6">
               <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-16">
-                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Избранное</p>
+                  <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Избранное</p>
                   <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.5rem", fontWeight: 300, color: "#3d3226" }}>Последние стихотворения</h2>
-                  <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.65, margin: "1.5rem auto 0" }} />
+                  <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "1.5rem auto 0" }} />
                 </div>
                 {loading ? (
                   <div className="text-center py-20" style={{ color: "rgba(74,60,44,0.55)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
                 ) : (
                   <div className="grid md:grid-cols-3 gap-6">
                     {poems.slice(0, 3).map((poem) => (
-                      <div key={poem.id} onClick={() => { setSelectedPoem(poem); setActiveSection("poems"); }} className="cursor-pointer" style={{ background: "#fffaf3", border: "1px solid #e5d8c0", transition: "all 0.4s ease", overflow: "hidden" }}
+                      <div key={poem.id} onClick={() => { setSelectedPoem(poem); setActiveSection("poems"); }} className="cursor-pointer" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", transition: "all 0.4s ease", overflow: "hidden" }}
                         onMouseEnter={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#a57c42"; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 0 40px rgba(165,124,66,0.07)"; }}
                         onMouseLeave={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#e5d8c0"; el.style.transform = "translateY(0)"; el.style.boxShadow = "none"; }}>
                         {poem.image_url && (
@@ -338,7 +338,7 @@ export default function Index() {
                         )}
                         <div style={{ padding: "2rem" }}>
                           <div className="flex items-center justify-between mb-5">
-                            <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>{poem.category}</span>
+                            <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
                             <span style={{ color: "#a57c42", opacity: 0.5, fontSize: "0.75rem", fontFamily: "Montserrat" }}>{poem.year}</span>
                           </div>
                           <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.8rem" }}>{poem.title}</h3>
@@ -377,9 +377,9 @@ export default function Index() {
         {activeSection === "poems" && !selectedPoem && (
           <div className="max-w-5xl mx-auto px-6 py-16">
             <div className="mb-14">
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Все произведения</p>
+              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Все произведения</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
-              <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, marginTop: "1.5rem" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
             {loading ? (
               <div className="text-center py-20" style={{ color: "rgba(74,60,44,0.55)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
@@ -399,12 +399,12 @@ export default function Index() {
                     <div className="space-y-4">
                       {poems.filter((p) => (p.author || AUTHORS[0]) === author).map((poem) => (
                         <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-6" onClick={() => setSelectedPoem(poem)}
-                          style={{ background: "#fffaf3", border: "1px solid #e5d8c0", padding: "2rem", transition: "all 0.4s ease" }}
+                          style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "2rem", transition: "all 0.4s ease" }}
                           onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#a57c42"; }}
                           onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e5d8c0"; }}>
                           <div className="flex-1">
                             <div className="flex items-center gap-4 mb-3">
-                              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>{poem.category}</span>
+                              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
                               <span style={{ color: "#e5d8c0" }}>·</span>
                               <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(74,60,44,0.5)" }}>{poem.year}</span>
                               {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
@@ -438,13 +438,13 @@ export default function Index() {
               </button>
             </div>
             <div className="flex items-center gap-4 mb-3">
-              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>{selectedPoem.category}</span>
+              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{selectedPoem.category}</span>
               <span style={{ color: "#e5d8c0" }}>·</span>
               <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(74,60,44,0.5)" }}>{selectedPoem.year}</span>
             </div>
             <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}>{selectedPoem.title}</h1>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
-            <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, marginBottom: "3rem" }} />
+            <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginBottom: "3rem" }} />
             {/* Картинка */}
             {selectedPoem.image_url && (
               <div className="mb-10">
@@ -481,9 +481,9 @@ export default function Index() {
           <div className="max-w-5xl mx-auto px-6 py-16">
             <div className="flex items-end justify-between mb-14">
               <div>
-                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Панель управления</p>
+                <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Панель управления</p>
                 <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
-                <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, marginTop: "1.5rem" }} />
+                <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
               </div>
               <button onClick={openCreate} className="flex items-center gap-2" style={{ ...btnGold, padding: "0.6rem 1.5rem" }}>
                 <Icon name="Plus" size={14} />Добавить
@@ -500,7 +500,7 @@ export default function Index() {
             ) : (
               <div className="space-y-3">
                 {poems.map((poem) => (
-                  <div key={poem.id} className="flex items-center justify-between gap-4" style={{ background: "#fffaf3", border: "1px solid #e5d8c0", padding: "1.25rem 1.75rem" }}>
+                  <div key={poem.id} className="flex items-center justify-between gap-4" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "1.25rem 1.75rem" }}>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-1">
                         <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 400, color: "#3d3226" }}>{poem.title}</h3>
@@ -508,7 +508,7 @@ export default function Index() {
                         {poem.has_video && <Icon name="Play" size={11} style={{ color: "#a57c42", opacity: 0.75 }} />}
                       </div>
                       <div className="flex items-center gap-3">
-                        <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75 }}>{poem.category}</span>
+                        <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
                         <span style={{ color: "#e5d8c0" }}>·</span>
                         <span style={{ fontFamily: "Montserrat", fontSize: "0.6rem", color: "rgba(74,60,44,0.5)" }}>{poem.year}</span>
                       </div>
@@ -548,11 +548,11 @@ export default function Index() {
         {activeSection === "about" && (
           <div className="max-w-3xl mx-auto px-6 py-16">
             <div className="text-center mb-14">
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Об авторе</p>
+              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Об авторе</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
                 История одной души,<br />преображённой словом
               </h1>
-              <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, margin: "2rem auto 0" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "2rem auto 0" }} />
             </div>
 
             <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 1.95, fontWeight: 300, color: "rgba(74,60,44,0.85)" }}>
@@ -566,7 +566,7 @@ export default function Index() {
 
               <p>Я надеюсь, что их стихи, как и мои, смогут послужить вам поддержкой, утешением и вдохновением. Как сказано в Писании:</p>
 
-              <div className="my-8 py-6 px-8" style={{ borderLeft: "2px solid #a57c42", background: "rgba(165,124,66,0.03)" }}>
+              <div className="my-8 py-6 px-8" style={{ borderLeft: "3px solid #7a8c60", background: "rgba(122,140,96,0.08)", borderRadius: "0 6px 6px 0" }}>
                 <p style={{ fontStyle: "italic", color: "rgba(74,60,44,0.88)", marginBottom: "0.75rem" }}>
                   «Ибо очи Господа обозревают всю землю, чтобы поддерживать тех, чьё сердце вполне предано Ему».
                 </p>
@@ -594,9 +594,9 @@ export default function Index() {
         {activeSection === "contacts" && (
           <div className="max-w-2xl mx-auto px-6 py-16">
             <div className="mb-14">
-              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#a57c42", opacity: 0.9, marginBottom: "1rem" }}>Связаться</p>
+              <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Связаться</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Контакты</h1>
-              <div style={{ width: "60px", height: "1px", background: "#a57c42", opacity: 0.7, marginTop: "1.5rem" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(74,60,44,0.72)", fontStyle: "italic", marginBottom: "3rem" }}>
               Если стихотворение тронуло вас, если хотите поделиться мыслями или предложить сотрудничество — напишите.
@@ -635,7 +635,7 @@ export default function Index() {
       {/* ===== MODAL: Create / Edit ===== */}
       {adminOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto py-10 px-4" style={{ backgroundColor: "rgba(255,250,243,0.9)", backdropFilter: "blur(6px)" }}>
-          <div className="w-full max-w-2xl" style={{ background: "#fffaf3", border: "1px solid #e5d8c0" }}>
+          <div className="w-full max-w-2xl" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)" }}>
             {/* Modal header */}
             <div className="flex items-center justify-between px-8 py-6" style={{ borderBottom: "1px solid #e5d8c0" }}>
               <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, color: "#3d3226" }}>
@@ -650,25 +650,25 @@ export default function Index() {
             <div className="px-8 py-8 space-y-8">
               {/* Название */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Название *</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Название *</label>
                 <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Название стихотворения" style={{ ...inputStyle, marginTop: "0.5rem" }} />
               </div>
 
               {/* Текст */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Текст *</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Текст *</label>
                 <textarea value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} placeholder="Текст стихотворения..." rows={10} style={{ ...inputStyle, marginTop: "0.5rem", resize: "vertical", lineHeight: 2, fontStyle: "italic" }} />
               </div>
 
               {/* Анонс */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Анонс (2 строки)</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Анонс (2 строки)</label>
                 <textarea value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} placeholder="Короткий анонс для списка (если пусто — возьмётся из текста)" rows={2} style={{ ...inputStyle, marginTop: "0.5rem", resize: "none", fontStyle: "italic" }} />
               </div>
 
               {/* Автор */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Автор</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Автор</label>
                 <select value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} style={{ ...inputStyle, marginTop: "0.5rem" }}>
                   {AUTHORS.map((a) => (
                     <option key={a} value={a} style={{ background: "#fffaf3", color: "#3d3226" }}>{a}</option>
@@ -679,18 +679,18 @@ export default function Index() {
               {/* Категория и год */}
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Категория</label>
+                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Категория</label>
                   <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} placeholder="Лирика" style={{ ...inputStyle, marginTop: "0.5rem" }} />
                 </div>
                 <div>
-                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Год</label>
+                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Год</label>
                   <input value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} placeholder="2024" style={{ ...inputStyle, marginTop: "0.5rem" }} />
                 </div>
               </div>
 
               {/* Картинка */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Картинка</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Картинка</label>
                 <div className="mt-3 space-y-3">
                   {form.image_url && (
                     <div className="relative" style={{ maxWidth: "200px" }}>
@@ -712,7 +712,7 @@ export default function Index() {
 
               {/* Аудио */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Аудио</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Аудио</label>
                 <div className="mt-3 space-y-3">
                   {form.audio_url && (
                     <div className="flex items-center gap-3 p-3" style={{ background: "rgba(165,124,66,0.04)", border: "1px solid #e5d8c0" }}>
@@ -734,7 +734,7 @@ export default function Index() {
 
               {/* Видео */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>Видео</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Видео</label>
                 <div className="mt-3 space-y-3">
                   {form.video_url && (
                     <div className="relative" style={{ maxWidth: "320px" }}>
