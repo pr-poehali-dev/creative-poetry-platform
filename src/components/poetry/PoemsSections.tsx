@@ -16,6 +16,38 @@ interface Props {
   setDeleteConfirm: (v: number | null) => void;
 }
 
+const HL_STYLE = { background: "rgba(192,138,62,0.28)", color: "#7a4a1e", borderRadius: "3px", padding: "0 0.12em", fontStyle: "inherit" };
+
+function Highlight({ text, query }: { text: string; query: string }) {
+  const q = query.trim();
+  if (!q) return <>{text}</>;
+  const lower = text.toLowerCase();
+  const needle = q.toLowerCase();
+  const parts: React.ReactNode[] = [];
+  let from = 0;
+  let at = lower.indexOf(needle);
+  while (at !== -1) {
+    if (at > from) parts.push(text.slice(from, at));
+    parts.push(<mark key={`${at}-${parts.length}`} style={HL_STYLE}>{text.slice(at, at + needle.length)}</mark>);
+    from = at + needle.length;
+    at = lower.indexOf(needle, from);
+  }
+  parts.push(text.slice(from));
+  return <>{parts}</>;
+}
+
+function snippetFor(poem: Poem, query: string) {
+  const q = query.trim().toLowerCase();
+  if (!q) return poem.excerpt;
+  if (poem.excerpt.toLowerCase().includes(q) || poem.title.toLowerCase().includes(q)) return poem.excerpt;
+  const lines = poem.text.split("\n");
+  const idx = lines.findIndex((l) => l.toLowerCase().includes(q));
+  if (idx === -1) return poem.excerpt;
+  const start = Math.max(0, idx - 1);
+  const chunk = lines.slice(start, start + 3).join("\n");
+  return (start > 0 ? "…\n" : "") + chunk + "…";
+}
+
 export default function PoemsSections({ activeSection, navigate, poems, loading, selectedPoem, setSelectedPoem, openEdit, openCreate, deletePoem, deleteConfirm, setDeleteConfirm }: Props) {
   const [activeCategory, setActiveCategory] = useState<string>("Все");
   const [search, setSearch] = useState("");
@@ -112,8 +144,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                               {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
                               {poem.has_video && <Icon name="Play" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
                             </div>
-                            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.5rem" }}>{poem.title}</h3>
-                            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(58,45,32,0.82)", whiteSpace: "pre-line", lineHeight: 1.8 }}>{poem.excerpt}</p>
+                            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.5rem" }}><Highlight text={poem.title} query={search} /></h3>
+                            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(58,45,32,0.82)", whiteSpace: "pre-line", lineHeight: 1.8 }}><Highlight text={snippetFor(poem, search)} query={search} /></p>
                           </div>
                           <Icon name="ArrowRight" size={18} style={{ color: "#a57c42", opacity: 0.6, marginTop: "0.5rem", flexShrink: 0 }} />
                         </div>
