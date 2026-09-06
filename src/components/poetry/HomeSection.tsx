@@ -147,11 +147,9 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
 
             <section className="py-24 px-6" style={{ borderTop: "1px solid #e5d8c0", borderBottom: "1px solid #e5d8c0" }}>
               <div className="max-w-2xl mx-auto text-center">
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", color: "#a57c42", opacity: 0.45, lineHeight: 1 }}>«</div>
                 <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, lineHeight: 1.75, fontStyle: "italic", color: "#3d3226", opacity: 0.8 }}>
-                  Поэзия — это молитва,<br />которую сердце произносит словами.
+                  <span style={{ color: "#a57c42", opacity: 0.55 }}>«</span>Поэзия — это молитва,<br />которую сердце произносит словами.<span style={{ color: "#a57c42", opacity: 0.55 }}>»</span>
                 </blockquote>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", color: "#a57c42", opacity: 0.45, lineHeight: 1 }}>»</div>
               </div>
             </section>
           </div>
