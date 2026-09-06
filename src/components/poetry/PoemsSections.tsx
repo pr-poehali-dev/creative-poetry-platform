@@ -18,16 +18,25 @@ interface Props {
 
 export default function PoemsSections({ activeSection, navigate, poems, loading, selectedPoem, setSelectedPoem, openEdit, openCreate, deletePoem, deleteConfirm, setDeleteConfirm }: Props) {
   const [activeCategory, setActiveCategory] = useState<string>("Все");
+  const [search, setSearch] = useState("");
 
   const categories = useMemo(() => {
     const set = new Set(poems.map((p) => p.category).filter(Boolean));
     return ["Все", ...Array.from(set).sort((a, b) => a.localeCompare(b, "ru"))];
   }, [poems]);
 
-  const visiblePoems = useMemo(
-    () => (activeCategory === "Все" ? poems : poems.filter((p) => p.category === activeCategory)),
-    [poems, activeCategory]
-  );
+  const visiblePoems = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return poems.filter((p) => {
+      if (activeCategory !== "Все" && p.category !== activeCategory) return false;
+      if (!q) return true;
+      return (
+        p.title.toLowerCase().includes(q) ||
+        p.text.toLowerCase().includes(q) ||
+        (p.author || AUTHORS[0]).toLowerCase().includes(q)
+      );
+    });
+  }, [poems, activeCategory, search]);
 
   return (
     <>
@@ -39,6 +48,18 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
+            {!loading && poems.length > 0 && (
+              <div className="mb-8 flex items-center gap-3" style={{ borderBottom: "1px solid #e5d8c0", paddingBottom: "0.6rem" }}>
+                <Icon name="Search" size={16} style={{ color: "#a57c42", opacity: 0.7, flexShrink: 0 }} />
+                <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Поиск по названию, тексту или автору..."
+                  style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", color: "#3d3226" }} />
+                {search && (
+                  <button onClick={() => setSearch("")} title="Очистить" style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.6, flexShrink: 0 }}>
+                    <Icon name="X" size={15} />
+                  </button>
+                )}
+              </div>
+            )}
             {!loading && poems.length > 0 && categories.length > 2 && (
               <div className="flex flex-wrap gap-3 mb-10">
                 {categories.map((cat) => {
@@ -63,7 +84,12 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <div className="space-y-16">
                 {visiblePoems.length === 0 && (
                   <div className="text-center py-16">
-                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(58,45,32,0.72)" }}>В этой категории пока нет стихотворений.</p>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(58,45,32,0.72)" }}>
+                      {search.trim() ? "Ничего не нашлось. Попробуйте изменить запрос." : "В этой категории пока нет стихотворений."}
+                    </p>
+                    {(search.trim() || activeCategory !== "Все") && (
+                      <button onClick={() => { setSearch(""); setActiveCategory("Все"); }} style={{ ...btnGold, marginTop: "1.5rem" }}>Сбросить фильтры</button>
+                    )}
                   </div>
                 )}
                 {AUTHORS.filter((a) => visiblePoems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
