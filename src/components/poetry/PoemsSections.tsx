@@ -403,10 +403,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
 
               <p>Мне бы очень хотелось, чтобы эти страницы наполняли ваши сердца Божьей любовью, миром и теплом. Возможно, читая эти строки, вы найдёте отраду в своих собственных переживаниях, вспомните о Божьем присутствии в самые трудные моменты жизни.</p>
 
-              <p>Если у вас есть желание поделиться своими христианскими стихотворениями или теми, которые находят отклик в вашей душе, я буду очень рада этому. Будем вместе вдохновляться и назидать друг друга.</p>
-
               <p style={{ textAlign: "center", color: "#a57c42", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", paddingTop: "1rem", textIndent: 0 }}>
-                Пусть наш общий путь через поэзию будет благословен Господом!
+                Пусть эти строки будут благословением для вашего сердца!
               </p>
 
               <p style={{ textAlign: "center", color: "rgba(58,45,32,0.92)", textIndent: 0 }}>
@@ -425,7 +423,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.9)", fontStyle: "italic", marginBottom: "3rem" }}>
-              Если стихотворение тронуло вас, если хотите поделиться мыслями или предложить сотрудничество — напишите.
+              Если стихотворение тронуло вас или отозвалось в сердце — будем рады добрым словам. Напишите нам.
             </p>
             <div className="space-y-8">
               <input placeholder="Ваше имя" style={inputStyle} />
