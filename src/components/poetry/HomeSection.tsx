@@ -67,7 +67,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                   </p>
 
                   <p className="text-center" style={{ color: "#a57c42", opacity: 0.8, letterSpacing: "0.15em", fontSize: "1.2rem", textIndent: 0, textAlign: "center" }}>
-                    ФВА
+                    С теплом, Валентина Фастовщук
                   </p>
                 </div>
 
