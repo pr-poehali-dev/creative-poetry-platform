@@ -261,7 +261,7 @@ export default function Index() {
             {/* Приветственное слово */}
             <section className="py-24 px-6">
               <div className="max-w-3xl mx-auto">
-                <div className="text-center mb-14">
+                <div className="text-center mb-14" style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.88) 0%, rgba(253,246,233,0.8) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/3c87e877-562c-4446-a8a4-8cdb3988643f.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
                   <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Приветствие</p>
                   <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.3rem", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
                     Добро пожаловать в мир поэзии,<br />рождённой с верой и любовью
@@ -318,7 +318,7 @@ export default function Index() {
             {/* Featured poems */}
             <section className="pb-24 px-6">
               <div className="max-w-5xl mx-auto">
-                <div className="text-center mb-16">
+                <div className="text-center mb-16" style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3rem 2.5rem", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.88) 0%, rgba(253,246,233,0.8) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/4ca1ed55-b029-4d0e-b334-8862593ef5d2.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
                   <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Избранное</p>
                   <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.5rem", fontWeight: 300, color: "#3d3226" }}>Последние стихотворения</h2>
                   <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "1.5rem auto 0" }} />
@@ -593,7 +593,7 @@ export default function Index() {
         {/* CONTACTS */}
         {activeSection === "contacts" && (
           <div className="max-w-2xl mx-auto px-6 py-16">
-            <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(90deg, rgba(253,246,233,0.94) 0%, rgba(253,246,233,0.72) 55%, rgba(253,246,233,0.55) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/8145e7ba-a43c-4589-9837-e8077605bda8.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
+            <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(90deg, rgba(253,246,233,0.94) 0%, rgba(253,246,233,0.72) 55%, rgba(253,246,233,0.55) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/4ca1ed55-b029-4d0e-b334-8862593ef5d2.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
               <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Связаться</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Контакты</h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
