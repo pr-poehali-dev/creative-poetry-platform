@@ -57,6 +57,14 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
     return ["Все", ...Array.from(set).sort((a, b) => a.localeCompare(b, "ru"))];
   }, [poems]);
 
+  const orderedPoems = useMemo(() => {
+    const base = poems;
+    const grouped: Poem[] = [];
+    AUTHORS.forEach((a) => grouped.push(...base.filter((p) => (p.author || AUTHORS[0]) === a)));
+    base.forEach((p) => { if (!grouped.includes(p)) grouped.push(p); });
+    return grouped;
+  }, [poems]);
+
   const visiblePoems = useMemo(() => {
     const q = search.trim().toLowerCase();
     return poems.filter((p) => {
@@ -69,6 +77,20 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
       );
     });
   }, [poems, activeCategory, search]);
+
+  const navList = useMemo(() => {
+    const filtered = orderedPoems.filter((p) => visiblePoems.includes(p));
+    return filtered.length > 1 ? filtered : orderedPoems;
+  }, [orderedPoems, visiblePoems]);
+
+  const currentIndex = selectedPoem ? navList.findIndex((p) => p.id === selectedPoem.id) : -1;
+  const prevPoem = currentIndex > 0 ? navList[currentIndex - 1] : null;
+  const nextPoem = currentIndex >= 0 && currentIndex < navList.length - 1 ? navList[currentIndex + 1] : null;
+
+  const goToPoem = (poem: Poem) => {
+    setSelectedPoem(poem);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <>
@@ -215,9 +237,36 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               </div>
             )}
 
-            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "5rem" }}>
+            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "3.5rem" }}>
               <Highlight text={selectedPoem.text} query={search} />
             </div>
+
+            {(prevPoem || nextPoem) && (
+              <div className="grid sm:grid-cols-2 gap-4" style={{ borderTop: "1px solid #e5d8c0", paddingTop: "2.5rem", marginBottom: "5rem" }}>
+                {prevPoem ? (
+                  <button onClick={() => goToPoem(prevPoem)} className="text-left cursor-pointer"
+                    style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", padding: "1.25rem 1.5rem", borderRadius: "6px", transition: "all 0.3s" }}
+                    onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.borderColor = "#a57c42"}
+                    onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.borderColor = "#e6d2b0"}>
+                    <span className="flex items-center gap-2 mb-2" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>
+                      <Icon name="ArrowLeft" size={12} />Предыдущее
+                    </span>
+                    <span style={{ display: "block", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", color: "#3d3226" }}>{prevPoem.title}</span>
+                  </button>
+                ) : <div />}
+                {nextPoem && (
+                  <button onClick={() => goToPoem(nextPoem)} className="text-right cursor-pointer"
+                    style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", padding: "1.25rem 1.5rem", borderRadius: "6px", transition: "all 0.3s" }}
+                    onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.borderColor = "#a57c42"}
+                    onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.borderColor = "#e6d2b0"}>
+                    <span className="flex items-center justify-end gap-2 mb-2" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>
+                      Следующее<Icon name="ArrowRight" size={12} />
+                    </span>
+                    <span style={{ display: "block", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", color: "#3d3226" }}>{nextPoem.title}</span>
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         )}
 
