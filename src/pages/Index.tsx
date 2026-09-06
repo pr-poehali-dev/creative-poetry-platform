@@ -625,7 +625,7 @@ export default function Index() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-24 py-10 text-center" style={{ borderTop: "1px solid #e5d8c0" }}>
+      <footer className="mt-24 py-16 text-center" style={{ borderTop: "1px solid #e5d8c0", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.9) 0%, rgba(253,246,233,0.82) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/3c87e877-562c-4446-a8a4-8cdb3988643f.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div style={{ color: "#a57c42", opacity: 0.45, marginBottom: "0.5rem", fontSize: "1.2rem" }}>✦</div>
         <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,60,44,0.45)" }}>
           Христианские стихотворения · {new Date().getFullYear()}
