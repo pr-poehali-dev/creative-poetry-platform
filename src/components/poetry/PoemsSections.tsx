@@ -54,6 +54,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
   const [search, setSearch] = useState("");
   const [copied, setCopied] = useState(false);
   const [fontStep, setFontStep] = useState(() => Number(localStorage.getItem("poemFontStep") ?? 1));
+  const [readMode, setReadMode] = useState(false);
 
   const FONT_SIZES = [1, 1.15, 1.35, 1.6];
   const changeFont = (step: number) => {
@@ -217,6 +218,32 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
           </div>
         )}
 
+        {/* READ MODE */}
+        {readMode && selectedPoem && (
+          <div className="fixed inset-0 z-50 overflow-y-auto" style={{ background: "linear-gradient(180deg, #fffdf8 0%, #fdf3e2 100%)" }}
+            onClick={() => setReadMode(false)}>
+            <button onClick={(e) => { e.stopPropagation(); setReadMode(false); }} title="Закрыть"
+              className="fixed top-6 right-6 flex items-center justify-center"
+              style={{ width: "42px", height: "42px", borderRadius: "50%", background: "rgba(253,246,233,0.9)", border: "1px solid #e6d2b0", color: "#a57c42", cursor: "pointer", zIndex: 60 }}>
+              <Icon name="X" size={18} />
+            </button>
+            <div className="max-w-2xl mx-auto px-6 py-24 text-center" onClick={(e) => e.stopPropagation()}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 5vw, 3rem)", fontWeight: 300, color: "#3d3226", marginBottom: "1rem" }}>{selectedPoem.title}</h1>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "0 auto 3rem" }} />
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: `${1.15 * FONT_SIZES[fontStep]}rem`, lineHeight: 2.1, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line" }}>
+                {typo(selectedPoem.text)}
+              </div>
+              <div className="flex items-center justify-center gap-2 mt-14">
+                {FONT_SIZES.map((_, i) => (
+                  <button key={i} onClick={() => changeFont(i)}
+                    style={{ width: "30px", height: "30px", borderRadius: "50%", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontSize: `${0.72 + i * 0.16}rem`, lineHeight: 1, background: fontStep === i ? "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)" : "transparent", color: fontStep === i ? "#fffaf3" : "#a57c42", border: `1px solid ${fontStep === i ? "#b5673a" : "#e6d2b0"}`, transition: "all 0.3s" }}>А</button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* POEM DETAIL */}
         {activeSection === "poems" && selectedPoem && (
           <div className="max-w-3xl mx-auto px-6 py-16">
@@ -233,6 +260,12 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                   onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(181,103,58,0.16)"}
                   onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(181,103,58,0.08)"}>
                   <Icon name="Share2" size={13} />Поделиться
+                </button>
+                <button onClick={() => setReadMode(true)} title="Читать без отвлечений" className="flex items-center gap-2"
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#5f7043", background: "rgba(122,140,96,0.1)", border: "1px solid rgba(122,140,96,0.3)", borderRadius: "999px", padding: "0.4rem 0.9rem", cursor: "pointer", transition: "all 0.3s" }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(122,140,96,0.2)"}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(122,140,96,0.1)"}>
+                  <Icon name="BookOpen" size={13} />Читать
                 </button>
                 <button onClick={() => openEdit(selectedPoem)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.65, transition: "opacity 0.3s" }}
                   onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"}
