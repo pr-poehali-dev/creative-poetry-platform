@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo } from "./shared";
 import AuthorPortrait from "./AuthorPortrait";
@@ -101,6 +101,17 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
     setSelectedPoem(poem);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (!readMode) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setReadMode(false);
+      if (e.key === "ArrowLeft" && prevPoem) goToPoem(prevPoem);
+      if (e.key === "ArrowRight" && nextPoem) goToPoem(nextPoem);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [readMode, prevPoem, nextPoem]);
 
   const sharePoem = async (poem: Poem) => {
     const author = poem.author || AUTHORS[0];
@@ -240,6 +251,25 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                     style={{ width: "30px", height: "30px", borderRadius: "50%", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontSize: `${0.72 + i * 0.16}rem`, lineHeight: 1, background: fontStep === i ? "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)" : "transparent", color: fontStep === i ? "#fffaf3" : "#a57c42", border: `1px solid ${fontStep === i ? "#b5673a" : "#e6d2b0"}`, transition: "all 0.3s" }}>А</button>
                 ))}
               </div>
+
+              {(prevPoem || nextPoem) && (
+                <div className="flex items-center justify-between gap-4 mt-12" style={{ borderTop: "1px solid #e5d8c0", paddingTop: "2rem" }}>
+                  {prevPoem ? (
+                    <button onClick={() => goToPoem(prevPoem)} className="flex items-center gap-2 text-left cursor-pointer"
+                      style={{ background: "none", border: "none", color: "#a57c42", maxWidth: "45%" }}>
+                      <Icon name="ArrowLeft" size={16} style={{ flexShrink: 0 }} />
+                      <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic" }}>{prevPoem.title}</span>
+                    </button>
+                  ) : <span />}
+                  {nextPoem && (
+                    <button onClick={() => goToPoem(nextPoem)} className="flex items-center gap-2 text-right cursor-pointer ml-auto"
+                      style={{ background: "none", border: "none", color: "#a57c42", maxWidth: "45%" }}>
+                      <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic" }}>{nextPoem.title}</span>
+                      <Icon name="ArrowRight" size={16} style={{ flexShrink: 0 }} />
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         )}
