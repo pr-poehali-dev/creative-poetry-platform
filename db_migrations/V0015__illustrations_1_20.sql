@@ -1,0 +1,23 @@
+UPDATE t_p79443517_creative_poetry_plat.poems SET image_url = CASE id
+WHEN 1 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/7b271e69-0e8b-4253-9bc4-b5326c184be2.jpg'
+WHEN 2 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/d166c412-7cfa-4c96-b0ad-67e83d85b7ef.jpg'
+WHEN 3 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/91155986-9f10-47f6-9632-eb9fa4fd3ca3.jpg'
+WHEN 4 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/c67f21f6-2fc2-4ba3-a876-f447621f84f4.jpg'
+WHEN 5 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/9094553d-ee95-4498-bce8-af5258640b50.jpg'
+WHEN 6 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/8fbcd015-2b1b-46a9-a54b-08b7a7f02843.jpg'
+WHEN 7 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/6a04ebab-c2a9-4e61-bd32-b64bfa6f3427.jpg'
+WHEN 8 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/acd5ee93-70f0-4928-8890-1ca65840f092.jpg'
+WHEN 9 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/f963943c-d16f-466e-8ed0-d2a0cde93ded.jpg'
+WHEN 10 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/ad3f27ea-8f85-4592-9d52-6ca6a67703ad.jpg'
+WHEN 11 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/f16b5a24-0c90-4cce-8198-7492e07def16.jpg'
+WHEN 12 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/f261ec6b-feb7-4a47-b36d-6eb22b3b862f.jpg'
+WHEN 13 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/7dd400e9-040d-4073-933d-4b0b603a350a.jpg'
+WHEN 14 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/3d465458-ca88-42d4-8097-7ca54fc43eae.jpg'
+WHEN 15 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/c04e4be1-82bf-4398-86f9-b8bd87bfa9f5.jpg'
+WHEN 16 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/b23aa5a2-1f80-4b3b-b1fa-be71473c557b.jpg'
+WHEN 17 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/2445963c-504a-4244-9551-107e3dc2bd59.jpg'
+WHEN 18 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/8ad848bb-77c7-4831-bfe0-70ba3d0d48d3.jpg'
+WHEN 19 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/23fbde65-deb4-4f43-9bc7-594532196798.jpg'
+WHEN 20 THEN 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/73e59192-aada-408b-8aba-d3893f3d332b.jpg'
+ELSE image_url END
+WHERE id BETWEEN 1 AND 20;

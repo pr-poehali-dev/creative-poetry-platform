@@ -258,8 +258,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             )}
             {/* Картинка */}
             {selectedPoem.image_url && (
-              <div className="mb-10">
-                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", maxHeight: "400px", objectFit: "cover", border: "1px solid #e5d8c0" }} />
+              <div className="mb-12" style={{ borderRadius: "8px", overflow: "hidden", border: "1px solid #e6d2b0", boxShadow: "0 8px 28px rgba(140,95,50,0.12)" }}>
+                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", display: "block", aspectRatio: "16 / 9", objectFit: "cover" }} />
               </div>
             )}
 
