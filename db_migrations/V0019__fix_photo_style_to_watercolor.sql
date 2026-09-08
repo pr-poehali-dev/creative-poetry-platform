@@ -1,0 +1,5 @@
+UPDATE poems SET image_url = 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/75c06ccb-a3ad-49ca-a651-a9b701d89574.jpg' WHERE id = 7;
+UPDATE poems SET image_url = 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/bcb9069e-6c59-4326-9873-2cabc19fadc3.jpg' WHERE id = 10;
+UPDATE poems SET image_url = 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/b31260b4-4b44-4d56-a6de-58fdfc927bf6.jpg' WHERE id = 9;
+UPDATE poems SET image_url = 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/772ed908-bfc8-4d1d-a786-0bd6bf13afda.jpg' WHERE id = 18;
+UPDATE poems SET image_url = 'https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/ae2f7bfe-eb00-4142-8c5e-e57837a6b647.jpg' WHERE id = 30;
