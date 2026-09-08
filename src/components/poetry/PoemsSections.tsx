@@ -53,6 +53,13 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
   const [activeCategory, setActiveCategory] = useState<string>("Все");
   const [search, setSearch] = useState("");
   const [copied, setCopied] = useState(false);
+  const [fontStep, setFontStep] = useState(() => Number(localStorage.getItem("poemFontStep") ?? 1));
+
+  const FONT_SIZES = [1, 1.15, 1.35, 1.6];
+  const changeFont = (step: number) => {
+    setFontStep(step);
+    localStorage.setItem("poemFontStep", String(step));
+  };
 
   const categories = useMemo(() => {
     const set = new Set(poems.map((p) => p.category).filter(Boolean));
@@ -281,7 +288,24 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               </div>
             )}
 
-            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "3.5rem" }}>
+            <div className="flex items-center justify-end gap-2 mb-6">
+              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75, marginRight: "0.4rem" }}>Размер текста</span>
+              {FONT_SIZES.map((_, i) => (
+                <button key={i} onClick={() => changeFont(i)} title={`Размер ${i + 1}`}
+                  style={{
+                    width: "30px", height: "30px", borderRadius: "50%", cursor: "pointer",
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: `${0.72 + i * 0.16}rem`,
+                    lineHeight: 1,
+                    background: fontStep === i ? "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)" : "transparent",
+                    color: fontStep === i ? "#fffaf3" : "#a57c42",
+                    border: `1px solid ${fontStep === i ? "#b5673a" : "#e6d2b0"}`,
+                    transition: "all 0.3s",
+                  }}>А</button>
+              ))}
+            </div>
+
+            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: `${1.15 * FONT_SIZES[fontStep]}rem`, lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "3.5rem", transition: "font-size 0.3s" }}>
               <Highlight text={typo(selectedPoem.text)} query={search} />
             </div>
 
