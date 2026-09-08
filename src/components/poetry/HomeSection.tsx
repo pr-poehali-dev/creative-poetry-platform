@@ -30,7 +30,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
               </h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.75, margin: "2.5rem auto" }} />
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.93)", fontStyle: "italic", maxWidth: "480px" }}>
-                Слова, рождённые из молитвы и тишины. Каждое стихотворение — свидетельство веры и красоты Божьего мира.
+                Слова, рождённые из молитвы и тишины. Каждое стихотворение{"\u00A0"}— свидетельство веры и красоты Божьего мира.
               </p>
               <div className="flex gap-4 mt-12">
                 <button onClick={() => navigate("poems")} style={btnGold}>Читать стихи</button>
@@ -146,7 +146,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
             <section className="py-24 px-6" style={{ borderTop: "1px solid #e5d8c0", borderBottom: "1px solid #e5d8c0" }}>
               <div className="max-w-2xl mx-auto text-center">
                 <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, lineHeight: 1.75, fontStyle: "italic", color: "#3d3226", opacity: 0.8 }}>
-                  <span style={{ color: "#a57c42", opacity: 0.55 }}>«</span>Поэзия — это молитва,<br />которую сердце произносит словами.<span style={{ color: "#a57c42", opacity: 0.55 }}>»</span>
+                  <span style={{ color: "#a57c42", opacity: 0.55 }}>«</span>Поэзия{"\u00A0"}— это молитва,<br />которую сердце произносит словами.<span style={{ color: "#a57c42", opacity: 0.55 }}>»</span>
                 </blockquote>
               </div>
             </section>
