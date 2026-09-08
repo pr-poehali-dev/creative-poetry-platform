@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import Icon from "@/components/ui/icon";
-import { AUTHORS, Poem, Section, btnGold, inputStyle } from "./shared";
+import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle } from "./shared";
+import AuthorPortrait from "./AuthorPortrait";
 
 interface Props {
   activeSection: Section;
@@ -170,7 +171,10 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                 {AUTHORS.filter((a) => visiblePoems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
                   <div key={author}>
                     <div className="mb-8">
-                      <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#a57c42" }}>{author}</h2>
+                      <div className="flex items-center gap-5">
+                        <AuthorPortrait src={AUTHOR_PHOTOS[author]} name={author} size={72} />
+                        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#a57c42" }}>{author}</h2>
+                      </div>
                       <div style={{ width: "100%", height: "1px", background: "#e5d8c0", marginTop: "1rem" }} />
                     </div>
                     <div className="space-y-4">
@@ -231,7 +235,10 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(58,45,32,0.68)" }}>{selectedPoem.year}</span>
             </div>
             <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}><Highlight text={selectedPoem.title} query={search} /></h1>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
+            <div className="flex items-center gap-4 mb-8">
+              <AuthorPortrait src={AUTHOR_PHOTOS[selectedPoem.author || AUTHORS[0]]} name={selectedPoem.author || AUTHORS[0]} size={54} />
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8 }}>{selectedPoem.author || AUTHORS[0]}</p>
+            </div>
             <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginBottom: "3rem" }} />
             {search.trim() && (
               <div className="flex items-center gap-3 mb-8" style={{ background: "rgba(192,138,62,0.08)", border: "1px solid rgba(181,103,58,0.2)", borderRadius: "6px", padding: "0.6rem 1rem" }}>
@@ -379,6 +386,15 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                 История одной души,<br />преображённой словом
               </h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "2rem auto 0" }} />
+            </div>
+
+            <div className="flex flex-wrap items-start justify-center gap-10 mb-14">
+              {AUTHORS.map((author) => (
+                <div key={author} className="flex flex-col items-center" style={{ width: "150px" }}>
+                  <AuthorPortrait src={AUTHOR_PHOTOS[author]} name={author} size={110} />
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic", color: "#a57c42", textAlign: "center", marginTop: "1rem", lineHeight: 1.4 }}>{author}</p>
+                </div>
+              ))}
             </div>
 
             <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", lineHeight: 1.95, fontWeight: 400, color: "#3a2d20", textAlign: "justify", textIndent: "2.2rem", hyphens: "auto" }}>
