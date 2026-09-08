@@ -183,6 +183,11 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                           style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "2rem", transition: "all 0.4s ease" }}
                           onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#a57c42"; }}
                           onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e5d8c0"; }}>
+                          {poem.image_url && (
+                            <div className="hidden sm:block" style={{ width: "110px", height: "110px", flexShrink: 0, borderRadius: "6px", overflow: "hidden", border: "1px solid #e6d2b0" }}>
+                              <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }} />
+                            </div>
+                          )}
                           <div className="flex-1">
                             <div className="flex items-center gap-4 mb-3">
                               <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
