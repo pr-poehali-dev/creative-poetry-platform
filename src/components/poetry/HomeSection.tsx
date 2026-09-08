@@ -1,5 +1,5 @@
 import Icon from "@/components/ui/icon";
-import { Poem, Section, btnGold } from "./shared";
+import { Poem, Section, btnGold, typo } from "./shared";
 
 interface Props {
   activeSection: Section;
@@ -124,7 +124,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                             <span style={{ color: "#a57c42", opacity: 0.5, fontSize: "0.75rem", fontFamily: "Montserrat" }}>{poem.year}</span>
                           </div>
                           <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.8rem" }}>{poem.title}</h3>
-                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.85)", fontStyle: "italic", whiteSpace: "pre-line" }}>{poem.excerpt}</p>
+                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.85)", fontStyle: "italic", whiteSpace: "pre-line" }}>{typo(poem.excerpt)}</p>
                           <div className="flex items-center gap-3 mt-5">
                             {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#a57c42", opacity: 0.75 }} />}
                             {poem.has_video && <Icon name="Play" size={12} style={{ color: "#a57c42", opacity: 0.75 }} />}

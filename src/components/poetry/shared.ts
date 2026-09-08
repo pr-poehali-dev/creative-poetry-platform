@@ -13,6 +13,12 @@ export const AUTHOR_PHOTOS: Record<string, string> = {
   [AUTHORS[2]]: "",
 };
 
+export function typo(s: string) {
+  return (s || "")
+    .replace(/ ([—–]) /g, "\u00A0$1 ")
+    .replace(/(^|[\s(«"])([вкосуяиаВКОСУЯИА]) /g, "$1$2\u00A0");
+}
+
 export interface Poem {
   id: number;
   title: string;

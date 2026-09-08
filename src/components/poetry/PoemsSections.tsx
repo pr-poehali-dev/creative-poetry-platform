@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import Icon from "@/components/ui/icon";
-import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle } from "./shared";
+import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo } from "./shared";
 import AuthorPortrait from "./AuthorPortrait";
 
 interface Props {
@@ -197,7 +197,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                               {poem.has_video && <Icon name="Play" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
                             </div>
                             <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.5rem" }}><Highlight text={poem.title} query={search} /></h3>
-                            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(58,45,32,0.82)", whiteSpace: "pre-line", lineHeight: 1.8 }}><Highlight text={snippetFor(poem, search)} query={search} /></p>
+                            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(58,45,32,0.82)", whiteSpace: "pre-line", lineHeight: 1.8 }}><Highlight text={typo(snippetFor(poem, search))} query={search} /></p>
                           </div>
                           <Icon name="ArrowRight" size={18} style={{ color: "#a57c42", opacity: 0.6, marginTop: "0.5rem", flexShrink: 0 }} />
                         </div>
@@ -282,7 +282,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             )}
 
             <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "3.5rem" }}>
-              <Highlight text={selectedPoem.text} query={search} />
+              <Highlight text={typo(selectedPoem.text)} query={search} />
             </div>
 
             {(prevPoem || nextPoem) && (
