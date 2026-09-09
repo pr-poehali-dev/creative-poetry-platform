@@ -25,7 +25,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, letterSpacing: "0.02em", color: "#3d3226", marginBottom: "0.3rem" }}>
                 Христианские
               </h1>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", background: "linear-gradient(100deg, #c08a3e 0%, #b5673a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, letterSpacing: "0.02em", background: "linear-gradient(100deg, #c08a3e 0%, #b5673a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
                 стихотворения
               </h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.75, margin: "2.5rem auto" }} />
