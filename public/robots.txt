@@ -1,2 +1,7 @@
+# Сайт временно закрыт от поисковых систем.
+# Чтобы открыть — замените Disallow: / на Allow: / в блоке ниже.
+
 User-agent: *
 Disallow: /
+
+Sitemap: /sitemap.xml

@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Карта сайта отдаётся",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Сводка в JSON",
+      "method": "GET",
+      "path": "/?format=json",
+      "expectedStatus": 200
+    }
+  ]
+}

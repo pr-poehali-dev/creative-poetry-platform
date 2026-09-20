@@ -4,6 +4,7 @@ import HomeSection from "@/components/poetry/HomeSection";
 import PoemsSections from "@/components/poetry/PoemsSections";
 import PoemFormModal from "@/components/poetry/PoemFormModal";
 import { API, UPLOAD_API, AUTHORS, EMPTY_FORM, Poem, Section } from "@/components/poetry/shared";
+import { applyMeta } from "@/components/poetry/seo";
 
 const VALID_SECTIONS: Section[] = ["home", "poems", "about", "contacts", "admin"];
 
@@ -61,6 +62,10 @@ export default function Index() {
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, [poems]);
+
+  useEffect(() => {
+    applyMeta(activeSection, selectedPoem);
+  }, [activeSection, selectedPoem]);
 
   useEffect(() => {
     const id = poemIdFromHash();
