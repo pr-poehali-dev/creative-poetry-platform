@@ -29,8 +29,8 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                 стихотворения
               </h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.75, margin: "2.5rem auto" }} />
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.93)", fontStyle: "italic", maxWidth: "480px" }}>
-                Слова, рождённые из молитвы и тишины. Каждое{"\u00A0"}стихотворение{"\u00A0"}— свидетельство веры и красоты Божьего мира.
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.93)", fontStyle: "italic", maxWidth: "560px" }}>
+                Слова, рождённые из молитвы и тишины. Каждое{"\u00A0"}стихотворение{"\u00A0"}—<br />свидетельство веры и красоты Божьего мира.
               </p>
               <div className="flex gap-4 mt-12">
                 <button onClick={() => navigate("poems")} style={btnGold}>Читать стихи</button>
