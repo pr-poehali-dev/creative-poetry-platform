@@ -30,7 +30,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
               </h1>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.75, margin: "2.5rem auto" }} />
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.93)", fontStyle: "italic", maxWidth: "560px" }}>
-                Слова, рождённые из молитвы и тишины.<br />Каждое{"\u00A0"}стихотворение{"\u00A0"}—<br />свидетельство веры и красоты Божьего мира.
+                Слова, рождённые из молитвы и тишины.{" "}<br className="br-desktop" />Каждое{"\u00A0"}стихотворение{"\u00A0"}—{" "}<br className="br-desktop" />свидетельство веры и красоты Божьего мира.
               </p>
               <div className="flex gap-4 mt-12">
                 <button onClick={() => navigate("poems")} style={btnGold}>Читать стихи</button>
@@ -48,12 +48,12 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                 <div className="text-center mb-14" style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.88) 0%, rgba(253,246,233,0.8) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/3c87e877-562c-4446-a8a4-8cdb3988643f.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
                   <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Приветствие</p>
                   <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.3rem", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
-                    Добро пожаловать в мир поэзии,<br />рождённой с верой и любовью
+                    Добро пожаловать в мир поэзии,{" "}<br className="br-desktop" />рождённой с верой и любовью
                   </h2>
                   <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "2rem auto 0" }} />
                 </div>
 
-                <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", fontWeight: 400, lineHeight: 1.95, color: "#3a2d20", textAlign: "justify", textIndent: "2.2rem", hyphens: "auto" }}>
+                <div className="space-y-6 prose-text" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", fontWeight: 400, lineHeight: 1.95, color: "#3a2d20" }}>
                   <p>Мы рады приветствовать вас на нашей странице, где каждый стих — это отклик души, пропитанный молитвой, тишиной и глубокими жизненными переживаниями. Здесь вы откроете для себя авторские стихотворения, написанные мной, а также произведения, вдохновлённые и созданные моей бабушкой и моим папой.</p>
 
                   <p>Мы создали этот сайт как место поддержки, утешения и духовного укрепления. Мы надеемся, что каждый, кто зайдёт сюда, найдёт слова, которые коснутся его сердца.</p>
@@ -146,7 +146,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
             <section className="py-24 px-6" style={{ borderTop: "1px solid #e5d8c0", borderBottom: "1px solid #e5d8c0" }}>
               <div className="max-w-2xl mx-auto text-center">
                 <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, lineHeight: 1.75, fontStyle: "italic", color: "#3d3226", opacity: 0.8 }}>
-                  <span style={{ color: "#a57c42", opacity: 0.55 }}>«</span>Поэзия{"\u00A0"}— это молитва,<br />которую сердце произносит словами.<span style={{ color: "#a57c42", opacity: 0.55 }}>»</span>
+                  <span style={{ color: "#a57c42", opacity: 0.55 }}>«</span>Поэзия{"\u00A0"}— это молитва,{" "}<br className="br-desktop" />которую сердце произносит словами.<span style={{ color: "#a57c42", opacity: 0.55 }}>»</span>
                 </blockquote>
               </div>
             </section>

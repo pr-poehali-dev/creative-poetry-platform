@@ -304,3 +304,26 @@
   color: rgba(240, 232, 213, 0.3);
   font-style: italic;
 }
+
+/* Читаемый текст: на мобильных убираем выключку по ширине и переносы по слогам */
+.prose-text {
+  text-align: justify;
+  hyphens: auto;
+  text-indent: 2.2rem;
+}
+
+@media (max-width: 767px) {
+  .prose-text {
+    text-align: left;
+    hyphens: manual;
+    text-indent: 1.2rem;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  /* Ручные переносы строк мешают на узком экране */
+  .br-desktop {
+    display: none;
+  }
+
+}
