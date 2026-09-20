@@ -78,7 +78,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
   const [formEmail, setFormEmail] = useState("");
   const [formText, setFormText] = useState("");
 
-  const [adminTab, setAdminTab] = useState<"poems" | "messages">("poems");
+  const [adminTab, setAdminTab] = useState<"poems" | "messages" | "files">("poems");
   const [messages, setMessages] = useState<{ id: number; name: string; email: string; message: string; created_at: string }[]>([]);
   const [msgLoading, setMsgLoading] = useState(false);
 
@@ -522,7 +522,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             <div className="flex items-end justify-between mb-14">
               <div>
                 <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Панель управления</p>
-                <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>{adminTab === "poems" ? "Стихотворения" : "Письма"}</h1>
+                <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>{adminTab === "poems" ? "Стихотворения" : adminTab === "messages" ? "Письма" : "Картинки"}</h1>
                 <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
               </div>
               <div className="flex items-center gap-4">
@@ -539,7 +539,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             </div>
 
             <div className="flex items-center gap-8 mb-10" style={{ borderBottom: "1px solid #e5d8c0" }}>
-              {([["poems", "Стихотворения"], ["messages", "Письма"]] as const).map(([key, label]) => (
+              {([["poems", "Стихотворения"], ["messages", "Письма"], ["files", "Картинки"]] as const).map(([key, label]) => (
                 <button key={key} onClick={() => setAdminTab(key)}
                   style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: adminTab === key ? "#8f4f2a" : "#a57c42", opacity: adminTab === key ? 1 : 0.55, background: "none", border: "none", borderBottom: adminTab === key ? "2px solid #b5673a" : "2px solid transparent", padding: "0 0 0.75rem", cursor: "pointer", transition: "all 0.3s" }}>
                   {label}
@@ -547,7 +547,32 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               ))}
             </div>
 
-            {adminTab === "messages" ? (
+            {adminTab === "files" ? (
+              <div>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", fontStyle: "italic", color: "rgba(58,45,32,0.75)", lineHeight: 1.8, marginBottom: "2.5rem" }}>
+                  Картинки для почты, мессенджеров и соцсетей. Нажмите «Скачать» — файл сохранится на ваше устройство.
+                </p>
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {[
+                    { src: "/avatar-pochta.jpg", title: "Аватарка", note: "Для почты, Telegram, WhatsApp. Квадратная.", round: true },
+                    { src: "/avatar-pochta-krug.png", title: "Аватарка в круге", note: "Уже обрезана в круг, с прозрачными углами.", round: true },
+                    { src: "/avatar-pochta-malenkaya.jpg", title: "Аватарка лёгкая", note: "Меньше по размеру, если сервис не принимает большую.", round: true },
+                    { src: "/og-image.jpg", title: "Обложка для ссылок", note: "Показывается, когда отправляете ссылку на сайт.", round: false },
+                  ].map((f) => (
+                    <div key={f.src} style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "1.5rem", borderRadius: "6px" }}>
+                      <div className="flex items-center justify-center mb-4" style={{ background: "#fdf6e9", borderRadius: "6px", padding: "1rem", minHeight: "150px" }}>
+                        <img src={f.src} alt={f.title} style={{ maxHeight: "130px", maxWidth: "100%", borderRadius: f.round ? "50%" : "4px", border: "1px solid #e6d2b0" }} />
+                      </div>
+                      <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.25rem", color: "#3d3226", marginBottom: "0.4rem" }}>{f.title}</h3>
+                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.98rem", fontStyle: "italic", color: "rgba(58,45,32,0.7)", lineHeight: 1.6, marginBottom: "1.25rem" }}>{f.note}</p>
+                      <a href={f.src} download className="flex items-center justify-center gap-2" style={{ ...btnGold, textDecoration: "none", padding: "0.6rem 1.25rem" }}>
+                        <Icon name="Download" size={14} />Скачать
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : adminTab === "messages" ? (
               msgLoading ? (
                 <div className="text-center py-20" style={{ color: "rgba(58,45,32,0.72)", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>Загрузка...</div>
               ) : messages.length === 0 ? (
