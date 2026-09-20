@@ -5,8 +5,21 @@ import PoemsSections from "@/components/poetry/PoemsSections";
 import PoemFormModal from "@/components/poetry/PoemFormModal";
 import { API, UPLOAD_API, AUTHORS, EMPTY_FORM, Poem, Section } from "@/components/poetry/shared";
 
+const VALID_SECTIONS: Section[] = ["home", "poems", "about", "contacts", "admin"];
+
+const sectionFromHash = (): Section => {
+  const raw = window.location.hash.replace(/^#\/?/, "").split("/")[0];
+  return (VALID_SECTIONS as string[]).includes(raw) ? (raw as Section) : "home";
+};
+
+const poemIdFromHash = (): number | null => {
+  const parts = window.location.hash.replace(/^#\/?/, "").split("/");
+  const id = Number(parts[1]);
+  return parts[0] === "poems" && Number.isFinite(id) && id > 0 ? id : null;
+};
+
 export default function Index() {
-  const [activeSection, setActiveSection] = useState<Section>("home");
+  const [activeSection, setActiveSection] = useState<Section>(sectionFromHash);
   const [selectedPoem, setSelectedPoem] = useState<Poem | null>(null);
   const [poems, setPoems] = useState<Poem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -39,11 +52,37 @@ export default function Index() {
 
   useEffect(() => { fetchPoems(); }, [fetchPoems]);
 
+  useEffect(() => {
+    const onHashChange = () => {
+      setActiveSection(sectionFromHash());
+      const id = poemIdFromHash();
+      setSelectedPoem(id ? poems.find((p) => p.id === id) || null : null);
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [poems]);
+
+  useEffect(() => {
+    const id = poemIdFromHash();
+    if (id && poems.length && !selectedPoem) {
+      const found = poems.find((p) => p.id === id);
+      if (found) setSelectedPoem(found);
+    }
+  }, [poems, selectedPoem]);
+
   const navigate = (section: Section) => {
     setActiveSection(section);
     setSelectedPoem(null);
     setMobileMenuOpen(false);
+    if (sectionFromHash() !== section || poemIdFromHash()) {
+      window.location.hash = `#/${section}`;
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const openPoem = (poem: Poem | null) => {
+    setSelectedPoem(poem);
+    window.location.hash = poem ? `#/poems/${poem.id}` : "#/poems";
   };
 
   const openCreate = () => {
@@ -138,7 +177,7 @@ export default function Index() {
           navigate={navigate}
           poems={poems}
           loading={loading}
-          setSelectedPoem={setSelectedPoem}
+          setSelectedPoem={openPoem}
         />
 
         <PoemsSections
@@ -147,7 +186,7 @@ export default function Index() {
           poems={poems}
           loading={loading}
           selectedPoem={selectedPoem}
-          setSelectedPoem={setSelectedPoem}
+          setSelectedPoem={openPoem}
           openEdit={openEdit}
           openCreate={openCreate}
           deletePoem={deletePoem}
