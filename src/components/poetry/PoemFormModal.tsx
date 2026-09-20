@@ -89,7 +89,7 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
                       </button>
                     </div>
                   )}
-                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingImage ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingImage ? 0.5 : 1 }}>
+                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", ...btnGold, cursor: uploadingImage ? "wait" : "pointer", padding: "0.4rem 1rem", opacity: uploadingImage ? 0.5 : 1 }}>
                     <Icon name={uploadingImage ? "Loader" : "ImagePlus"} size={13} />
                     <span>{uploadingImage ? "Загрузка..." : form.image_url ? "Заменить" : "Загрузить"}</span>
                     <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingImage}
@@ -111,7 +111,7 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
                       </button>
                     </div>
                   )}
-                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingAudio ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingAudio ? 0.5 : 1 }}>
+                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", ...btnGold, cursor: uploadingAudio ? "wait" : "pointer", padding: "0.4rem 1rem", opacity: uploadingAudio ? 0.5 : 1 }}>
                     <Icon name={uploadingAudio ? "Loader" : "Music"} size={13} />
                     <span>{uploadingAudio ? "Загрузка..." : form.audio_url ? "Заменить" : "Загрузить"}</span>
                     <input type="file" accept="audio/*" style={{ display: "none" }} disabled={uploadingAudio}
@@ -133,7 +133,7 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
                       </button>
                     </div>
                   )}
-                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: uploadingVideo ? "wait" : "pointer", ...btnGold, padding: "0.4rem 1rem", opacity: uploadingVideo ? 0.5 : 1 }}>
+                  <label style={{ display: "inline-flex", alignItems: "center", gap: "8px", ...btnGold, cursor: uploadingVideo ? "wait" : "pointer", padding: "0.4rem 1rem", opacity: uploadingVideo ? 0.5 : 1 }}>
                     <Icon name={uploadingVideo ? "Loader" : "Video"} size={13} />
                     <span>{uploadingVideo ? "Загрузка..." : form.video_url ? "Заменить" : "Загрузить"}</span>
                     <input type="file" accept="video/*" style={{ display: "none" }} disabled={uploadingVideo}

@@ -115,10 +115,11 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
 
   const sharePoem = async (poem: Poem) => {
     const author = poem.author || AUTHORS[0];
-    const shareText = `${poem.title}\n\n${poem.text}\n\n— ${author}\n${window.location.origin}`;
+    const shareUrl = `${window.location.origin}/#/poems/${poem.id}`;
+    const shareText = `${poem.title}\n\n${poem.text}\n\n— ${author}\n${shareUrl}`;
     if (navigator.share) {
       try {
-        await navigator.share({ title: poem.title, text: shareText });
+        await navigator.share({ title: poem.title, text: shareText, url: shareUrl });
         return;
       } catch {
         return;
@@ -201,7 +202,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                         <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-6" onClick={() => setSelectedPoem(poem)}
                           style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "2rem", transition: "all 0.4s ease" }}
                           onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#a57c42"; }}
-                          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e5d8c0"; }}>
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e6d2b0"; }}>
                           {poem.image_url && (
                             <div className="hidden sm:block" style={{ width: "110px", height: "110px", flexShrink: 0, borderRadius: "6px", overflow: "hidden", border: "1px solid #e6d2b0" }}>
                               <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }} />
@@ -299,7 +300,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                 </button>
                 <button onClick={() => openEdit(selectedPoem)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.65, transition: "opacity 0.3s" }}
                   onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.4"}>
+                  onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.65"}>
                   <Icon name="Pencil" size={15} />
                 </button>
               </div>

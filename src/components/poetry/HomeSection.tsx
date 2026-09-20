@@ -112,7 +112,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                     {poems.slice(0, 3).map((poem) => (
                       <div key={poem.id} onClick={() => { setSelectedPoem(poem); setActiveSection("poems"); }} className="cursor-pointer" style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", transition: "all 0.4s ease", overflow: "hidden" }}
                         onMouseEnter={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#a57c42"; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 0 40px rgba(165,124,66,0.07)"; }}
-                        onMouseLeave={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#e5d8c0"; el.style.transform = "translateY(0)"; el.style.boxShadow = "none"; }}>
+                        onMouseLeave={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#e6d2b0"; el.style.transform = "translateY(0)"; el.style.boxShadow = "0 4px 18px rgba(140,95,50,0.07)"; }}>
                         {poem.image_url && (
                           <div style={{ height: "140px", overflow: "hidden" }}>
                             <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
