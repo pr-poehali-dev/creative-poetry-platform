@@ -85,3 +85,20 @@ export const navItems: { key: Section; label: string }[] = [
   { key: "about", label: "\u041e \u043f\u043e\u044d\u0442\u0435" },
   { key: "contacts", label: "\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u044b" },
 ];
+
+export const ADMIN_PASSWORD = "\u0424\u0430\u0441\u0442\u043e\u0432\u0449\u0443\u043a2026";
+export const ADMIN_STORAGE_KEY = "poetryAdmin";
+
+export function isAdminUnlocked() {
+  return localStorage.getItem(ADMIN_STORAGE_KEY) === "1";
+}
+
+export function unlockAdmin(password: string) {
+  const ok = password.trim() === ADMIN_PASSWORD;
+  if (ok) localStorage.setItem(ADMIN_STORAGE_KEY, "1");
+  return ok;
+}
+
+export function lockAdmin() {
+  localStorage.removeItem(ADMIN_STORAGE_KEY);
+}

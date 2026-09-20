@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
-import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo } from "./shared";
+import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin } from "./shared";
 import AuthorPortrait from "./AuthorPortrait";
 
 interface Props {
@@ -71,6 +71,19 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
   const [copied, setCopied] = useState(false);
   const [fontStep, setFontStep] = useState(() => Number(localStorage.getItem("poemFontStep") ?? 1));
   const [readMode, setReadMode] = useState(false);
+  const [adminUnlocked, setAdminUnlocked] = useState(isAdminUnlocked);
+  const [passInput, setPassInput] = useState("");
+  const [passError, setPassError] = useState(false);
+
+  const tryUnlock = () => {
+    if (unlockAdmin(passInput)) {
+      setAdminUnlocked(true);
+      setPassInput("");
+      setPassError(false);
+    } else {
+      setPassError(true);
+    }
+  };
 
   const FONT_SIZES = [1, 1.15, 1.35, 1.6];
   const changeFont = (step: number) => {
@@ -190,7 +203,9 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             ) : poems.length === 0 ? (
               <div className="text-center py-20">
                 <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(58,45,32,0.72)" }}>Стихотворений пока нет.</p>
-                <button onClick={() => navigate("admin")} style={{ ...btnGold, marginTop: "1.5rem" }}>Добавить первое</button>
+                {adminUnlocked && (
+                  <button onClick={() => navigate("admin")} style={{ ...btnGold, marginTop: "1.5rem" }}>Добавить первое</button>
+                )}
               </div>
             ) : (
               <div className="space-y-16">
@@ -314,11 +329,13 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                   onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(122,140,96,0.1)"}>
                   <Icon name="BookOpen" size={13} />Читать
                 </button>
-                <button onClick={() => openEdit(selectedPoem)} style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.65, transition: "opacity 0.3s" }}
-                  onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.65"}>
-                  <Icon name="Pencil" size={15} />
-                </button>
+                {adminUnlocked && (
+                  <button onClick={() => openEdit(selectedPoem)} title="Редактировать" style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: 0.65, transition: "opacity 0.3s" }}
+                    onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.9"}
+                    onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.opacity = "0.65"}>
+                    <Icon name="Pencil" size={15} />
+                  </button>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-4 mb-3">
@@ -418,8 +435,33 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
           </div>
         )}
 
+        {/* ADMIN — вход */}
+        {activeSection === "admin" && !adminUnlocked && (
+          <div className="max-w-sm mx-auto px-6 py-24 text-center">
+            <Icon name="Lock" size={22} style={{ color: "#a57c42", opacity: 0.7, margin: "0 auto 1.5rem" }} />
+            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.8rem", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}>Управление сайтом</h1>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic", color: "rgba(58,45,32,0.7)", marginBottom: "2.5rem" }}>
+              Этот раздел только для авторов сайта.
+            </p>
+            <input type="password" value={passInput} autoFocus
+              onChange={(e) => { setPassInput(e.target.value); setPassError(false); }}
+              onKeyDown={(e) => { if (e.key === "Enter") tryUnlock(); }}
+              placeholder="Пароль"
+              style={{ ...inputStyle, textAlign: "center", marginBottom: "0.75rem" }} />
+            {passError && (
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontStyle: "italic", color: "#b5673a", marginBottom: "1rem" }}>
+                Пароль не подошёл
+              </p>
+            )}
+            <button onClick={tryUnlock} style={{ ...btnGold, width: "100%", marginTop: "1.5rem" }}>Войти</button>
+            <button onClick={() => navigate("home")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.7, background: "none", border: "none", cursor: "pointer", marginTop: "2rem" }}>
+              Вернуться на сайт
+            </button>
+          </div>
+        )}
+
         {/* ADMIN */}
-        {activeSection === "admin" && (
+        {activeSection === "admin" && adminUnlocked && (
           <div className="max-w-5xl mx-auto px-6 py-16">
             <div className="flex items-end justify-between mb-14">
               <div>
@@ -427,9 +469,15 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                 <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
                 <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
               </div>
-              <button onClick={openCreate} className="flex items-center gap-2" style={{ ...btnGold, padding: "0.6rem 1.5rem" }}>
-                <Icon name="Plus" size={14} />Добавить
-              </button>
+              <div className="flex items-center gap-4">
+                <button onClick={() => { lockAdmin(); setAdminUnlocked(false); navigate("home"); }} className="flex items-center gap-2"
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75, background: "none", border: "none", cursor: "pointer" }}>
+                  <Icon name="LogOut" size={13} />Выйти
+                </button>
+                <button onClick={openCreate} className="flex items-center gap-2" style={{ ...btnGold, padding: "0.6rem 1.5rem" }}>
+                  <Icon name="Plus" size={14} />Добавить
+                </button>
+              </div>
             </div>
 
             {loading ? (

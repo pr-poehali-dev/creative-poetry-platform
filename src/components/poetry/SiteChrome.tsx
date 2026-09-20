@@ -1,5 +1,6 @@
+import { useRef } from "react";
 import Icon from "@/components/ui/icon";
-import { Section, navItems } from "./shared";
+import { Section, navItems, isAdminUnlocked } from "./shared";
 
 interface NavProps {
   activeSection: Section;
@@ -23,9 +24,11 @@ export function SiteNav({ activeSection, navigate, mobileMenuOpen, setMobileMenu
                 {item.label}
               </button>
             ))}
-            <button onClick={() => navigate("admin")} title="Управление" style={{ background: "none", border: "none", cursor: "pointer", color: activeSection === "admin" ? "#a57c42" : "#a57c42", opacity: activeSection === "admin" ? 1 : 0.3, transition: "opacity 0.3s" }}>
-              <Icon name="Settings" size={15} />
-            </button>
+            {isAdminUnlocked() && (
+              <button onClick={() => navigate("admin")} title="Управление" style={{ background: "none", border: "none", cursor: "pointer", color: "#a57c42", opacity: activeSection === "admin" ? 1 : 0.4, transition: "opacity 0.3s" }}>
+                <Icon name="Settings" size={15} />
+              </button>
+            )}
           </div>
           <button className="md:hidden" style={{ color: "#a57c42", background: "none", border: "none", cursor: "pointer" }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <Icon name={mobileMenuOpen ? "X" : "Menu"} size={20} />
@@ -38,9 +41,11 @@ export function SiteNav({ activeSection, navigate, mobileMenuOpen, setMobileMenu
                 {item.label}
               </button>
             ))}
-            <button onClick={() => navigate("admin")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75, background: "none", border: "none", cursor: "pointer" }}>
-              Управление
-            </button>
+            {isAdminUnlocked() && (
+              <button onClick={() => navigate("admin")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75, background: "none", border: "none", cursor: "pointer" }}>
+                Управление
+              </button>
+            )}
           </div>
         )}
       </nav>
@@ -49,11 +54,25 @@ export function SiteNav({ activeSection, navigate, mobileMenuOpen, setMobileMenu
 }
 
 export function SiteFooter({ navigate }: { navigate: (section: Section) => void }) {
+  const clicks = useRef(0);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const secretClick = () => {
+    clicks.current += 1;
+    if (timer.current) clearTimeout(timer.current);
+    if (clicks.current >= 3) {
+      clicks.current = 0;
+      navigate("admin");
+      return;
+    }
+    timer.current = setTimeout(() => { clicks.current = 0; }, 900);
+  };
+
   return (
     <>
       {/* Footer */}
       <footer className="mt-24 py-16 text-center" style={{ borderTop: "1px solid #e5d8c0", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.9) 0%, rgba(253,246,233,0.82) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/3c87e877-562c-4446-a8a4-8cdb3988643f.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div style={{ color: "#a57c42", opacity: 0.7, marginBottom: "1.25rem", fontSize: "1.2rem" }}>✦</div>
+        <button onClick={secretClick} aria-label="" style={{ color: "#a57c42", opacity: 0.7, marginBottom: "1.25rem", fontSize: "1.2rem", background: "none", border: "none", cursor: "default", lineHeight: 1, userSelect: "none" }}>✦</button>
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-8">
           {navItems.map((item) => (
             <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "none", border: "none", cursor: "pointer", transition: "color 0.3s" }}
