@@ -74,6 +74,15 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
   const [adminUnlocked, setAdminUnlocked] = useState(isAdminUnlocked);
   const [passInput, setPassInput] = useState("");
   const [passError, setPassError] = useState(false);
+  const [formName, setFormName] = useState("");
+  const [formEmail, setFormEmail] = useState("");
+  const [formText, setFormText] = useState("");
+
+  const sendMessage = () => {
+    const subject = "Сообщение с сайта «Христианские стихотворения»";
+    const body = ["Имя: " + (formName || "не указано"), "Обратная почта: " + (formEmail || "не указана"), "", formText].join("\n");
+    window.location.href = "mailto:hristianskiestihotvoreniya@yandex.ru?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  };
 
   const tryUnlock = () => {
     if (unlockAdmin(passInput)) {
@@ -599,22 +608,31 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               Если стихотворение тронуло вас или отозвалось в сердце — будем рады добрым словам. Напишите нам.
             </p>
             <div className="space-y-8">
-              <input placeholder="Ваше имя" style={inputStyle} />
-              <input placeholder="Электронная почта" style={inputStyle} />
-              <textarea placeholder="Ваше сообщение..." rows={5} style={{ ...inputStyle, resize: "none" }} />
-              <button style={{ display: "block", width: "100%", background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)", border: "1px solid #b5673a", color: "#fffaf3", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer" }}>
+              <input placeholder="Ваше имя" value={formName} onChange={(e) => setFormName(e.target.value)} style={inputStyle} />
+              <input placeholder="Электронная почта" value={formEmail} onChange={(e) => setFormEmail(e.target.value)} style={inputStyle} />
+              <textarea placeholder="Ваше сообщение..." rows={5} value={formText} onChange={(e) => setFormText(e.target.value)} style={{ ...inputStyle, resize: "none" }} />
+              <button onClick={sendMessage} style={{ display: "block", width: "100%", background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)", border: "1px solid #b5673a", color: "#fffaf3", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer" }}>
                 Отправить сообщение
               </button>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(58,45,32,0.55)", textAlign: "center", marginTop: "1rem" }}>
+                Письмо откроется в вашей почтовой программе
+              </p>
             </div>
-            <div className="mt-14 pt-10 flex items-center gap-10" style={{ borderTop: "1px solid #e5d8c0" }}>
-              {[{ icon: "Mail", label: "Почта", value: "Укажите email" }, { icon: "MessageCircle", label: "Telegram", value: "@username" }].map((contact) => (
-                <div key={contact.label} className="flex items-center gap-3">
-                  <Icon name={contact.icon as "Mail"} size={15} style={{ color: "#a57c42", opacity: 0.75 }} />
-                  <div>
+            <div className="mt-14 pt-10 flex flex-col sm:flex-row sm:items-center gap-7 sm:gap-10" style={{ borderTop: "1px solid #e5d8c0" }}>
+              {[
+                { icon: "Mail", label: "Почта", value: "hristianskiestihotvoreniya@yandex.ru", href: "mailto:hristianskiestihotvoreniya@yandex.ru" },
+                { icon: "Send", label: "Telegram", value: "@hristianskiestihotvoreniyafastov", href: "https://t.me/hristianskiestihotvoreniyafastov" },
+              ].map((contact) => (
+                <a key={contact.label} href={contact.href} target={contact.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
+                  className="flex items-center gap-3" style={{ textDecoration: "none", transition: "opacity 0.3s" }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.opacity = "0.7"}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.opacity = "1"}>
+                  <Icon name={contact.icon as "Mail"} size={15} style={{ color: "#a57c42", opacity: 0.75, flexShrink: 0 }} />
+                  <div style={{ minWidth: 0 }}>
                     <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.7 }}>{contact.label}</div>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(58,45,32,0.85)" }}>{contact.value}</div>
+                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(58,45,32,0.85)", overflowWrap: "anywhere" }}>{contact.value}</div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>

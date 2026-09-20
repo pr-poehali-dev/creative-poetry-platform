@@ -82,6 +82,20 @@ export function SiteFooter({ navigate }: { navigate: (section: Section) => void 
             </button>
           ))}
         </div>
+        <div className="flex items-center justify-center gap-6 mb-8">
+          <a href="https://t.me/hristianskiestihotvoreniyafastov" target="_blank" rel="noreferrer" title="Telegram"
+            className="flex items-center gap-2" style={{ textDecoration: "none", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#8f4f2a", transition: "color 0.3s" }}
+            onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#5f7043"}
+            onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#8f4f2a"}>
+            <Icon name="Send" size={14} />Telegram
+          </a>
+          <a href="mailto:hristianskiestihotvoreniya@yandex.ru" title="Написать"
+            className="flex items-center gap-2" style={{ textDecoration: "none", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#8f4f2a", transition: "color 0.3s" }}
+            onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#5f7043"}
+            onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#8f4f2a"}>
+            <Icon name="Mail" size={14} />Почта
+          </a>
+        </div>
         <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(58,45,32,0.8)" }}>
           © {new Date().getFullYear()} Христианские стихотворения · Семья Фастовщук
         </p>
