@@ -49,6 +49,22 @@ function snippetFor(poem: Poem, query: string) {
   return (start > 0 ? "…\n" : "") + chunk + "…";
 }
 
+function PoemBody({ text, query }: { text: string; query?: string }) {
+  return (
+    <>
+      {text.split("\n").map((line, i) =>
+        line.trim() === "" ? (
+          <div key={i} className="poem-line-empty" />
+        ) : (
+          <div key={i} className="poem-line">
+            {query ? <Highlight text={line} query={query} /> : line}
+          </div>
+        )
+      )}
+    </>
+  );
+}
+
 export default function PoemsSections({ activeSection, navigate, poems, loading, selectedPoem, setSelectedPoem, openEdit, openCreate, deletePoem, deleteConfirm, setDeleteConfirm }: Props) {
   const [activeCategory, setActiveCategory] = useState<string>("Все");
   const [search, setSearch] = useState("");
@@ -243,8 +259,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 5vw, 3rem)", fontWeight: 300, color: "#3d3226", marginBottom: "1rem" }}>{selectedPoem.title}</h1>
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "0 auto 3rem" }} />
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: `${1.15 * FONT_SIZES[fontStep]}rem`, lineHeight: 2.1, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line" }}>
-                {typo(selectedPoem.text)}
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: `${1.15 * FONT_SIZES[fontStep]}rem`, lineHeight: 2.1, fontWeight: 300, color: "#3d3226", textAlign: "left", display: "inline-block" }}>
+                <PoemBody text={typo(selectedPoem.text)} />
               </div>
               <div className="flex items-center justify-center gap-2 mt-14">
                 {FONT_SIZES.map((_, i) => (
@@ -369,8 +385,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               ))}
             </div>
 
-            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: `${1.15 * FONT_SIZES[fontStep]}rem`, lineHeight: 2, fontWeight: 300, color: "#3d3226", whiteSpace: "pre-line", marginBottom: "3.5rem", transition: "font-size 0.3s" }}>
-              <Highlight text={typo(selectedPoem.text)} query={search} />
+            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: `${1.15 * FONT_SIZES[fontStep]}rem`, lineHeight: 2, fontWeight: 300, color: "#3d3226", marginBottom: "3.5rem", transition: "font-size 0.3s" }}>
+              <PoemBody text={typo(selectedPoem.text)} query={search} />
             </div>
 
             {(prevPoem || nextPoem) && (

@@ -327,3 +327,23 @@
   }
 
 }
+
+/* Текст стихотворения: каждая строка отдельно,
+   перенос длинной строки уходит вправо «висячим» отступом */
+.poem-line {
+  padding-left: 1.8rem;
+  text-indent: -1.8rem;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+.poem-line-empty {
+  height: 0.9em;
+}
+
+@media (max-width: 767px) {
+  .poem-line {
+    padding-left: 1.5rem;
+    text-indent: -1.5rem;
+  }
+}
