@@ -19,7 +19,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
             <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6" style={{ background: "radial-gradient(ellipse at center, rgba(165,124,66,0.05) 0%, transparent 70%)" }}>
               <div className="mb-8" style={{ opacity: 0.75 }}>
                 <div className="flex items-center gap-3 justify-center" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#a57c42" }}>
-                  <span>✦</span><span style={{ color: "#7a6444" }}>Семья Фастовщук</span><span>✦</span>
+                  <span>✦</span><span style={{ color: "#7a6444" }}>Авторские стихотворения</span><span>✦</span>
                 </div>
               </div>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", background: "linear-gradient(100deg, #c08a3e 0%, #b5673a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", marginBottom: "0.3rem" }}>
