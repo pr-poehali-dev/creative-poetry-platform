@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
-import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin } from "./shared";
+import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin, MESSAGES_URL } from "./shared";
 import AuthorPortrait from "./AuthorPortrait";
 
 interface Props {
@@ -78,10 +78,57 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
   const [formEmail, setFormEmail] = useState("");
   const [formText, setFormText] = useState("");
 
-  const sendMessage = () => {
-    const subject = "Сообщение с сайта «Христианские стихотворения»";
-    const body = ["Имя: " + (formName || "не указано"), "Обратная почта: " + (formEmail || "не указана"), "", formText].join("\n");
-    window.location.href = "mailto:hristianskiestihotvoreniya@yandex.ru?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  const [adminTab, setAdminTab] = useState<"poems" | "messages">("poems");
+  const [messages, setMessages] = useState<{ id: number; name: string; email: string; message: string; created_at: string }[]>([]);
+  const [msgLoading, setMsgLoading] = useState(false);
+
+  const loadMessages = async () => {
+    setMsgLoading(true);
+    try {
+      const res = await fetch(MESSAGES_URL);
+      setMessages(await res.json());
+    } catch {
+      setMessages([]);
+    }
+    setMsgLoading(false);
+  };
+
+  const deleteMessage = async (id: number) => {
+    if (!confirm("Удалить это письмо?")) return;
+    await fetch(MESSAGES_URL + "?id=" + id, { method: "DELETE" });
+    setMessages((prev) => prev.filter((m) => m.id !== id));
+  };
+
+  useEffect(() => {
+    if (activeSection === "admin" && adminUnlocked && adminTab === "messages") loadMessages();
+  }, [activeSection, adminUnlocked, adminTab]);
+
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [formError, setFormError] = useState("");
+
+  const sendMessage = async () => {
+    if (!formText.trim()) {
+      setFormError("Напишите, пожалуйста, сообщение");
+      return;
+    }
+    setSending(true);
+    setFormError("");
+    try {
+      const res = await fetch(MESSAGES_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: formName, email: formEmail, message: formText }),
+      });
+      if (!res.ok) throw new Error("fail");
+      setSent(true);
+      setFormName("");
+      setFormEmail("");
+      setFormText("");
+    } catch {
+      setFormError("Не удалось отправить. Попробуйте ещё раз или напишите нам на почту.");
+    }
+    setSending(false);
   };
 
   const tryUnlock = () => {
@@ -475,7 +522,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             <div className="flex items-end justify-between mb-14">
               <div>
                 <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Панель управления</p>
-                <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
+                <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>{adminTab === "poems" ? "Стихотворения" : "Письма"}</h1>
                 <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
               </div>
               <div className="flex items-center gap-4">
@@ -483,13 +530,55 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                   style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.75, background: "none", border: "none", cursor: "pointer" }}>
                   <Icon name="LogOut" size={13} />Выйти
                 </button>
-                <button onClick={openCreate} className="flex items-center gap-2" style={{ ...btnGold, padding: "0.6rem 1.5rem" }}>
-                  <Icon name="Plus" size={14} />Добавить
-                </button>
+                {adminTab === "poems" && (
+                  <button onClick={openCreate} className="flex items-center gap-2" style={{ ...btnGold, padding: "0.6rem 1.5rem" }}>
+                    <Icon name="Plus" size={14} />Добавить
+                  </button>
+                )}
               </div>
             </div>
 
-            {loading ? (
+            <div className="flex items-center gap-8 mb-10" style={{ borderBottom: "1px solid #e5d8c0" }}>
+              {([["poems", "Стихотворения"], ["messages", "Письма"]] as const).map(([key, label]) => (
+                <button key={key} onClick={() => setAdminTab(key)}
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: adminTab === key ? "#8f4f2a" : "#a57c42", opacity: adminTab === key ? 1 : 0.55, background: "none", border: "none", borderBottom: adminTab === key ? "2px solid #b5673a" : "2px solid transparent", padding: "0 0 0.75rem", cursor: "pointer", transition: "all 0.3s" }}>
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {adminTab === "messages" ? (
+              msgLoading ? (
+                <div className="text-center py-20" style={{ color: "rgba(58,45,32,0.72)", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>Загрузка...</div>
+              ) : messages.length === 0 ? (
+                <div className="text-center py-20">
+                  <Icon name="Mail" size={22} style={{ color: "#a57c42", opacity: 0.5, margin: "0 auto 1.25rem" }} />
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "rgba(58,45,32,0.72)" }}>Писем пока нет.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {messages.map((m) => (
+                    <div key={m.id} style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "1.5rem 1.75rem", borderRadius: "6px" }}>
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <div className="min-w-0">
+                          <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", color: "#3d3226" }}>{m.name || "Без имени"}</h3>
+                          {m.email && (
+                            <a href={"mailto:" + m.email} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.58rem", letterSpacing: "0.1em", color: "#a57c42", textDecoration: "none", overflowWrap: "anywhere" }}>{m.email}</a>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-4 flex-shrink-0">
+                          <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.12em", color: "rgba(58,45,32,0.5)" }}>{m.created_at}</span>
+                          <button onClick={() => deleteMessage(m.id)} title="Удалить" style={{ background: "none", border: "none", cursor: "pointer", color: "#b5673a", opacity: 0.6 }}>
+                            <Icon name="Trash2" size={14} />
+                          </button>
+                        </div>
+                      </div>
+                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", lineHeight: 1.8, color: "rgba(58,45,32,0.9)", whiteSpace: "pre-wrap" }}>{m.message}</p>
+                    </div>
+                  ))}
+                </div>
+              )
+            ) : loading ? (
               <div className="text-center py-20" style={{ color: "rgba(58,45,32,0.72)", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>Загрузка...</div>
             ) : poems.length === 0 ? (
               <div className="text-center py-20">
@@ -607,17 +696,30 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.9)", fontStyle: "italic", marginBottom: "3rem" }}>
               Если стихотворение тронуло вас или отозвалось в сердце — будем рады добрым словам. Напишите нам.
             </p>
+            {sent ? (
+              <div className="text-center py-12" style={{ border: "1px solid #e6d2b0", borderRadius: "8px", background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", padding: "3rem 2rem" }}>
+                <Icon name="Check" size={26} style={{ color: "#7a8c60", margin: "0 auto 1.25rem" }} />
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}>Спасибо за ваше письмо</p>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", fontStyle: "italic", color: "rgba(58,45,32,0.75)", lineHeight: 1.8 }}>
+                  Мы обязательно прочитаем его и ответим.
+                </p>
+                <button onClick={() => setSent(false)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", background: "none", border: "none", cursor: "pointer", marginTop: "2rem" }}>
+                  Написать ещё
+                </button>
+              </div>
+            ) : (
             <div className="space-y-8">
               <input placeholder="Ваше имя" value={formName} onChange={(e) => setFormName(e.target.value)} style={inputStyle} />
               <input placeholder="Электронная почта" value={formEmail} onChange={(e) => setFormEmail(e.target.value)} style={inputStyle} />
-              <textarea placeholder="Ваше сообщение..." rows={5} value={formText} onChange={(e) => setFormText(e.target.value)} style={{ ...inputStyle, resize: "none" }} />
-              <button onClick={sendMessage} style={{ display: "block", width: "100%", background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)", border: "1px solid #b5673a", color: "#fffaf3", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer" }}>
-                Отправить сообщение
+              <textarea placeholder="Ваше сообщение..." rows={5} value={formText} onChange={(e) => { setFormText(e.target.value); setFormError(""); }} style={{ ...inputStyle, resize: "none" }} />
+              {formError && (
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.98rem", fontStyle: "italic", color: "#b5673a" }}>{formError}</p>
+              )}
+              <button onClick={sendMessage} disabled={sending} style={{ display: "block", width: "100%", background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)", border: "1px solid #b5673a", color: "#fffaf3", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: sending ? "default" : "pointer", opacity: sending ? 0.65 : 1, transition: "opacity 0.3s" }}>
+                {sending ? "Отправляем..." : "Отправить сообщение"}
               </button>
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(58,45,32,0.55)", textAlign: "center", marginTop: "1rem" }}>
-                Письмо откроется в вашей почтовой программе
-              </p>
             </div>
+            )}
             <div className="mt-14 pt-10 flex flex-col sm:flex-row sm:items-center gap-7 sm:gap-10" style={{ borderTop: "1px solid #e5d8c0" }}>
               {[
                 { icon: "Mail", label: "Почта", value: "hristianskiestihotvoreniya@yandex.ru", href: "mailto:hristianskiestihotvoreniya@yandex.ru" },

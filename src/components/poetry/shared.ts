@@ -1,5 +1,6 @@
 export const API = "https://functions.poehali.dev/4f546a64-ab67-4997-8f24-3dca5874d153";
 export const UPLOAD_API = "https://functions.poehali.dev/5934a1fd-54aa-4dbb-b346-ccaf74ab4d2f";
+export const MESSAGES_URL = "https://functions.poehali.dev/deb2b8cf-3e45-4333-a52b-6bb752c17a14";
 
 export const AUTHORS = [
   "\u0424\u0430\u0441\u0442\u043e\u0432\u0449\u0443\u043a \u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440 \u0418\u043a\u0430\u0440\u043e\u0432\u0438\u0447",

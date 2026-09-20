@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "name": "Список сообщений",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Отправка сообщения",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Тест",
+        "email": "test@example.com",
+        "message": "Проверка формы обратной связи"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Пустое сообщение отклоняется",
+      "method": "POST",
+      "path": "/",
+      "body": {"name": "Тест", "email": "t@e.ru", "message": ""},
+      "expectedStatus": 400
+    }
+  ]
+}
