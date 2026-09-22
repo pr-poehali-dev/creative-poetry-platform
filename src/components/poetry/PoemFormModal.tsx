@@ -39,25 +39,25 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
             <div className="px-8 py-8 space-y-8">
               {/* Название */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Название *</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Название *</label>
                 <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Название стихотворения" style={{ ...inputStyle, marginTop: "0.5rem" }} />
               </div>
 
               {/* Текст */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Текст *</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Текст *</label>
                 <textarea value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} placeholder="Текст стихотворения..." rows={10} style={{ ...inputStyle, marginTop: "0.5rem", resize: "vertical", lineHeight: 2, fontStyle: "italic" }} />
               </div>
 
               {/* Анонс */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Анонс (2 строки)</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Анонс (2 строки)</label>
                 <textarea value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} placeholder="Короткий анонс для списка (если пусто — возьмётся из текста)" rows={2} style={{ ...inputStyle, marginTop: "0.5rem", resize: "none", fontStyle: "italic" }} />
               </div>
 
               {/* Автор */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Автор</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Автор</label>
                 <select value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} style={{ ...inputStyle, marginTop: "0.5rem" }}>
                   {AUTHORS.map((a) => (
                     <option key={a} value={a} style={{ background: "#fffaf3", color: "#3d3226" }}>{a}</option>
@@ -68,18 +68,18 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
               {/* Категория и год */}
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Категория</label>
+                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Категория</label>
                   <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} placeholder="Лирика" style={{ ...inputStyle, marginTop: "0.5rem" }} />
                 </div>
                 <div>
-                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Год</label>
+                  <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Год</label>
                   <input value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} placeholder="2024" style={{ ...inputStyle, marginTop: "0.5rem" }} />
                 </div>
               </div>
 
               {/* Картинка */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Картинка</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Картинка</label>
                 <div className="mt-3 space-y-3">
                   {form.image_url && (
                     <div className="relative" style={{ maxWidth: "200px" }}>
@@ -101,7 +101,7 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
 
               {/* Аудио */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Аудио</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Аудио</label>
                 <div className="mt-3 space-y-3">
                   {form.audio_url && (
                     <div className="flex items-center gap-3 p-3" style={{ background: "rgba(165,124,66,0.04)", border: "1px solid #e5d8c0" }}>
@@ -123,7 +123,7 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
 
               {/* Видео */}
               <div>
-                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Видео</label>
+                <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Видео</label>
                 <div className="mt-3 space-y-3">
                   {form.video_url && (
                     <div className="relative" style={{ maxWidth: "320px" }}>

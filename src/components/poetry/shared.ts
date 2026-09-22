@@ -68,8 +68,8 @@ export const inputStyle = {
 };
 
 export const btnGold = {
-  background: "linear-gradient(135deg, #c2a173 0%, #93705a 100%)",
-  border: "1px solid #93705a",
+  background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)",
+  border: "1px solid #b5673a",
   color: "#fffaf3",
   padding: "0.5rem 1.5rem",
   fontFamily: "Montserrat, sans-serif",

@@ -75,24 +75,24 @@ export function SiteFooter({ navigate }: { navigate: (section: Section) => void 
         <button onClick={secretClick} aria-label="" style={{ color: "#a57c42", opacity: 0.7, marginBottom: "1.25rem", fontSize: "1.2rem", background: "none", border: "none", cursor: "default", lineHeight: 1, userSelect: "none" }}>✦</button>
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-8">
           {navItems.map((item) => (
-            <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "none", border: "none", cursor: "pointer", transition: "color 0.3s" }}
+            <button key={item.key} onClick={() => navigate(item.key)} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "none", border: "none", cursor: "pointer", transition: "color 0.3s" }}
               onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.color = "#5f7043"}
-              onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.color = "#7d6047"}>
+              onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.color = "#8f4f2a"}>
               {item.label}
             </button>
           ))}
         </div>
         <div className="flex items-center justify-center gap-6 mb-8">
           <a href="https://t.me/hristianskiestihotvoreniyafastov" target="_blank" rel="noreferrer" title="Telegram"
-            className="flex items-center gap-2" style={{ textDecoration: "none", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#7d6047", transition: "color 0.3s" }}
+            className="flex items-center gap-2" style={{ textDecoration: "none", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#8f4f2a", transition: "color 0.3s" }}
             onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#5f7043"}
-            onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#7d6047"}>
+            onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#8f4f2a"}>
             <Icon name="Send" size={14} />Telegram
           </a>
           <a href="mailto:hristianskiestihotvoreniya@yandex.ru" title="Написать"
-            className="flex items-center gap-2" style={{ textDecoration: "none", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#7d6047", transition: "color 0.3s" }}
+            className="flex items-center gap-2" style={{ textDecoration: "none", fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#8f4f2a", transition: "color 0.3s" }}
             onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#5f7043"}
-            onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#7d6047"}>
+            onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#8f4f2a"}>
             <Icon name="Mail" size={14} />Почта
           </a>
         </div>

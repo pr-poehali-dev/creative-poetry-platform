@@ -178,7 +178,7 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#fdf6e9", backgroundImage: "radial-gradient(ellipse 60% 40% at 15% 10%, rgba(147,112,90,0.10) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 85% 25%, rgba(122,140,96,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 50% 85%, rgba(194,161,115,0.10) 0%, transparent 65%)", backgroundAttachment: "fixed" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#fdf6e9", backgroundImage: "radial-gradient(ellipse 60% 40% at 15% 10%, rgba(181,103,58,0.10) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 85% 25%, rgba(122,140,96,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 50% 85%, rgba(192,138,62,0.10) 0%, transparent 65%)", backgroundAttachment: "fixed" }}>
 
       <SiteNav
         activeSection={activeSection}
