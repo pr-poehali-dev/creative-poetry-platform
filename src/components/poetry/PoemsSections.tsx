@@ -454,8 +454,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             )}
             {/* Картинка */}
             {selectedPoem.image_url && (
-              <div className="mb-12 flex items-center justify-center" style={{ borderRadius: "8px", overflow: "hidden", border: "1px solid #e6d2b0", boxShadow: "0 8px 28px rgba(140,95,50,0.12)", background: "#fdf6e9" }}>
-                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", height: "auto", display: "block", maxHeight: "70vh", objectFit: "contain" }} />
+              <div className="mb-12 flex justify-center">
+                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ maxWidth: "100%", maxHeight: "70vh", width: "auto", height: "auto", display: "block", borderRadius: "8px", border: "1px solid #e6d2b0", boxShadow: "0 8px 28px rgba(140,95,50,0.12)" }} />
               </div>
             )}
 
@@ -472,8 +472,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
 
             {/* Видео */}
             {selectedPoem.video_url && (
-              <div className="mb-10" style={{ border: "1px solid #e5d8c0" }}>
-                <video controls playsInline src={selectedPoem.video_url} style={{ width: "100%", height: "auto", display: "block", maxHeight: "70vh", objectFit: "contain", background: "#e5d8c0" }} />
+              <div className="mb-10 flex justify-center">
+                <video controls playsInline src={selectedPoem.video_url} style={{ maxWidth: "100%", maxHeight: "70vh", width: "auto", height: "auto", display: "block", border: "1px solid #e5d8c0", background: "#e5d8c0" }} />
               </div>
             )}
 
