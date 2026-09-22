@@ -17,7 +17,7 @@ interface Props {
   setDeleteConfirm: (v: number | null) => void;
 }
 
-const HL_STYLE = { background: "rgba(192,138,62,0.28)", color: "#7a4a1e", borderRadius: "3px", padding: "0 0.12em", fontStyle: "inherit" };
+const HL_STYLE = { background: "rgba(194,161,115,0.28)", color: "#7a4a1e", borderRadius: "3px", padding: "0 0.12em", fontStyle: "inherit" };
 
 function Highlight({ text, query }: { text: string; query: string }) {
   const q = query.trim();
@@ -262,7 +262,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(90deg, rgba(253,246,233,0.94) 0%, rgba(253,246,233,0.72) 55%, rgba(253,246,233,0.55) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/8145e7ba-a43c-4589-9837-e8077605bda8.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
               <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Все произведения</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Стихотворения</h1>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
             {!loading && poems.length > 0 && (
               <div className="mb-8 flex items-center gap-3" style={{ borderBottom: "1px solid #e5d8c0", paddingBottom: "0.6rem" }}>
@@ -282,7 +282,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                   const active = cat === activeCategory;
                   return (
                     <button key={cat} onClick={() => setActiveCategory(cat)}
-                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", padding: "0.45rem 1rem", borderRadius: "999px", cursor: "pointer", transition: "all 0.3s", color: active ? "#fffaf3" : "#8f4f2a", background: active ? "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)" : "rgba(181,103,58,0.08)", border: active ? "1px solid #b5673a" : "1px solid rgba(181,103,58,0.25)" }}>
+                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", padding: "0.45rem 1rem", borderRadius: "999px", cursor: "pointer", transition: "all 0.3s", color: active ? "#fffaf3" : "#7d6047", background: active ? "linear-gradient(135deg, #c2a173 0%, #93705a 100%)" : "rgba(147,112,90,0.08)", border: active ? "1px solid #93705a" : "1px solid rgba(147,112,90,0.25)" }}>
                       {cat}
                     </button>
                   );
@@ -327,7 +327,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                           onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e6d2b0"; }}>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-4 mb-3">
-                              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
+                              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
                               <span style={{ color: "#e5d8c0" }}>·</span>
                               <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(58,45,32,0.68)" }}>{poem.year}</span>
                               {poem.has_audio && <Icon name="Music" size={12} style={{ color: "#a57c42", opacity: 0.7 }} />}
@@ -365,14 +365,14 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             <div className="max-w-2xl mx-auto px-6 py-24 text-center" onClick={(e) => e.stopPropagation()}>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 5vw, 3rem)", fontWeight: 300, color: "#3d3226", marginBottom: "1rem" }}>{selectedPoem.title}</h1>
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "0 auto 3rem" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.7, margin: "0 auto 3rem" }} />
               <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: `${1.15 * FONT_SIZES[fontStep]}rem`, lineHeight: 2.1, fontWeight: 300, color: "#3d3226", textAlign: "left", display: "inline-block" }}>
                 <PoemBody text={typo(selectedPoem.text)} />
               </div>
               <div className="flex items-center justify-center gap-2 mt-14">
                 {FONT_SIZES.map((_, i) => (
                   <button key={i} onClick={() => changeFont(i)}
-                    style={{ width: "30px", height: "30px", borderRadius: "50%", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontSize: `${0.72 + i * 0.16}rem`, lineHeight: 1, background: fontStep === i ? "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)" : "transparent", color: fontStep === i ? "#fffaf3" : "#a57c42", border: `1px solid ${fontStep === i ? "#b5673a" : "#e6d2b0"}`, transition: "all 0.3s" }}>А</button>
+                    style={{ width: "30px", height: "30px", borderRadius: "50%", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontSize: `${0.72 + i * 0.16}rem`, lineHeight: 1, background: fontStep === i ? "linear-gradient(135deg, #c2a173 0%, #93705a 100%)" : "transparent", color: fontStep === i ? "#fffaf3" : "#a57c42", border: `1px solid ${fontStep === i ? "#93705a" : "#e6d2b0"}`, transition: "all 0.3s" }}>А</button>
                 ))}
               </div>
 
@@ -410,9 +410,9 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                   <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#5f7043" }}>Скопировано</span>
                 )}
                 <button onClick={() => sharePoem(selectedPoem)} title="Поделиться" className="flex items-center gap-2"
-                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.08)", border: "1px solid rgba(181,103,58,0.25)", borderRadius: "999px", padding: "0.4rem 0.9rem", cursor: "pointer", transition: "all 0.3s" }}
-                  onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(181,103,58,0.16)"}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(181,103,58,0.08)"}>
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.08)", border: "1px solid rgba(147,112,90,0.25)", borderRadius: "999px", padding: "0.4rem 0.9rem", cursor: "pointer", transition: "all 0.3s" }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(147,112,90,0.16)"}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.background = "rgba(147,112,90,0.08)"}>
                   <Icon name="Share2" size={13} />Поделиться
                 </button>
                 <button onClick={() => setReadMode(true)} title="Читать без отвлечений" className="flex items-center gap-2"
@@ -431,7 +431,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               </div>
             </div>
             <div className="flex items-center gap-4 mb-3">
-              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{selectedPoem.category}</span>
+              <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{selectedPoem.category}</span>
               <span style={{ color: "#e5d8c0" }}>·</span>
               <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(58,45,32,0.68)" }}>{selectedPoem.year}</span>
             </div>
@@ -440,14 +440,14 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <AuthorPortrait src={AUTHOR_PHOTOS[selectedPoem.author || AUTHORS[0]]} name={selectedPoem.author || AUTHORS[0]} size={54} />
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8 }}>{selectedPoem.author || AUTHORS[0]}</p>
             </div>
-            <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginBottom: "3rem" }} />
+            <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.7, marginBottom: "3rem" }} />
             {search.trim() && (
-              <div className="flex items-center gap-3 mb-8" style={{ background: "rgba(192,138,62,0.08)", border: "1px solid rgba(181,103,58,0.2)", borderRadius: "6px", padding: "0.6rem 1rem" }}>
+              <div className="flex items-center gap-3 mb-8" style={{ background: "rgba(194,161,115,0.08)", border: "1px solid rgba(147,112,90,0.2)", borderRadius: "6px", padding: "0.6rem 1rem" }}>
                 <Icon name="Search" size={13} style={{ color: "#a57c42", opacity: 0.8, flexShrink: 0 }} />
                 <span style={{ flex: 1, fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", color: "rgba(58,45,32,0.85)" }}>
                   Подсвечено по запросу «{search.trim()}»
                 </span>
-                <button onClick={() => setSearch("")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#8f4f2a", background: "none", border: "none", cursor: "pointer", flexShrink: 0 }}>
+                <button onClick={() => setSearch("")} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#7d6047", background: "none", border: "none", cursor: "pointer", flexShrink: 0 }}>
                   Снять
                 </button>
               </div>
@@ -486,9 +486,9 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                     fontFamily: "'Cormorant Garamond', serif",
                     fontSize: `${0.72 + i * 0.16}rem`,
                     lineHeight: 1,
-                    background: fontStep === i ? "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)" : "transparent",
+                    background: fontStep === i ? "linear-gradient(135deg, #c2a173 0%, #93705a 100%)" : "transparent",
                     color: fontStep === i ? "#fffaf3" : "#a57c42",
-                    border: `1px solid ${fontStep === i ? "#b5673a" : "#e6d2b0"}`,
+                    border: `1px solid ${fontStep === i ? "#93705a" : "#e6d2b0"}`,
                     transition: "all 0.3s",
                   }}>А</button>
               ))}
@@ -541,7 +541,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               placeholder="Пароль"
               style={{ ...inputStyle, textAlign: "center", marginBottom: "0.75rem" }} />
             {passError && (
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontStyle: "italic", color: "#b5673a", marginBottom: "1rem" }}>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontStyle: "italic", color: "#93705a", marginBottom: "1rem" }}>
                 Пароль не подошёл
               </p>
             )}
@@ -559,7 +559,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <div>
                 <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Панель управления</p>
                 <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>{adminTab === "poems" ? "Стихотворения" : adminTab === "messages" ? "Письма" : "Картинки"}</h1>
-                <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
+                <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
               </div>
               <div className="flex items-center gap-4">
                 <button onClick={() => { lockAdmin(); setAdminUnlocked(false); navigate("home"); }} className="flex items-center gap-2"
@@ -577,7 +577,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             <div className="flex items-center gap-8 mb-10" style={{ borderBottom: "1px solid #e5d8c0" }}>
               {([["poems", "Стихотворения"], ["messages", "Письма"], ["files", "Картинки"]] as const).map(([key, label]) => (
                 <button key={key} onClick={() => setAdminTab(key)}
-                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: adminTab === key ? "#8f4f2a" : "#a57c42", opacity: adminTab === key ? 1 : 0.55, background: "none", border: "none", borderBottom: adminTab === key ? "2px solid #b5673a" : "2px solid transparent", padding: "0 0 0.75rem", cursor: "pointer", transition: "all 0.3s" }}>
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: adminTab === key ? "#7d6047" : "#a57c42", opacity: adminTab === key ? 1 : 0.55, background: "none", border: "none", borderBottom: adminTab === key ? "2px solid #93705a" : "2px solid transparent", padding: "0 0 0.75rem", cursor: "pointer", transition: "all 0.3s" }}>
                   {label}
                 </button>
               ))}
@@ -641,7 +641,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                             </button>
                             <button onClick={() => { if (confirm("Убрать эту фотографию из списка?")) saveMyPhotos(myPhotos.filter((u) => u !== url)); }}
                               title="Убрать из списка"
-                              style={{ background: "none", border: "1px solid #e6d2b0", borderRadius: "3px", cursor: "pointer", color: "#b5673a", padding: "0.45rem 0.6rem" }}>
+                              style={{ background: "none", border: "1px solid #e6d2b0", borderRadius: "3px", cursor: "pointer", color: "#93705a", padding: "0.45rem 0.6rem" }}>
                               <Icon name="Trash2" size={12} />
                             </button>
                           </div>
@@ -672,7 +672,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                         </div>
                         <div className="flex items-center gap-4 flex-shrink-0">
                           <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.12em", color: "rgba(58,45,32,0.5)" }}>{m.created_at}</span>
-                          <button onClick={() => deleteMessage(m.id)} title="Удалить" style={{ background: "none", border: "none", cursor: "pointer", color: "#b5673a", opacity: 0.6 }}>
+                          <button onClick={() => deleteMessage(m.id)} title="Удалить" style={{ background: "none", border: "none", cursor: "pointer", color: "#93705a", opacity: 0.6 }}>
                             <Icon name="Trash2" size={14} />
                           </button>
                         </div>
@@ -700,7 +700,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                         {poem.has_video && <Icon name="Play" size={11} style={{ color: "#a57c42", opacity: 0.75 }} />}
                       </div>
                       <div className="flex items-center gap-3">
-                        <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
+                        <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
                         <span style={{ color: "#e5d8c0" }}>·</span>
                         <span style={{ fontFamily: "Montserrat", fontSize: "0.6rem", color: "rgba(58,45,32,0.68)" }}>{poem.year}</span>
                       </div>
@@ -744,7 +744,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
                 История одной души,{" "}<br className="br-desktop" />преображённой словом
               </h1>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "2rem auto 0" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.7, margin: "2rem auto 0" }} />
             </div>
 
             <div className="flex flex-wrap items-start justify-center gap-10 mb-14">
@@ -795,7 +795,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3.5rem 2.5rem", marginBottom: "3.5rem", backgroundImage: "linear-gradient(90deg, rgba(253,246,233,0.94) 0%, rgba(253,246,233,0.72) 55%, rgba(253,246,233,0.55) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/4ca1ed55-b029-4d0e-b334-8862593ef5d2.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
               <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Связаться</p>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", fontWeight: 300, color: "#3d3226" }}>Контакты</h1>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.9)", fontStyle: "italic", marginBottom: "3rem" }}>
               Если стихотворение тронуло вас или отозвалось в сердце — будем рады добрым словам.
@@ -819,9 +819,9 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <input placeholder="Электронная почта" value={formEmail} onChange={(e) => setFormEmail(e.target.value)} style={inputStyle} />
               <textarea placeholder="Ваше сообщение..." rows={5} value={formText} onChange={(e) => { setFormText(e.target.value); setFormError(""); }} style={{ ...inputStyle, resize: "none" }} />
               {formError && (
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.98rem", fontStyle: "italic", color: "#b5673a" }}>{formError}</p>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.98rem", fontStyle: "italic", color: "#93705a" }}>{formError}</p>
               )}
-              <button onClick={sendMessage} disabled={sending} style={{ display: "block", width: "100%", background: "linear-gradient(135deg, #c08a3e 0%, #b5673a 100%)", border: "1px solid #b5673a", color: "#fffaf3", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: sending ? "default" : "pointer", opacity: sending ? 0.65 : 1, transition: "opacity 0.3s" }}>
+              <button onClick={sendMessage} disabled={sending} style={{ display: "block", width: "100%", background: "linear-gradient(135deg, #c2a173 0%, #93705a 100%)", border: "1px solid #93705a", color: "#fffaf3", padding: "0.75rem 2rem", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: sending ? "default" : "pointer", opacity: sending ? 0.65 : 1, transition: "opacity 0.3s" }}>
                 {sending ? "Отправляем..." : "Отправить сообщение"}
               </button>
             </div>

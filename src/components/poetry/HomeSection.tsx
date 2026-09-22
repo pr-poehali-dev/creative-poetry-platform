@@ -22,13 +22,13 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                   <span>✦</span><span style={{ color: "#7a6444" }}>Авторские стихотворения</span><span>✦</span>
                 </div>
               </div>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", background: "linear-gradient(100deg, #c08a3e 0%, #b5673a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", marginBottom: "0.3rem" }}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", background: "linear-gradient(100deg, #c2a173 0%, #93705a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", marginBottom: "0.3rem" }}>
                 Христианские
               </h1>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", background: "linear-gradient(100deg, #c08a3e 0%, #b5673a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 8vw, 6.5rem)", fontWeight: 300, lineHeight: 1.15, fontStyle: "italic", background: "linear-gradient(100deg, #c2a173 0%, #93705a 45%, #7a8c60 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
                 стихотворения
               </h1>
-              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.75, margin: "2.5rem auto" }} />
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.75, margin: "2.5rem auto" }} />
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.93)", fontStyle: "italic", maxWidth: "560px" }}>
                 Слова, рождённые из молитвы и тишины.{" "}<br className="br-desktop" />Каждое{"\u00A0"}стихотворение{"\u00A0"}—{" "}<br className="br-desktop" />свидетельство веры и красоты Божьего мира.
               </p>
@@ -50,7 +50,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                   <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.3rem", fontWeight: 300, lineHeight: 1.3, color: "#3d3226" }}>
                     Добро пожаловать в мир поэзии,{" "}<br className="br-desktop" />рождённой с верой и любовью
                   </h2>
-                  <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "2rem auto 0" }} />
+                  <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.65, margin: "2rem auto 0" }} />
                 </div>
 
                 <div className="space-y-6 prose-text" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", fontWeight: 400, lineHeight: 1.95, color: "#3a2d20" }}>
@@ -103,7 +103,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                 <div className="text-center mb-16" style={{ position: "relative", borderRadius: "10px", overflow: "hidden", padding: "3rem 2.5rem", backgroundImage: "linear-gradient(180deg, rgba(253,246,233,0.88) 0%, rgba(253,246,233,0.8) 100%), url('https://cdn.poehali.dev/projects/75fbe93d-cfab-43f5-9635-e93d4516bacb/files/4ca1ed55-b029-4d0e-b334-8862593ef5d2.jpg')", backgroundSize: "cover", backgroundPosition: "center", border: "1px solid #e6d2b0" }}>
                   <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", opacity: 1, marginBottom: "1rem" }}>Избранное</p>
                   <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.5rem", fontWeight: 300, color: "#3d3226" }}>Последние стихотворения</h2>
-                  <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.65, margin: "1.5rem auto 0" }} />
+                  <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c2a173, #93705a, #7a8c60)", opacity: 0.65, margin: "1.5rem auto 0" }} />
                 </div>
                 {loading ? (
                   <div className="text-center py-20" style={{ color: "rgba(58,45,32,0.72)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic" }}>Загрузка...</div>
@@ -120,7 +120,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                         )}
                         <div style={{ padding: "2rem" }}>
                           <div className="flex items-center justify-between mb-5">
-                            <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
+                            <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#7d6047", background: "rgba(147,112,90,0.16)", border: "1px solid rgba(147,112,90,0.38)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
                             <span style={{ color: "#a57c42", opacity: 0.5, fontSize: "0.75rem", fontFamily: "Montserrat" }}>{poem.year}</span>
                           </div>
                           <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.8rem" }}>{poem.title}</h3>
