@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
-import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin, MESSAGES_URL } from "./shared";
+import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin, MESSAGES_URL, UPLOAD_API } from "./shared";
 import AuthorPortrait from "./AuthorPortrait";
 
 interface Props {
@@ -66,6 +66,41 @@ function PoemBody({ text, query }: { text: string; query?: string }) {
 }
 
 export default function PoemsSections({ activeSection, navigate, poems, loading, selectedPoem, setSelectedPoem, openEdit, openCreate, deletePoem, deleteConfirm, setDeleteConfirm }: Props) {
+  const [myPhotos, setMyPhotos] = useState<string[]>(() => {
+    try { return JSON.parse(localStorage.getItem("my_photos") || "[]"); } catch { return []; }
+  });
+  const [photoUploading, setPhotoUploading] = useState(false);
+  const [copiedPhoto, setCopiedPhoto] = useState<string | null>(null);
+
+  const saveMyPhotos = (list: string[]) => {
+    setMyPhotos(list);
+    localStorage.setItem("my_photos", JSON.stringify(list));
+  };
+
+  const uploadMyPhoto = async (file: File) => {
+    setPhotoUploading(true);
+    try {
+      const b64 = await new Promise<string>((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(String(r.result));
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
+      const res = await fetch(UPLOAD_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ file: b64, name: file.name, type: file.type }),
+      });
+      const data = await res.json();
+      if (data.url) saveMyPhotos([data.url, ...myPhotos]);
+      else alert("Не получилось загрузить файл");
+    } catch {
+      alert("Не получилось загрузить файл");
+    } finally {
+      setPhotoUploading(false);
+    }
+  };
+
   const [activeCategory, setActiveCategory] = useState<string>("Все");
   const [search, setSearch] = useState("");
   const [copied, setCopied] = useState(false);
@@ -286,16 +321,11 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                     </div>
                     <div className="space-y-4">
                       {visiblePoems.filter((p) => (p.author || AUTHORS[0]) === author).map((poem) => (
-                        <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-6" onClick={() => setSelectedPoem(poem)}
-                          style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", padding: "2rem", transition: "all 0.4s ease" }}
+                        <div key={poem.id} className="cursor-pointer flex items-start justify-between gap-4 sm:gap-6 p-5 sm:p-8" onClick={() => setSelectedPoem(poem)}
+                          style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", boxShadow: "0 4px 18px rgba(140,95,50,0.07)", transition: "all 0.4s ease" }}
                           onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#a57c42"; }}
                           onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e6d2b0"; }}>
-                          {poem.image_url && (
-                            <div className="hidden sm:block" style={{ width: "110px", height: "110px", flexShrink: 0, borderRadius: "6px", overflow: "hidden", border: "1px solid #e6d2b0" }}>
-                              <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }} />
-                            </div>
-                          )}
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-4 mb-3">
                               <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{poem.category}</span>
                               <span style={{ color: "#e5d8c0" }}>·</span>
@@ -306,7 +336,13 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                             <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "#3d3226", marginBottom: "0.5rem" }}><Highlight text={poem.title} query={search} /></h3>
                             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", fontStyle: "italic", color: "rgba(58,45,32,0.82)", whiteSpace: "pre-line", lineHeight: 1.8 }}><Highlight text={typo(snippetFor(poem, search))} query={search} /></p>
                           </div>
-                          <Icon name="ArrowRight" size={18} style={{ color: "#a57c42", opacity: 0.6, marginTop: "0.5rem", flexShrink: 0 }} />
+                          {poem.image_url ? (
+                            <div className="poem-thumb" style={{ flexShrink: 0, borderRadius: "6px", overflow: "hidden", border: "1px solid #e6d2b0", background: "#fdf6e9" }}>
+                              <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }} />
+                            </div>
+                          ) : (
+                            <Icon name="ArrowRight" size={18} style={{ color: "#a57c42", opacity: 0.6, marginTop: "0.5rem", flexShrink: 0 }} />
+                          )}
                         </div>
                       ))}
                     </div>
@@ -418,8 +454,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             )}
             {/* Картинка */}
             {selectedPoem.image_url && (
-              <div className="mb-12" style={{ borderRadius: "8px", overflow: "hidden", border: "1px solid #e6d2b0", boxShadow: "0 8px 28px rgba(140,95,50,0.12)" }}>
-                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", display: "block", aspectRatio: "16 / 9", objectFit: "cover" }} />
+              <div className="mb-12 flex items-center justify-center" style={{ borderRadius: "8px", overflow: "hidden", border: "1px solid #e6d2b0", boxShadow: "0 8px 28px rgba(140,95,50,0.12)", background: "#fdf6e9" }}>
+                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ width: "100%", height: "auto", display: "block", maxHeight: "70vh", objectFit: "contain" }} />
               </div>
             )}
 
@@ -437,7 +473,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             {/* Видео */}
             {selectedPoem.video_url && (
               <div className="mb-10" style={{ border: "1px solid #e5d8c0" }}>
-                <video controls src={selectedPoem.video_url} style={{ width: "100%", display: "block", maxHeight: "400px", background: "#e5d8c0" }} />
+                <video controls playsInline src={selectedPoem.video_url} style={{ width: "100%", height: "auto", display: "block", maxHeight: "70vh", objectFit: "contain", background: "#e5d8c0" }} />
               </div>
             )}
 
@@ -570,6 +606,49 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                       </a>
                     </div>
                   ))}
+                </div>
+
+                <div style={{ borderTop: "1px solid #e5d8c0", marginTop: "3.5rem", paddingTop: "2.5rem" }}>
+                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2rem", fontWeight: 300, color: "#3d3226", marginBottom: "0.6rem" }}>Мои фотографии</h2>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", fontStyle: "italic", color: "rgba(58,45,32,0.75)", lineHeight: 1.8, marginBottom: "2rem" }}>
+                    Загрузите свои снимки — семейные фото, пейзажи, что угодно. Они сохранятся, и их можно будет скачать с любого устройства.
+                  </p>
+
+                  <label className="inline-flex items-center gap-2 mb-8" style={{ ...btnGold, cursor: photoUploading ? "wait" : "pointer", padding: "0.7rem 1.5rem", opacity: photoUploading ? 0.5 : 1 }}>
+                    <Icon name={photoUploading ? "Loader" : "ImagePlus"} size={14} />
+                    <span>{photoUploading ? "Загружаю..." : "Загрузить фотографию"}</span>
+                    <input type="file" accept="image/*" style={{ display: "none" }} disabled={photoUploading}
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadMyPhoto(f); e.target.value = ""; }} />
+                  </label>
+
+                  {myPhotos.length === 0 ? (
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", fontStyle: "italic", color: "rgba(58,45,32,0.5)" }}>Пока ничего не загружено.</p>
+                  ) : (
+                    <div className="grid gap-5 grid-cols-2 sm:grid-cols-3">
+                      {myPhotos.map((url) => (
+                        <div key={url} style={{ background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", border: "1px solid #e6d2b0", borderRadius: "6px", padding: "0.75rem" }}>
+                          <div className="flex items-center justify-center mb-3" style={{ background: "#fdf6e9", borderRadius: "4px", height: "120px", overflow: "hidden" }}>
+                            <img src={url} alt="" style={{ maxHeight: "120px", maxWidth: "100%", objectFit: "contain" }} />
+                          </div>
+                          <div className="flex gap-2">
+                            <a href={url} download target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-1" style={{ ...btnGold, textDecoration: "none", padding: "0.45rem 0.5rem", fontSize: "0.55rem" }}>
+                              <Icon name="Download" size={12} />Скачать
+                            </a>
+                            <button onClick={() => { navigator.clipboard.writeText(url); setCopiedPhoto(url); setTimeout(() => setCopiedPhoto(null), 2000); }}
+                              title="Скопировать ссылку"
+                              style={{ background: "none", border: "1px solid #e6d2b0", borderRadius: "3px", cursor: "pointer", color: "#a57c42", padding: "0.45rem 0.6rem" }}>
+                              <Icon name={copiedPhoto === url ? "Check" : "Link"} size={12} />
+                            </button>
+                            <button onClick={() => { if (confirm("Убрать эту фотографию из списка?")) saveMyPhotos(myPhotos.filter((u) => u !== url)); }}
+                              title="Убрать из списка"
+                              style={{ background: "none", border: "1px solid #e6d2b0", borderRadius: "3px", cursor: "pointer", color: "#b5673a", padding: "0.45rem 0.6rem" }}>
+                              <Icon name="Trash2" size={12} />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ) : adminTab === "messages" ? (
@@ -719,7 +798,9 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginTop: "1.5rem" }} />
             </div>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(58,45,32,0.9)", fontStyle: "italic", marginBottom: "3rem" }}>
-              Если стихотворение тронуло вас или отозвалось в сердце — будем рады добрым словам. Напишите нам.
+              Если стихотворение тронуло вас или отозвалось в сердце — будем рады добрым словам.
+              <br />
+              Напишите нам.
             </p>
             {sent ? (
               <div className="text-center py-12" style={{ border: "1px solid #e6d2b0", borderRadius: "8px", background: "linear-gradient(160deg, #fffdf8 0%, #fdf3e2 100%)", padding: "3rem 2rem" }}>

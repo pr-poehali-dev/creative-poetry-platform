@@ -54,6 +54,12 @@ export default function Index() {
   useEffect(() => { fetchPoems(); }, [fetchPoems]);
 
   useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
+  useEffect(() => {
     const onHashChange = () => {
       setActiveSection(sectionFromHash());
       const id = poemIdFromHash();
@@ -65,6 +71,7 @@ export default function Index() {
 
   useEffect(() => {
     applyMeta(activeSection, selectedPoem);
+    window.scrollTo(0, 0);
   }, [activeSection, selectedPoem]);
 
   useEffect(() => {
@@ -75,6 +82,11 @@ export default function Index() {
     }
   }, [poems, selectedPoem]);
 
+  const scrollTop = () => {
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => window.scrollTo(0, 0));
+  };
+
   const navigate = (section: Section) => {
     setActiveSection(section);
     setSelectedPoem(null);
@@ -82,12 +94,13 @@ export default function Index() {
     if (sectionFromHash() !== section || poemIdFromHash()) {
       window.location.hash = `#/${section}`;
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollTop();
   };
 
   const openPoem = (poem: Poem | null) => {
     setSelectedPoem(poem);
     window.location.hash = poem ? `#/poems/${poem.id}` : "#/poems";
+    scrollTop();
   };
 
   const openCreate = () => {

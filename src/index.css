@@ -346,3 +346,29 @@
     text-indent: -1.5rem;
   }
 }
+
+/* Картинка-превью в списке стихотворений */
+.poem-thumb {
+  width: 110px;
+  height: 110px;
+}
+
+.poem-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 639px) {
+  .poem-thumb {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+/* Медиа внутри стихотворения не обрезается и не вылезает за экран */
+.poem-media img,
+.poem-media video {
+  max-width: 100%;
+  height: auto;
+}

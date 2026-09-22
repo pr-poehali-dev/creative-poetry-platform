@@ -23,7 +23,9 @@ def esc(value: str) -> str:
 def send_mail(name: str, email: str, message: str) -> bool:
     password = os.environ.get("YANDEX_MAIL_PASSWORD")
     if not password:
+        print("MAIL: YANDEX_MAIL_PASSWORD не задан")
         return False
+    password = password.strip().replace(" ", "")
 
     body = (
         "Новое сообщение с сайта «Христианские стихотворения»\n\n"
@@ -40,10 +42,11 @@ def send_mail(name: str, email: str, message: str) -> bool:
     if email and "@" in email:
         msg["Reply-To"] = email
 
-    server = smtplib.SMTP_SSL("smtp.yandex.ru", 465, timeout=12)
+    server = smtplib.SMTP_SSL("smtp.yandex.ru", 465, timeout=20)
     server.login(OWNER_EMAIL, password)
     server.sendmail(OWNER_EMAIL, [OWNER_EMAIL], msg.as_string())
     server.quit()
+    print("MAIL: письмо отправлено на " + OWNER_EMAIL)
     return True
 
 
@@ -118,15 +121,18 @@ def handler(event: dict, context) -> dict:
         conn.close()
 
         mailed = False
+        mail_error = ""
         try:
             mailed = send_mail(name, email, message)
-        except Exception:
+        except Exception as e:
             mailed = False
+            mail_error = type(e).__name__ + ": " + str(e)
+            print("MAIL ERROR: " + mail_error)
 
         return {
             "statusCode": 200,
             "headers": {**cors, "Content-Type": "application/json"},
-            "body": json.dumps({"ok": True, "mailed": mailed}, ensure_ascii=False),
+            "body": json.dumps({"ok": True, "mailed": mailed, "mail_error": mail_error}, ensure_ascii=False),
         }
 
     return {"statusCode": 405, "headers": cors, "body": json.dumps({"error": "method not allowed"})}
