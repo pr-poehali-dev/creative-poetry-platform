@@ -1,0 +1,1 @@
+UPDATE t_p79443517_creative_poetry_plat.poems SET image_url = '/poems/17.jpg', updated_at = NOW() WHERE id = 17;
