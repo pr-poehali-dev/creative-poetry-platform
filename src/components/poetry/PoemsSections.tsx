@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin, MESSAGES_URL, UPLOAD_API } from "./shared";
 import AuthorPortrait from "./AuthorPortrait";
+import PoemThumb from "./PoemThumb";
 
 interface Props {
   activeSection: Section;
@@ -338,7 +339,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                           </div>
                           {poem.image_url ? (
                             <div className="poem-thumb" style={{ flexShrink: 0, borderRadius: "6px", overflow: "hidden", border: "1px solid #e6d2b0", background: "#fdf6e9" }}>
-                              <img src={poem.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }} />
+                              <PoemThumb id={poem.id} src={poem.image_url} />
                             </div>
                           ) : (
                             <Icon name="ArrowRight" size={18} style={{ color: "#a57c42", opacity: 0.6, marginTop: "0.5rem", flexShrink: 0 }} />
@@ -455,7 +456,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             {/* Картинка */}
             {selectedPoem.image_url && (
               <div className="mb-12 flex justify-center">
-                <img src={selectedPoem.image_url} alt={selectedPoem.title} style={{ maxWidth: "100%", maxHeight: "70vh", width: "auto", height: "auto", display: "block", borderRadius: "8px", border: "1px solid #e6d2b0", boxShadow: "0 8px 28px rgba(140,95,50,0.12)" }} />
+                <img src={selectedPoem.image_url} alt={selectedPoem.title} loading="lazy" decoding="async" style={{ maxWidth: "100%", maxHeight: "70vh", width: "auto", height: "auto", display: "block", borderRadius: "8px", border: "1px solid #e6d2b0", boxShadow: "0 8px 28px rgba(140,95,50,0.12)" }} />
               </div>
             )}
 
