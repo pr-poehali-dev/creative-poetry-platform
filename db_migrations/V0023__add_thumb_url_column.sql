@@ -1,0 +1,1 @@
+ALTER TABLE t_p79443517_creative_poetry_plat.poems ADD COLUMN IF NOT EXISTS thumb_url TEXT DEFAULT '';

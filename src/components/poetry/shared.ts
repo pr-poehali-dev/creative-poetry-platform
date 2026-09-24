@@ -33,6 +33,7 @@ export interface Poem {
   audio_url?: string;
   video_url?: string;
   image_url?: string;
+  thumb_url?: string;
   created_at?: string;
 }
 
@@ -48,6 +49,7 @@ export const EMPTY_FORM = {
   audio_url: "",
   video_url: "",
   image_url: "",
+  thumb_url: "",
 };
 
 export type PoemForm = typeof EMPTY_FORM;

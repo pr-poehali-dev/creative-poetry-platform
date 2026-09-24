@@ -84,7 +84,7 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
                   {form.image_url && (
                     <div className="relative" style={{ maxWidth: "200px" }}>
                       <img src={form.image_url} alt="" style={{ width: "100%", height: "120px", objectFit: "cover", border: "1px solid #e5d8c0" }} />
-                      <button onClick={() => setForm({ ...form, image_url: "" })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(255,250,243,0.85)", border: "none", cursor: "pointer", color: "#a13b3b", padding: "2px" }}>
+                      <button onClick={() => setForm({ ...form, image_url: "", thumb_url: "" })} style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(255,250,243,0.85)", border: "none", cursor: "pointer", color: "#a13b3b", padding: "2px" }}>
                         <Icon name="X" size={12} />
                       </button>
                     </div>

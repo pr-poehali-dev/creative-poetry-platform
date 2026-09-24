@@ -123,6 +123,7 @@ export default function Index() {
       audio_url: poem.audio_url || "",
       video_url: poem.video_url || "",
       image_url: poem.image_url || "",
+      thumb_url: poem.thumb_url || "",
     });
     setAdminOpen(true);
   };
@@ -146,7 +147,13 @@ export default function Index() {
         body: JSON.stringify({ file: base64, name: file.name, type: file.type }),
       });
       const data = await res.json();
-      if (data.url) setForm((prev) => ({ ...prev, [field]: data.url }));
+      if (data.url) {
+        setForm((prev) => ({
+          ...prev,
+          [field]: data.url,
+          ...(field === "image_url" ? { thumb_url: data.thumb_url || "" } : {}),
+        }));
+      }
     } finally {
       setUploading(false);
     }

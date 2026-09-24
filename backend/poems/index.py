@@ -56,12 +56,13 @@ def handler(event: dict, context) -> dict:
         audio_url = body.get("audio_url", "")
         video_url = body.get("video_url", "")
         image_url = body.get("image_url", "")
+        thumb_url = body.get("thumb_url", "")
         conn = get_conn()
         cur = conn.cursor(cursor_factory=RealDictCursor)
         cur.execute(
-            f"""INSERT INTO {SCHEMA}.poems (title, text, excerpt, category, year, author, has_audio, has_video, audio_url, video_url, image_url)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING *""",
-            (title, text, excerpt, category, year, author, has_audio, has_video, audio_url, video_url, image_url),
+            f"""INSERT INTO {SCHEMA}.poems (title, text, excerpt, category, year, author, has_audio, has_video, audio_url, video_url, image_url, thumb_url)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING *""",
+            (title, text, excerpt, category, year, author, has_audio, has_video, audio_url, video_url, image_url, thumb_url),
         )
         row = cur.fetchone()
         conn.commit()
@@ -75,7 +76,7 @@ def handler(event: dict, context) -> dict:
         body = json.loads(event.get("body") or "{}")
         fields = []
         values = []
-        for key in ["title", "text", "excerpt", "category", "year", "author", "has_audio", "has_video", "audio_url", "video_url", "image_url"]:
+        for key in ["title", "text", "excerpt", "category", "year", "author", "has_audio", "has_video", "audio_url", "video_url", "image_url", "thumb_url"]:
             if key in body:
                 fields.append(f"{key} = %s")
                 values.append(body[key])

@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Props {
   id: number;
   src: string;
+  thumb?: string;
   alt?: string;
   opacity?: number;
   className?: string;
   style?: React.CSSProperties;
 }
 
-export default function PoemThumb({ id, src, alt = "", opacity = 0.9, className, style }: Props) {
-  const [source, setSource] = useState(`/poems/thumbs/${id}.webp`);
+export default function PoemThumb({ id, src, thumb, alt = "", opacity = 0.9, className, style }: Props) {
+  const preferred = thumb || `/poems/thumbs/${id}.webp`;
+  const [source, setSource] = useState(preferred);
+
+  useEffect(() => {
+    setSource(preferred);
+  }, [preferred]);
 
   return (
     <img

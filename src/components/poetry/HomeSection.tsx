@@ -116,7 +116,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                         onMouseLeave={(e) => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = "#e6d2b0"; el.style.transform = "translateY(0)"; el.style.boxShadow = "0 4px 18px rgba(140,95,50,0.07)"; }}>
                         {poem.image_url && (
                           <div style={{ height: "140px", overflow: "hidden" }}>
-                            <PoemThumb id={poem.id} src={poem.image_url} opacity={0.7} />
+                            <PoemThumb id={poem.id} src={poem.image_url} thumb={poem.thumb_url} opacity={0.7} />
                           </div>
                         )}
                         <div style={{ padding: "2rem" }}>

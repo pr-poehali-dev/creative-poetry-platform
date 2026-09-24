@@ -339,7 +339,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                           </div>
                           {poem.image_url ? (
                             <div className="poem-thumb" style={{ flexShrink: 0, borderRadius: "6px", overflow: "hidden", border: "1px solid #e6d2b0", background: "#fdf6e9" }}>
-                              <PoemThumb id={poem.id} src={poem.image_url} />
+                              <PoemThumb id={poem.id} src={poem.image_url} thumb={poem.thumb_url} />
                             </div>
                           ) : (
                             <Icon name="ArrowRight" size={18} style={{ color: "#a57c42", opacity: 0.6, marginTop: "0.5rem", flexShrink: 0 }} />

@@ -4,9 +4,24 @@ import base64
 import boto3
 import uuid
 import mimetypes
+import io
+
+
+def make_thumb(raw: bytes) -> bytes:
+    from PIL import Image
+
+    im = Image.open(io.BytesIO(raw)).convert("RGB")
+    w, h = im.size
+    side = min(w, h)
+    im = im.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
+    im = im.resize((320, 320), Image.LANCZOS)
+    out = io.BytesIO()
+    im.save(out, "WEBP", quality=82, method=6)
+    return out.getvalue()
+
 
 def handler(event: dict, context) -> dict:
-    """Загрузка медиафайла (аудио, видео, картинка) в S3 и возврат CDN-ссылки."""
+    """Загрузка медиафайла (аудио, видео, картинка) в S3 и возврат CDN-ссылки. Для картинок дополнительно создаётся лёгкое превью."""
     cors = {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -61,10 +76,21 @@ def handler(event: dict, context) -> dict:
     )
     s3.put_object(Bucket="files", Key=key, Body=raw, ContentType=file_type or "application/octet-stream")
 
-    cdn_url = f"https://cdn.poehali.dev/projects/{os.environ['AWS_ACCESS_KEY_ID']}/bucket/{key}"
+    base = f"https://cdn.poehali.dev/projects/{os.environ['AWS_ACCESS_KEY_ID']}/bucket"
+    cdn_url = f"{base}/{key}"
+
+    thumb_url = ""
+    if file_type.startswith("image/"):
+        try:
+            thumb = make_thumb(raw)
+            thumb_key = f"poems/thumbs/{key.rsplit('/', 1)[-1].rsplit('.', 1)[0]}.webp"
+            s3.put_object(Bucket="files", Key=thumb_key, Body=thumb, ContentType="image/webp")
+            thumb_url = f"{base}/{thumb_key}"
+        except Exception:
+            thumb_url = ""
 
     return {
         "statusCode": 200,
         "headers": cors,
-        "body": json.dumps({"url": cdn_url, "key": key}),
+        "body": json.dumps({"url": cdn_url, "key": key, "thumb_url": thumb_url}),
     }
