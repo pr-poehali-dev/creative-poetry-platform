@@ -81,6 +81,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                     {[
                       { ref: "Псалтирь 104:1", text: "Славьте Господа; призывайте имя Его; возвещайте в народах дела Его" },
                       { ref: "Книга Иова 34:21", text: "Ибо очи Его над путями человека, и Он видит все шаги его" },
+                      { ref: "Исаия 41:10", text: "Не бойся, ибо Я с тобою; не смущайся, ибо Я Бог твой; Я укреплю тебя, и помогу тебе, и поддержу тебя десницею правды Моей" },
                       { ref: "1 Фессалоникийцам 5:11", text: "Посему увещавайте друг друга и назидайте один другого" },
                     ].map((verse) => (
                       <div key={verse.ref} style={{ borderLeft: "3px solid #7a8c60", paddingLeft: "1.5rem", background: "rgba(122,140,96,0.07)", paddingTop: "0.75rem", paddingBottom: "0.75rem", borderRadius: "0 6px 6px 0" }}>
