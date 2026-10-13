@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin, MESSAGES_URL, UPLOAD_API } from "./shared";
 import AuthorPortrait from "./AuthorPortrait";
+import GrandmaStories from "./GrandmaStories";
 import PoemThumb from "./PoemThumb";
 
 interface Props {
@@ -787,6 +788,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                 С любовью и верой, <span style={{ color: "#a57c42", opacity: 0.85 }}>Валентина Фастовщук</span>
               </p>
             </div>
+
+            <GrandmaStories />
           </div>
         )}
 
