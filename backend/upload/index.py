@@ -11,10 +11,7 @@ def make_thumb(raw: bytes) -> bytes:
     from PIL import Image
 
     im = Image.open(io.BytesIO(raw)).convert("RGB")
-    w, h = im.size
-    side = min(w, h)
-    im = im.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
-    im = im.resize((320, 320), Image.LANCZOS)
+    im.thumbnail((480, 480), Image.LANCZOS)
     out = io.BytesIO()
     im.save(out, "WEBP", quality=82, method=6)
     return out.getvalue()
