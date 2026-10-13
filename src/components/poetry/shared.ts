@@ -10,7 +10,7 @@ export const AUTHORS = [
 
 export const AUTHOR_PHOTOS: Record<string, string> = {
   [AUTHORS[0]]: "",
-  [AUTHORS[1]]: "/authors/valentina.webp",
+  [AUTHORS[1]]: "/authors/valentina.webp?v=2",
   [AUTHORS[2]]: "",
 };
 
