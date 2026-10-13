@@ -35,7 +35,7 @@ const stories = [
 
 export default function GrandmaStories() {
   return (
-    <section className="mt-20">
+    <section id="grandma-stories" className="mt-20" style={{ scrollMarginTop: "90px" }}>
       <div className="text-center mb-12">
         <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", marginBottom: "1rem" }}>Семейная память</p>
         <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 4.5vw, 2.5rem)", fontWeight: 300, color: "#3d3226", lineHeight: 1.3 }}>Тёплые истории о бабушке</h2>

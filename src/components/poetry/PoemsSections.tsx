@@ -317,7 +317,19 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                     <div className="mb-8">
                       <div className="flex items-center gap-5">
                         <AuthorPortrait src={AUTHOR_PHOTOS[author]} name={author} size={72} />
-                        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#a57c42" }}>{author}</h2>
+                        <div>
+                          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 300, fontStyle: "italic", color: "#a57c42" }}>{author}</h2>
+                          {author === AUTHORS[2] && (
+                            <button
+                              onClick={() => { navigate("about"); setTimeout(() => document.getElementById("grandma-stories")?.scrollIntoView({ behavior: "smooth", block: "start" }), 350); }}
+                              className="inline-flex items-center gap-2 mt-2"
+                              style={{ background: "none", border: "none", padding: 0, cursor: "pointer", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8f4f2a" }}>
+                              <Icon name="BookHeart" fallback="Heart" size={14} />
+                              Тёплые истории о бабушке
+                              <Icon name="ArrowRight" size={13} />
+                            </button>
+                          )}
+                        </div>
                       </div>
                       <div style={{ width: "100%", height: "1px", background: "#e5d8c0", marginTop: "1rem" }} />
                     </div>
