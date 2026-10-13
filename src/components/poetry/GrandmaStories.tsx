@@ -56,7 +56,7 @@ export default function GrandmaStories() {
               </div>
               <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.6rem", fontWeight: 400, color: "#3d3226", lineHeight: 1.3 }}>{s.title}</h3>
             </div>
-            <div className="space-y-4" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.22rem", lineHeight: 1.9, color: "#3a2d20" }}>
+            <div className="space-y-4 prose-text" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.22rem", lineHeight: 1.9, color: "#3a2d20" }}>
               {s.text.map((p, i) => <p key={i}>{p}</p>)}
             </div>
           </article>
