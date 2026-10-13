@@ -7,11 +7,11 @@
       "expectedStatus": 200
     },
     {
-      "name": "POST create poem",
+      "name": "POST without data is rejected",
       "method": "POST",
       "path": "/",
-      "body": {"title": "Тест", "text": "Строка первая\nСтрока вторая", "category": "Лирика", "year": "2024"},
-      "expectedStatus": 201
+      "body": {},
+      "expectedStatus": 400
     }
   ]
 }
