@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
-import { AUTHORS, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin, MESSAGES_URL, UPLOAD_API } from "./shared";
+import { AUTHORS, AUTHORS_ORDER, AUTHOR_PHOTOS, Poem, Section, btnGold, inputStyle, typo, isAdminUnlocked, unlockAdmin, lockAdmin, MESSAGES_URL, UPLOAD_API } from "./shared";
 import AuthorPortrait from "./AuthorPortrait";
 import GrandmaStories from "./GrandmaStories";
 import PoemThumb from "./PoemThumb";
@@ -192,7 +192,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
   const orderedPoems = useMemo(() => {
     const base = poems;
     const grouped: Poem[] = [];
-    AUTHORS.forEach((a) => grouped.push(...base.filter((p) => (p.author || AUTHORS[0]) === a)));
+    AUTHORS_ORDER.forEach((a) => grouped.push(...base.filter((p) => (p.author || AUTHORS[0]) === a)));
     base.forEach((p) => { if (!grouped.includes(p)) grouped.push(p); });
     return grouped;
   }, [poems]);
@@ -312,7 +312,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                     )}
                   </div>
                 )}
-                {AUTHORS.filter((a) => visiblePoems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
+                {AUTHORS_ORDER.filter((a) => visiblePoems.some((p) => (p.author || AUTHORS[0]) === a)).map((author) => (
                   <div key={author}>
                     <div className="mb-8">
                       <div className="flex items-center gap-5">
@@ -762,7 +762,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
             </div>
 
             <div className="flex flex-wrap items-start justify-center gap-10 mb-14">
-              {AUTHORS.map((author) => (
+              {AUTHORS_ORDER.map((author) => (
                 <div key={author} className="flex flex-col items-center" style={{ width: "150px" }}>
                   <AuthorPortrait src={AUTHOR_PHOTOS[author]} name={author} size={110} />
                   <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic", color: "#a57c42", textAlign: "center", marginTop: "1rem", lineHeight: 1.4 }}>{author}</p>

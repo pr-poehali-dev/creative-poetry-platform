@@ -8,6 +8,8 @@ export const AUTHORS = [
   "\u0424\u0430\u0441\u0442\u043e\u0432\u0449\u0443\u043a \u0412\u0430\u043b\u0435\u0440\u0438\u044f \u0418\u0432\u0430\u043d\u043e\u0432\u043d\u0430",
 ];
 
+export const AUTHORS_ORDER = [AUTHORS[2], AUTHORS[0], AUTHORS[1]];
+
 export const AUTHOR_PHOTOS: Record<string, string> = {
   [AUTHORS[0]]: "",
   [AUTHORS[1]]: "/authors/valentina.webp?v=2",
