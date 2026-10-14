@@ -12,7 +12,7 @@ export const AUTHORS_ORDER = [AUTHORS[2], AUTHORS[0], AUTHORS[1]];
 
 export const AUTHOR_PHOTOS: Record<string, string> = {
   [AUTHORS[0]]: "",
-  [AUTHORS[1]]: "/authors/valentina.webp?v=2",
+  [AUTHORS[1]]: "/authors/valentina-acryl.webp?v=1",
   [AUTHORS[2]]: "",
 };
 
