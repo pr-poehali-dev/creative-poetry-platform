@@ -3,7 +3,7 @@ import { SiteNav, SiteFooter } from "@/components/poetry/SiteChrome";
 import HomeSection from "@/components/poetry/HomeSection";
 import PoemsSections from "@/components/poetry/PoemsSections";
 import PoemFormModal from "@/components/poetry/PoemFormModal";
-import { API, UPLOAD_API, AUTHORS, EMPTY_FORM, Poem, Section } from "@/components/poetry/shared";
+import { API, UPLOAD_API, AUTHORS, AUTHORS_ORDER, EMPTY_FORM, Poem, Section } from "@/components/poetry/shared";
 import { applyMeta } from "@/components/poetry/seo";
 
 const VALID_SECTIONS: Section[] = ["home", "poems", "about", "contacts", "admin"];
@@ -43,7 +43,11 @@ export default function Index() {
     try {
       const res = await fetch(API);
       const data = await res.json();
-      setPoems(data);
+      const rank = (p: Poem) => {
+        const i = AUTHORS_ORDER.indexOf(p.author || AUTHORS[0]);
+        return i === -1 ? AUTHORS_ORDER.length : i;
+      };
+      setPoems(Array.isArray(data) ? [...data].sort((a: Poem, b: Poem) => rank(a) - rank(b)) : []);
     } catch {
       setPoems([]);
     } finally {

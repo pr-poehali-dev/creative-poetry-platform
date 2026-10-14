@@ -1,5 +1,5 @@
 import Icon from "@/components/ui/icon";
-import { AUTHORS, Poem, PoemForm, btnGold, inputStyle } from "./shared";
+import { AUTHORS_ORDER, Poem, PoemForm, btnGold, inputStyle } from "./shared";
 
 interface Props {
   adminOpen: boolean;
@@ -59,7 +59,7 @@ export default function PoemFormModal({ adminOpen, setAdminOpen, editingPoem, fo
               <div>
                 <label style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>Автор</label>
                 <select value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} style={{ ...inputStyle, marginTop: "0.5rem" }}>
-                  {AUTHORS.map((a) => (
+                  {AUTHORS_ORDER.map((a) => (
                     <option key={a} value={a} style={{ background: "#fffaf3", color: "#3d3226" }}>{a}</option>
                   ))}
                 </select>
