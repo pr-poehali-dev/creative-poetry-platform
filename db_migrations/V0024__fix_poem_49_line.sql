@@ -1,0 +1,1 @@
+UPDATE t_p79443517_creative_poetry_plat.poems SET text = REPLACE(text, 'порог в Его чертога', 'порог Его чертога') WHERE id = 49;
