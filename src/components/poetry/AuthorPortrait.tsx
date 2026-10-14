@@ -35,7 +35,6 @@ export default function AuthorPortrait({ src, name, size = 96 }: Props) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: "sepia(0.42) saturate(0.88) contrast(0.97) brightness(1.03)",
           }}
         />
       ) : (
@@ -60,7 +59,7 @@ export default function AuthorPortrait({ src, name, size = 96 }: Props) {
           inset: 0,
           borderRadius: "50% / 50%",
           pointerEvents: "none",
-          boxShadow: "inset 0 0 26px rgba(120,80,40,0.28)",
+          boxShadow: "inset 0 0 10px rgba(120,80,40,0.12)",
         }}
       />
     </div>
