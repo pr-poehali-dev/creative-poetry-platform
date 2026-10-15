@@ -41,7 +41,7 @@ export default function GrandmaStories() {
         <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 4.5vw, 2.5rem)", fontWeight: 300, color: "#3d3226", lineHeight: 1.3 }}>Тёплые истории о бабушке</h2>
         <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "1.5rem auto 0" }} />
         <p className="mx-auto mt-8" style={{ maxWidth: "640px", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontStyle: "italic", lineHeight: 1.8, color: "#5a4a38" }}>
-          Почему истории именно о бабушке? Потому что с неё всё началось. Многие её стихи были адресованы конкретным людям, и без этих историй их смысл и тепло было бы трудно понять. Наши с папой стихи пока говорят сами за себя, а бабушкины мы хотим сохранить вместе с памятью о том, как и для кого они рождались.
+          Почему истории именно о бабушке? Потому что с неё всё началось. За её строками стоят живые события и встречи, и без этих историй их смысл и тепло было бы трудно понять. Наши с папой стихи пока говорят сами за себя, а бабушкины мы хотим сохранить вместе с памятью о том, как и для кого они рождались.
         </p>
       </div>
 
