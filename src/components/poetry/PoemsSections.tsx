@@ -325,7 +325,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                               className="inline-flex items-center gap-2 mt-2"
                               style={{ background: "none", border: "none", padding: 0, cursor: "pointer", fontFamily: "Montserrat, sans-serif", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8f4f2a" }}>
                               <Icon name="BookHeart" fallback="Heart" size={14} />
-                              Тёплые истории о бабушке
+                              Тёплые истории о бабушке и её творчестве
                               <Icon name="ArrowRight" size={13} />
                             </button>
                           )}

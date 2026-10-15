@@ -38,10 +38,10 @@ export default function GrandmaStories() {
     <section id="grandma-stories" className="mt-20" style={{ scrollMarginTop: "90px" }}>
       <div className="text-center mb-12">
         <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#6b7d52", marginBottom: "1rem" }}>Семейная память</p>
-        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 4.5vw, 2.5rem)", fontWeight: 300, color: "#3d3226", lineHeight: 1.3 }}>Несколько тёплых историй о бабушке и её творчестве</h2>
+        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 4.5vw, 2.5rem)", fontWeight: 300, color: "#3d3226", lineHeight: 1.3 }}>Несколько тёплых историй о бабушке<br />и её творчестве</h2>
         <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "1.5rem auto 0" }} />
         <p className="mx-auto mt-8" style={{ maxWidth: "640px", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontStyle: "italic", lineHeight: 1.8, color: "#5a4a38" }}>
-          Каждое дерево держится на корнях. В нашей семье таким корнем стала бабушка: её стихи и вера стали началом всего, что вы найдёте на этом сайте.
+          Каждое дерево держится на корнях. В нашей семье таким корнем стала бабушка: из её стихов и веры, как из доброго семени, выросло всё, что вы найдёте на этом сайте. Её тепло, заботу и любовь мы чувствуем до сих пор — в каждой строчке, в каждом воспоминании.
         </p>
       </div>
 
