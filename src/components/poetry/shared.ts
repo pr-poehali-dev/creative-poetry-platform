@@ -11,9 +11,9 @@ export const AUTHORS = [
 export const AUTHORS_ORDER = [AUTHORS[2], AUTHORS[0], AUTHORS[1]];
 
 export const AUTHOR_PHOTOS: Record<string, string> = {
-  [AUTHORS[0]]: "/authors/alexander-photo.webp?v=5",
+  [AUTHORS[0]]: "/authors/alexander-photo.webp?v=6",
   [AUTHORS[1]]: "/authors/valentina-watercolor.webp?v=1",
-  [AUTHORS[2]]: "/authors/valeria-photo.webp?v=5",
+  [AUTHORS[2]]: "/authors/valeria-photo.webp?v=6",
 };
 
 export function typo(s: string) {
