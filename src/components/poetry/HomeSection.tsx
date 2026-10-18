@@ -55,7 +55,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                 </div>
 
                 <div className="space-y-6 prose-text" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.28rem", fontWeight: 400, lineHeight: 1.95, color: "#3a2d20" }}>
-                  <p>Мы рады приветствовать вас на нашей странице, где каждый стих — это отклик души, пропитанный молитвой, тишиной и глубокими жизненными переживаниями. Здесь вы откроете для себя авторские стихотворения, написанные мной, а также произведения, вдохновлённые и созданные моей бабушкой и моим папой.</p>
+                  <p>Мы рады приветствовать вас на нашем сайте, где каждый стих — это отклик души, пропитанный молитвой, тишиной и глубокими жизненными переживаниями. Здесь вы откроете для себя авторские стихотворения, написанные мной, а также произведения, вдохновлённые и созданные моей бабушкой и моим папой.</p>
 
                   <p>Мы создали этот сайт как место поддержки, утешения и духовного укрепления. Мы надеемся, что каждый, кто зайдёт сюда, найдёт слова, которые коснутся его сердца.</p>
 
@@ -64,7 +64,7 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                   <p>В жизни каждого человека встречаются радости и трудности, но во всём этом присутствует Господь. Возможно, в каких-то стихах вы узнаете себя, свои переживания, и это послужит вам поддержкой.</p>
 
                   <p className="text-center" style={{ color: "#a57c42", fontStyle: "italic", fontSize: "1.3rem", padding: "1rem 0", textIndent: 0, textAlign: "center" }}>
-                    Пусть Господь благословит каждого из вас!
+                    Пусть Господь благословит<br />каждого из вас!
                   </p>
 
                   <p className="text-center" style={{ color: "#a57c42", opacity: 0.8, letterSpacing: "0.15em", fontSize: "1.2rem", textIndent: 0, textAlign: "center" }}>
@@ -81,14 +81,14 @@ export default function HomeSection({ activeSection, setActiveSection, navigate,
                     {[
                       { ref: "Псалтирь 104:1", text: "Славьте Господа; призывайте имя Его; возвещайте в народах дела Его" },
                       { ref: "Книга Иова 34:21", text: "Ибо очи Его над путями человека, и Он видит все шаги его" },
-                      { ref: "Исаия 41:10", text: "Не бойся, ибо Я с тобою; не смущайся, ибо Я Бог твой; Я укреплю тебя,\nи помогу тебе, и поддержу тебя десницею правды Моей" },
+                      { ref: "Исаия 41:10", text: "Не бойся, ибо Я с тобою; не смущайся, ибо Я Бог твой; Я укреплю тебя, и помогу тебе, и поддержу тебя десницею правды Моей" },
                       { ref: "1 Фессалоникийцам 5:11", text: "Посему увещавайте друг друга и назидайте один другого" },
                     ].map((verse) => (
-                      <div key={verse.ref} style={{ borderLeft: "3px solid #7a8c60", paddingLeft: "1.5rem", background: "rgba(122,140,96,0.07)", paddingTop: "0.75rem", paddingBottom: "0.75rem", borderRadius: "0 6px 6px 0" }}>
-                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.7, color: "rgba(58,45,32,0.96)", marginBottom: "0.5rem", whiteSpace: "pre-line" }}>
+                      <div key={verse.ref} style={{ borderLeft: "3px solid #7a8c60", padding: "1rem 1.5rem", background: "rgba(122,140,96,0.07)", borderRadius: "0 6px 6px 0", textAlign: "center" }}>
+                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.7, color: "rgba(58,45,32,0.96)", marginBottom: "0.6rem", textIndent: 0, textAlign: "center", textWrap: "balance", hyphens: "none" }}>
                           «{verse.text}»
                         </p>
-                        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85 }}>
+                        <p style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#a57c42", opacity: 0.85, textIndent: 0, textAlign: "center" }}>
                           {verse.ref}
                         </p>
                       </div>
