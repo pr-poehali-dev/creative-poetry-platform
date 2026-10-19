@@ -28,7 +28,7 @@ export default function PoemThumb({ id, src, thumb, alt = "", opacity = 0.9, cla
         src={source}
         alt=""
         aria-hidden="true"
-        loading="lazy"
+        loading="eager"
         decoding="async"
         onError={onError}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "blur(14px) saturate(0.9)", transform: "scale(1.15)", opacity: opacity * 0.45 }}
@@ -36,7 +36,7 @@ export default function PoemThumb({ id, src, thumb, alt = "", opacity = 0.9, cla
       <img
         src={source}
         alt={alt}
-        loading="lazy"
+        loading="eager"
         decoding="async"
         onError={onError}
         style={{ position: "relative", width: "100%", height: "100%", objectFit: "contain", opacity }}
