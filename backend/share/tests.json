@@ -1,0 +1,4 @@
+{"tests": [
+  {"name": "Превью стихотворения", "method": "GET", "path": "/?id=36", "expectedStatus": 200},
+  {"name": "Без id — главная", "method": "GET", "path": "/", "expectedStatus": 200}
+]}
