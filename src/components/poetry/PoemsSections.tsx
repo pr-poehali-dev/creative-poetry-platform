@@ -377,7 +377,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <Icon name="X" size={18} />
             </button>
             <div className="max-w-2xl mx-auto px-6 py-24 text-center" onClick={(e) => e.stopPropagation()}>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 5vw, 3rem)", fontWeight: 300, color: "#3d3226", marginBottom: "1rem" }}>{selectedPoem.title}</h1>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.8rem, 5vw, 3rem)", lineHeight: 1.2, textWrap: "balance", fontWeight: 300, color: "#3d3226", marginBottom: "1rem" }}>{selectedPoem.title}</h1>
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8, marginBottom: "2rem" }}>{selectedPoem.author || AUTHORS[0]}</p>
               <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "0 auto 3rem" }} />
               <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: `${1.15 * FONT_SIZES[fontStep]}rem`, lineHeight: 2.1, fontWeight: 300, color: "#3d3226", textAlign: "left", display: "inline-block" }}>
@@ -414,12 +414,12 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
 
         {/* POEM DETAIL */}
         {activeSection === "poems" && selectedPoem && (
-          <div className="max-w-3xl mx-auto px-6 py-16">
-            <div className="flex items-center justify-between mb-12">
+          <div className="max-w-3xl mx-auto px-5 sm:px-6 py-12 sm:py-16 overflow-hidden">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-10 sm:mb-12">
               <button onClick={() => setSelectedPoem(null)} className="flex items-center gap-2" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#a57c42", opacity: 0.8, background: "none", border: "none", cursor: "pointer" }}>
                 <Icon name="ArrowLeft" size={13} />Назад
               </button>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                 {copied && (
                   <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#5f7043" }}>Скопировано</span>
                 )}
@@ -444,17 +444,17 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                 )}
               </div>
             </div>
-            <div className="flex items-center gap-4 mb-3">
+            <div className="flex items-center justify-center sm:justify-start gap-4 mb-3">
               <span style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8f4f2a", background: "rgba(181,103,58,0.12)", border: "1px solid rgba(181,103,58,0.25)", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>{selectedPoem.category}</span>
               <span style={{ color: "#e5d8c0" }}>·</span>
               <span style={{ fontFamily: "Montserrat", fontSize: "0.65rem", color: "rgba(58,45,32,0.68)" }}>{selectedPoem.year}</span>
             </div>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, color: "#3d3226", marginBottom: "0.75rem" }}><Highlight text={selectedPoem.title} query={search} /></h1>
-            <div className="flex items-center gap-4 mb-8">
+            <h1 className="text-center sm:text-left" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.8rem, 5vw, 3.5rem)", lineHeight: 1.2, fontWeight: 300, color: "#3d3226", marginBottom: "1rem", textWrap: "balance", overflowWrap: "break-word" }}><Highlight text={selectedPoem.title} query={search} /></h1>
+            <div className="flex items-center justify-center sm:justify-start gap-4 mb-8">
               <AuthorPortrait src={AUTHOR_PHOTOS[selectedPoem.author || AUTHORS[0]]} name={selectedPoem.author || AUTHORS[0]} size={54} />
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontStyle: "italic", color: "#a57c42", opacity: 0.8 }}>{selectedPoem.author || AUTHORS[0]}</p>
             </div>
-            <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginBottom: "3rem" }} />
+            <div className="mx-auto sm:mx-0" style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, marginBottom: "3rem" }} />
             {search.trim() && (
               <div className="flex items-center gap-3 mb-8" style={{ background: "rgba(192,138,62,0.08)", border: "1px solid rgba(181,103,58,0.2)", borderRadius: "6px", padding: "0.6rem 1rem" }}>
                 <Icon name="Search" size={13} style={{ color: "#a57c42", opacity: 0.8, flexShrink: 0 }} />

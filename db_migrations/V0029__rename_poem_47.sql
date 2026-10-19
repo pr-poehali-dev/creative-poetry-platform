@@ -1,0 +1,1 @@
+UPDATE t_p79443517_creative_poetry_plat.poems SET title = 'Жизнь — это злая шутка, если', updated_at = now() WHERE id = 47;
