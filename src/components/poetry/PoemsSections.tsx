@@ -4,7 +4,8 @@ import { AUTHORS, AUTHORS_ORDER, AUTHOR_PHOTOS, Poem, Section, btnGold, inputSty
 import AuthorPortrait from "./AuthorPortrait";
 import GrandmaStories from "./GrandmaStories";
 import PoemThumb from "./PoemThumb";
-import { SHARE_API, STATIC_SHARE_IDS } from "./sharePages";
+
+const SHARE_API = "https://functions.poehali.dev/d982c099-c603-4992-a98e-bb7e2366af4f";
 
 interface Props {
   activeSection: Section;
@@ -238,7 +239,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
 
   const sharePoem = async (poem: Poem) => {
     const author = poem.author || AUTHORS[0];
-    const shareUrl = STATIC_SHARE_IDS.has(poem.id) ? `${window.location.origin}/p/${poem.id}.html` : `${SHARE_API}?id=${poem.id}`;
+    const shareUrl = `${SHARE_API}?id=${poem.id}`;
     const shareText = `${poem.title}\n\n${poem.text}\n\n— ${author}\n${shareUrl}`;
     if (navigator.share) {
       try {
