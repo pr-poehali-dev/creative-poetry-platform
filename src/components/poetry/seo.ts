@@ -63,7 +63,7 @@ export function applyMeta(section: Section, poem?: Poem | null) {
   setTag('meta[name="twitter:description"]', "content", meta.description);
 
   const noindex = section === "admin";
-  setTag('meta[name="robots"]', "content", noindex ? "noindex, nofollow" : "noindex, nofollow");
+  setTag('meta[name="robots"]', "content", noindex ? "noindex, nofollow" : "index, follow");
 
   const canonical = document.head.querySelector('link[rel="canonical"]');
   if (canonical) canonical.setAttribute("href", window.location.href);

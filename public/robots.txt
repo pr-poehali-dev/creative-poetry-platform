@@ -1,7 +1,5 @@
-# Сайт временно закрыт от поисковых систем.
-# Чтобы открыть — замените Disallow: / на Allow: / в блоке ниже.
-
 User-agent: *
-Disallow: /
+Allow: /
 
-Sitemap: /sitemap.xml
+Host: https://xn--80aafbmbrabbcsi6agnbewlkddjhici5ayio0mni.xn--p1ai
+Sitemap: https://xn--80aafbmbrabbcsi6agnbewlkddjhici5ayio0mni.xn--p1ai/sitemap.xml
