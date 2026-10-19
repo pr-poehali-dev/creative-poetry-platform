@@ -5,7 +5,7 @@ import AuthorPortrait from "./AuthorPortrait";
 import GrandmaStories from "./GrandmaStories";
 import PoemThumb from "./PoemThumb";
 
-const SHARE_API = "https://functions.poehali.dev/d982c099-c603-4992-a98e-bb7e2366af4f";
+const SITE_URL = "https://христианскиестихотворенияфастовщук.рф";
 
 interface Props {
   activeSection: Section;
@@ -239,7 +239,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
 
   const sharePoem = async (poem: Poem) => {
     const author = poem.author || AUTHORS[0];
-    const shareUrl = `${SHARE_API}?id=${poem.id}`;
+    const shareUrl = `${SITE_URL}/#/poems/${poem.id}`;
     const shareText = `${poem.title}\n\n${poem.text}\n\n— ${author}\n${shareUrl}`;
     if (navigator.share) {
       try {
