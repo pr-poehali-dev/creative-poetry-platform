@@ -2,7 +2,7 @@ import { Poem, Section } from "./shared";
 
 export const SITE_NAME = "Христианские стихотворения — семья Фастовщук";
 export const OG_IMAGE = "/og-image.jpg";
-export const SITE_URL = "https://hristianskiestihotvoreniya.ru";
+export const SITE_URL = "https://xn--80aafbmbrabbcsi6agnbewlkddjhici5ayio0mni.xn--p1ai";
 
 type Meta = { title: string; description: string };
 

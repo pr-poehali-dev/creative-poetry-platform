@@ -5,7 +5,7 @@ from xml.sax.saxutils import escape
 import psycopg2
 
 SCHEMA = "t_p79443517_creative_poetry_plat"
-DEFAULT_HOST = "https://hristianskiestihotvoreniya.ru"
+DEFAULT_HOST = "https://xn--80aafbmbrabbcsi6agnbewlkddjhici5ayio0mni.xn--p1ai"
 
 SECTIONS = [
     ("", "1.0", "weekly"),
