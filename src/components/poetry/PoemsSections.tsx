@@ -798,8 +798,8 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
                 Пусть эти строки будут благословением для вашего сердца!
               </p>
 
-              <p style={{ textAlign: "center", color: "rgba(58,45,32,0.92)", textIndent: 0 }}>
-                С любовью и верой, <span style={{ color: "#a57c42", opacity: 0.85 }}>Валентина Фастовщук</span>
+              <p style={{ textAlign: "center", color: "#a57c42", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", textIndent: 0 }}>
+                С любовью и верой, Валентина Фастовщук
               </p>
             </div>
 
