@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function PoemThumb({ id, src, thumb, alt = "", opacity = 0.9, className, style }: Props) {
-  const preferred = thumb || `/poems/thumbs/${id}.webp`;
+  const preferred = thumb || src;
   const [source, setSource] = useState(preferred);
 
   useEffect(() => {
