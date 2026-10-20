@@ -801,6 +801,7 @@ export default function PoemsSections({ activeSection, navigate, poems, loading,
               <p style={{ textAlign: "center", color: "#a57c42", opacity: 0.85, fontStyle: "italic", fontSize: "1.25rem", textIndent: 0 }}>
                 С любовью и верой, Валентина Фастовщук
               </p>
+              <div style={{ width: "60px", height: "2px", background: "linear-gradient(90deg, #c08a3e, #b5673a, #7a8c60)", opacity: 0.7, margin: "1.5rem auto 0" }} />
             </div>
 
             <GrandmaStories />
